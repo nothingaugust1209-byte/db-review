@@ -64,6 +64,28 @@
   .review .ans{font-size:.88rem;margin:2px 0 0;}
   .review .ans .c{color:var(--ok);}
   .review .ans .w{color:var(--ng);}
+  /* 学習（解説集・フラッシュカード） */
+  .sec-lead{color:var(--muted);font-size:.85rem;margin:0 0 12px;}
+  .count{font-size:.78rem;color:var(--muted);}
+  .gnav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .gnav button{font-size:.8rem;padding:6px 12px;border-radius:99px;background:var(--card2);color:var(--text);border:1px solid var(--line);cursor:pointer;transition:.12s;}
+  .gnav button:hover{border-color:var(--accent);}
+  .gnav button.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1220;border:none;font-weight:700;}
+  .story{background:var(--code);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:14px 16px;margin:10px 0 18px;font-size:.95rem;line-height:1.95;}
+  .story b{color:var(--accent);font-weight:700;}
+  .tcard{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin:8px 0;}
+  .tcard .t{font-weight:700;color:var(--accent);font-size:1rem;margin-bottom:2px;}
+  .tcard .d{font-size:.9rem;line-height:1.7;}
+  .fcard{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:18px;padding:34px 20px;min-height:190px;display:flex;flex-direction:column;justify-content:center;text-align:center;cursor:pointer;user-select:none;transition:.12s;animation:fcin .18s ease;}
+  @keyframes fcin{from{opacity:.3;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
+  .fcard:hover{border-color:var(--accent);}
+  .fcard .side{font-size:.72rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
+  .fcard .ft{font-size:1.5rem;font-weight:800;line-height:1.4;}
+  .fcard .fd{font-size:1.02rem;line-height:1.85;}
+  .fcard .hint{font-size:.76rem;color:var(--muted);margin-top:16px;}
+  .fc-bar{display:flex;gap:8px;margin-top:12px;}
+  .fc-bar button{flex:1;padding:11px 8px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--text);cursor:pointer;font-size:.9rem;transition:.12s;}
+  .fc-bar button:hover{border-color:var(--accent);}
   footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:28px;}
 </style>
 </head>
@@ -247,6 +269,128 @@ const BANK = [
   "順序は関係なく、どちらからでもよい"],a:0,exp:"参照している側（子・FKを持つEnrollment）→参照される側（親・Student）の順で削除する。"}
 ];
 
+/* ============ 単語解説集（章ごとに流れで解説） ============ */
+const GLOSSARY = [
+{ch:"第1回 DBの基礎",
+ story:"世の中は<b>データ</b>であふれている——名前、点数、注文…。それを整理して倉庫にしまい、必要なときすぐ取り出せる仕組みが<b>データベース(DB)</b>。倉庫を管理する係が<b>DBMS</b>だ。DBにも型があり、いまの主流は表で管理する<b>リレーショナルDB(RDB)</b>、柔軟な形で保存する<b>NoSQL</b>もある。RDBでは、データは<b>テーブル(表)</b>に入り、横1行が<b>レコード</b>、縦1列が<b>フィールド</b>。行を見分ける目印が<b>主キー</b>、別の表とつなぐ橋が<b>外部キー</b>、この表同士のつながりが<b>リレーション</b>。倉庫に指示を出す専用言語が<b>SQL</b>、その基本4操作が<b>CRUD</b>。ここが全ての出発点。",
+ terms:[
+  {t:"データと情報",d:"データ＝事実や数値そのもの。情報＝データを目的に沿って整理し意味を持たせたもの。"},
+  {t:"データベース（DB）",d:"大量のデータを整理して保存し、必要なときにすぐ取り出せるようにした「データの倉庫」。"},
+  {t:"DBMS",d:"データベース管理システム。データの保存・検索・更新を自動で管理するソフトウェア。倉庫でいう「倉庫係」。"},
+  {t:"リレーショナルDB（RDB）",d:"表（テーブル）形式でデータを管理するDB。Excelの表に近く現在の主流。例:MySQL, PostgreSQL, Oracle。"},
+  {t:"NoSQL",d:"表以外の柔軟な形式でデータを保存するDB。SNSやビッグデータ向き。例:MongoDB, Redis。"},
+  {t:"テーブル（表）",d:"データをまとめた表。Excelのシートに相当する。"},
+  {t:"レコード（行）",d:"1件分のデータ（表の横1行）。例:「田中太郎」の情報1行分。"},
+  {t:"フィールド（列）",d:"データの項目（表の縦1列）。例:「氏名」「学部」「学生ID」。"},
+  {t:"主キー（PK）",d:"行を一意に識別する目印の列。重複不可・NULL不可。同姓同名でも区別できる。"},
+  {t:"外部キー（FK）",d:"他テーブルの主キーを参照し、表と表をつなぐ列。"},
+  {t:"リレーション（関係）",d:"共通の項目（キー）でテーブル同士をつなぐこと。RDBの核となる考え方。"},
+  {t:"SQL",d:"データベースに命令を出す専用言語（Structured Query Language）。"},
+  {t:"CRUD",d:"データ操作の4基本:Create(追加/INSERT)・Read(取得/SELECT)・Update(更新)・Delete(削除)。"}
+ ]},
+{ch:"第3回 データモデル・正規化",
+ story:"データを「どう保存するか」の設計図が<b>データモデル</b>。歴史をたどると、まず親子のツリーで管理する<b>階層型</b>、次に網目状で多対多を扱える<b>ネットワーク型</b>、そして1970年にE.F.コードが提唱した<b>リレーショナル型</b>が主流になった。RDBでは表を<b>主キー</b>と<b>外部キー</b>でつなぐ。ただ1枚の表に詰め込むと重複や矛盾が起きるので、<b>正規化</b>で段階的に分ける——1セル1値の<b>第1正規形</b>、複合キーの一部依存を外す<b>第2正規形</b>、非キー同士の依存(推移的従属)を外す<b>第3正規形</b>。多対多は<b>中間テーブル</b>で受け止める。RDBを補うのが<b>NoSQL</b>で、<b>ドキュメント型</b>・<b>グラフ型</b>・<b>カラム型</b>・<b>キー・バリュー型</b>の4種類。",
+ terms:[
+  {t:"データモデル",d:"現実世界のデータ構造をコンピュータ上で再現する抽象的なルール・構造。「データの管理方法を決める設計図」。"},
+  {t:"階層型データモデル",d:"ツリー構造（親子関係）で1対多を管理する最初期のモデル。IBMのIMSで実用化。"},
+  {t:"ネットワーク型データモデル",d:"グラフ構造で多対多を表現できるモデル。CODASYL（コダシル）で標準化。"},
+  {t:"リレーショナル型データモデル",d:"行と列（テーブル）で管理するモデル。E.F.コードが1970年に提唱、現在の主流。"},
+  {t:"1対多 / 多対多",d:"1件が複数と対応するのが1対多、互いに複数対応するのが多対多。多対多は中間テーブルで表す。"},
+  {t:"正規化",d:"重複の排除・更新時の不整合防止・検索効率化のため、テーブルを段階的に分割する作業。"},
+  {t:"第1正規形（1NF）",d:"1つのセルに1つの値だけにする（単一値の原則）。カンマ区切りを1行ずつ分割。"},
+  {t:"第2正規形（2NF）",d:"複合主キーの一部にだけ依存する属性（部分関数従属）を別表に分ける。"},
+  {t:"第3正規形（3NF）",d:"非キー属性が別の非キー属性に依存する（推移的従属）のを解消する。例:教師名→教師住所を分離。"},
+  {t:"中間テーブル",d:"多対多を「1対多＋1対多」に分解するために設ける関係テーブル。"},
+  {t:"ドキュメント型（NoSQL）",d:"JSON/BSON形式で1件を保存。柔軟なスキーマ。例:MongoDB, CouchDB。"},
+  {t:"グラフ型（NoSQL）",d:"ノードとエッジで関係を表現し、複雑なつながりを高速探索。例:Neo4j, Amazon Neptune。"},
+  {t:"カラム型（NoSQL）",d:"列ごとにデータを管理し、分析・検索性能が高い。例:Cassandra, HBase。"},
+  {t:"キー・バリュー型（NoSQL）",d:"キーと値のペアでシンプル超高速。例:Redis, DynamoDB。"}
+ ]},
+{ch:"第4回 設計・ER図",
+ story:"設計とは、現実世界を機械が扱える形へ「翻訳」する作業。進め方は3段階。まず<b>概念設計</b>で、登場人物＝<b>エンティティ</b>、その性質＝<b>属性</b>、つながり＝<b>リレーションシップ</b>を洗い出し、<b>ER図</b>(矩形=実体・楕円=属性・ひし形=関係)に描く。関係の数の対応が<b>多重度</b>(1対1・1対多・多対多)。次に<b>論理設計</b>でER図をテーブルに変換し、正規化して主キー・外部キーを決める。外部キーが効くと<b>参照整合性</b>が保たれ、存在しないIDは入らない。最後に<b>物理設計</b>で、実際のDBMSに合わせ<b>データ型</b>や高速化の<b>インデックス</b>を決め、CREATE文に落とす。抽象→具体へ、一貫性を保つのが鍵。",
+ terms:[
+  {t:"データベース設計",d:"現実世界（人・物・出来事）をDBで再現できるように構造化すること。誤ると後の修正コストが大きい。"},
+  {t:"概念設計",d:"現実の情報をモデル化する最初の段階。成果物はER図。"},
+  {t:"論理設計",d:"ER図をテーブル形式に変換する段階。テーブル定義・正規化を行う。DBMSに依存しない。"},
+  {t:"物理設計",d:"実際のDBMSで最適に動くよう具体化する段階。データ型・索引・制約・CREATE文（DDL）。"},
+  {t:"エンティティ",d:"管理したい対象（人・物・出来事）。例:学生、科目、教師。ER図では矩形。"},
+  {t:"属性",d:"エンティティが持つ性質や情報項目。例:学籍番号、氏名、学年。ER図では楕円。"},
+  {t:"リレーションシップ",d:"エンティティ同士のつながり。例:学生―履修―科目。ER図ではひし形。"},
+  {t:"ER図",d:"エンティティ・属性・関係を可視化した図。開発者と利用者の共通理解を作る。"},
+  {t:"多重度（カーディナリティ）",d:"関係の数の対応。1対1・1対多・多対多。鳥足記法で線の形として表す。"},
+  {t:"参照整合性",d:"外部キーにより「存在しないIDは登録できない」＝間違ったデータが入らない仕組み。"},
+  {t:"データ型",d:"列に入るデータの種類。INT/CHAR/VARCHAR/DATE/DATETIME/BOOLEAN/TEXT/BLOB。性質に合わせて選ぶ。"},
+  {t:"インデックス",d:"「本の索引」のように検索を高速化する仕組み。付けすぎると更新（INSERT/UPDATE）が遅くなる。"}
+ ]},
+{ch:"第5回 DDL・制約",
+ story:"ここからは実際のSQL。まずは器づくりの言語<b>DDL</b>。表を作るのが<b>CREATE TABLE</b>、構造を直すのが<b>ALTER TABLE</b>、丸ごと消すのが<b>DROP TABLE</b>。作るときは列に「見張り番」＝制約をつける:必ず値を求める<b>NOT NULL</b>、重複を防ぐ<b>UNIQUE</b>、範囲を縛る<b>CHECK</b>、未指定時の初期値<b>DEFAULT</b>、他表とつなぐ<b>FOREIGN KEY</b>。2列で一意にするのが<b>複合主キー</b>。補助として、データだけ高速全消しの<b>TRUNCATE</b>、安全に消す<b>IF EXISTS</b>、連動削除の<b>CASCADE</b>、定義を確認する<b>DESCRIBE</b>。DROP・ALTERは元に戻せないので慎重に。",
+ terms:[
+  {t:"DDL",d:"データの構造を定義する言語（Data Definition Language）。CREATE/ALTER/DROPなど。"},
+  {t:"CREATE TABLE",d:"新しい表を作る命令。列名・データ型・制約を定義する。"},
+  {t:"ALTER TABLE",d:"既存の表の構造を変更する命令。列の追加(ADD)/削除(DROP)/変更(MODIFY)/制約追加など。"},
+  {t:"DROP TABLE",d:"表そのものを削除する命令。データも構造も消え、元に戻せないことが多い。"},
+  {t:"NOT NULL制約",d:"空欄（NULL）を許さず、必ず値が必要とする制約。"},
+  {t:"UNIQUE制約",d:"値が重複しないようにする制約。例:emailの重複禁止。"},
+  {t:"CHECK制約",d:"値が条件を満たすか確認し、不正なデータを防ぐ。例:CHECK(grade BETWEEN 1 AND 5)。"},
+  {t:"DEFAULT",d:"値を指定しなかったとき自動で入る初期値。例:DEFAULT CURRENT_TIMESTAMP。"},
+  {t:"FOREIGN KEY制約",d:"他表の主キーを参照する制約。参照整合性を保証する。"},
+  {t:"複合主キー",d:"2つ以上の列を組み合わせて一意にする主キー。例:履修表（学籍番号＋科目コード）。"},
+  {t:"TRUNCATE TABLE",d:"表は残しデータだけを高速に全削除。DELETEより速い（ログをほぼ書かない）。"},
+  {t:"IF EXISTS",d:"存在しない表をDROPしてもエラーにしない句。初期化スクリプトで習慣化する。"},
+  {t:"CASCADE",d:"連動削除。親を消すと関連する子も削除される。大規模DBでは危険。"},
+  {t:"DESCRIBE / SHOW CREATE TABLE",d:"テーブルの定義（列・型・キー・制約名）を確認するコマンド。"}
+ ]},
+{ch:"第6回 DML・トランザクション",
+ story:"器ができたら中身を操る言語<b>DML</b>。行を足す<b>INSERT</b>、書き換える<b>UPDATE</b>、消す<b>DELETE</b>の3本柱。ここで命綱になるのが<b>WHERE句</b>——付け忘れると全件が変わる/消える最大の事故になる。番号を自動採番する<b>AUTO_INCREMENT</b>も便利。そして安全装置が<b>トランザクション</b>。<b>BEGIN</b>で始め、良ければ<b>COMMIT</b>、間違えたら<b>ROLLBACK</b>で巻き戻す。その品質を支える4性質が<b>ACID</b>。似て非なる<b>DELETE/TRUNCATE/DROP</b>の違いも押さえよう:行を選んで消す／全行を高速に消す／表ごと消す。",
+ terms:[
+  {t:"DML",d:"データそのものを操作する言語（Data Manipulation Language）。INSERT/UPDATE/DELETE。"},
+  {t:"INSERT",d:"表に新しい行を追加する命令。INSERT INTO 表(列…) VALUES(値…);"},
+  {t:"UPDATE",d:"既存の行を変更する命令。WHEREを忘れると全件更新の危険。"},
+  {t:"DELETE",d:"行を削除する命令。WHEREを忘れると全件削除。DMLで最も危険な操作。"},
+  {t:"WHERE句",d:"どの行を対象にするかを絞る条件。UPDATE/DELETEでは必須級（忘れは事故の元）。"},
+  {t:"AUTO_INCREMENT",d:"行ごとに重複しない通し番号を自動で割り当てる機能。主キーと組み合わせて使う。"},
+  {t:"トランザクション",d:"複数のDML操作を1つの単位として扱い、「全て成功」か「全て取消」を保証する仕組み。"},
+  {t:"BEGIN / COMMIT / ROLLBACK",d:"BEGINで開始、COMMITで変更を確定、ROLLBACKで実行前に巻き戻す。"},
+  {t:"ACID",d:"トランザクションの4性質:原子性(A)・一貫性(C)・独立性(I)・永続性(D)。"},
+  {t:"DELETE / TRUNCATE / DROP の違い",d:"DELETE=行を選んで削除(取消可)、TRUNCATE=全行を高速削除、DROP=表ごと削除。"}
+ ]},
+{ch:"第7回 SELECT・JOIN・集約",
+ story:"データを取り出す主役が<b>SELECT</b>。読み取り専用だから安全。ポイントは<b>実行順序</b>——書く順と処理順(FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY)は違う。行を絞るのが<b>WHERE</b>で、<b>AND/OR/NOT</b>や<b>BETWEEN・IN・LIKE・IS NULL</b>を組み合わせる。並べ替えは<b>ORDER BY</b>、見出しを変える<b>AS</b>、重複を消す<b>DISTINCT</b>、件数を絞る<b>LIMIT/OFFSET</b>、条件分岐の<b>CASE式</b>。分かれた表をつなぐのが<b>JOIN</b>——両方一致だけの<b>INNER</b>、左を全部残す<b>LEFT</b>、自分同士の<b>自己結合</b>。最後にまとめる<b>集約関数</b>を<b>GROUP BY</b>でグループ化し、<b>HAVING</b>で集約後に絞る。",
+ terms:[
+  {t:"SELECT",d:"データを読み出す（検索する）読み取り専用の命令。データを壊さず安全。"},
+  {t:"実行順序",d:"書く順と処理順は違う。処理は FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY の順。"},
+  {t:"WHERE（絞り込み）",d:"条件に合う行だけを取り出す。= <> > < >= <= などの比較演算子を使う。"},
+  {t:"AND / OR / NOT",d:"複数条件を組み合わせる論理演算子。混在時は括弧で優先順位を明示する。"},
+  {t:"BETWEEN / IN / LIKE / IS NULL",d:"範囲/複数値/パターン(% _)/NULL判定。NULLは=でなくIS NULLで判定する。"},
+  {t:"ORDER BY",d:"指定した列で並べ替える。ASC=昇順(既定・省略可)、DESC=降順。"},
+  {t:"AS（別名）",d:"列や表に別名を付けて見出しを変える・短く書く。元データは変わらない。"},
+  {t:"DISTINCT",d:"重複行を除外する。「どんな種類があるか」を調べるのに便利。"},
+  {t:"LIMIT / OFFSET",d:"取得行数の制限と開始位置のスキップ。Webのページングで必須。"},
+  {t:"CASE式",d:"条件で異なる値を返す式（IF文のSQL版）。WHEN 条件 THEN 値 … END。"},
+  {t:"JOIN（結合）",d:"複数の表を共通の列でつなぐ。ON句で結合条件を指定する。"},
+  {t:"INNER JOIN",d:"両方に存在する行だけを取得する最も基本の結合。"},
+  {t:"LEFT JOIN",d:"左表の全行＋右の一致行（無ければNULL）。未関連データの検出に便利。"},
+  {t:"自己結合（SELF JOIN）",d:"同じ表を別名で2回使い、自分自身と結合する手法。"},
+  {t:"集約関数",d:"複数行を1つの値にまとめる関数:COUNT/SUM/AVG/MIN/MAX。"},
+  {t:"GROUP BY / HAVING",d:"GROUP BYで列ごとにグループ化、HAVINGで集約後のグループを絞る（WHEREは集約前）。"}
+ ]},
+{ch:"第8回 サブクエリ・ビュー",
+ story:"仕上げは複雑な問い合わせ。SQLの中にSQLを入れるのが<b>サブクエリ</b>で、内側が先に動く。1つの値を返す<b>スカラサブクエリ</b>、集合と照らす<b>IN/NOT IN</b>、外側の行を参照して行ごとに動く重い<b>相関サブクエリ</b>、FROMに置いて中間表を作る<b>派生表</b>。存在チェックの<b>EXISTS/NOT EXISTS</b>はNOT INのNULL問題の逃げ道。そして長いSQLに名前を付けて仮想テーブルにするのが<b>ビュー</b>。1表の<b>単純ビュー</b>は更新できることが多く、JOINや集約を含む<b>複合ビュー</b>は通常更新不可。見せる列だけのビューで<b>アクセス制御</b>(password隠し)ができ、結果をキャッシュする<b>マテリアライズドビュー</b>もある。",
+ terms:[
+  {t:"サブクエリ",d:"SQLの中で別のSELECT文の結果を利用する仕組み。内側が先に実行される。"},
+  {t:"スカラサブクエリ",d:"1行1列の結果を返し「1つの値」として扱う。複数行を返すとエラー。"},
+  {t:"IN / NOT IN サブクエリ",d:"集合との比較。含む/含まない。NOT INはNULLがあると結果が返らない点に注意。"},
+  {t:"相関サブクエリ",d:"内側から外側の表を参照するサブクエリ。行ごとに再実行され処理が重い。"},
+  {t:"派生表（FROM句サブクエリ）",d:"FROM句に置くサブクエリが作る一時表（インラインビュー）。AS別名が必須。"},
+  {t:"EXISTS / NOT EXISTS",d:"行が存在するかで判定する。NOT INのNULL問題の対策としてNOT EXISTSが推奨。"},
+  {t:"ビュー",d:"SELECT文に名前を付けた仮想テーブル。実データは持たず定義だけを保存。再利用に便利。"},
+  {t:"単純ビュー / 複合ビュー",d:"単純=1表・更新可の場合が多い。複合=複数表JOINや集約を含み通常は更新不可。"},
+  {t:"ビューによるアクセス制御",d:"見せる列だけのビューを作りpassword等を隠せる＝セキュリティ機能。"},
+  {t:"マテリアライズドビュー",d:"結果をキャッシュ（実体化）するビュー。毎回のフルスキャンを避けられる。"}
+ ]}
+];
+const GTERMS = GLOSSARY.reduce((s,g)=>s+g.terms.length,0);
+
 /* ============ アプリ本体 ============ */
 const app = document.getElementById('app');
 let quiz = [], idx = 0, correct = 0, answered = false, wrongList = [];
@@ -276,7 +420,13 @@ function home(){
   const codeN = BANK.filter(x=>x.type==='code').length;
   app.innerHTML = `
     <div class="card">
-      <h2>出題モードを選択</h2>
+      <h2>📖 まず覚える</h2>
+      <p class="sec-lead">演習の前に、用語を「流れ」で理解して暗記しよう。<span class="count">全${GTERMS}語</span></p>
+      <button class="btn primary" onclick="glossaryView(0)" style="background:linear-gradient(90deg,#818cf8,#38bdf8)">📗 単語解説集を読む<small>章ごとにストーリー仕立てで全用語を解説</small></button>
+      <button class="btn" onclick="flashHome()" style="margin-top:10px">🃏 フラッシュカードで暗記<small>表:用語／裏:意味。タップでめくる</small></button>
+    </div>
+    <div class="card">
+      <h2>✏️ 演習で力だめし</h2>
       <button class="btn primary" onclick="start('exam')">🎯 本番モード（50問・50分・100点満点）<small>過去問と同じ形式：用語＋コードをまとめて／制限時間つき</small></button>
       <button class="btn" onclick="start('all')" style="margin-top:10px">▶ おてがる20問<small>タイマーなし・全範囲ランダム</small></button>
       <div class="row" style="margin-top:10px">
@@ -290,6 +440,79 @@ function home(){
         const n = BANK.filter(x=>x.ch===c).length;
         return `<button class="btn" onclick="start('ch:${c}')">${c}<small>${n}問｜${chTitle(c)}</small></button>`;
       }).join('')}
+    </div>`;
+}
+
+/* ---- 単語解説集 ---- */
+function glossaryView(ci){
+  stopTimer(); examMode=false;
+  const g = GLOSSARY[ci];
+  app.innerHTML = `
+    <div class="card">
+      <h2>📗 単語解説集</h2>
+      <p class="sec-lead">章を選んで、流れ（ストーリー）で覚えよう。<span class="count">全${GTERMS}語</span></p>
+      <div class="gnav">${GLOSSARY.map((x,i)=>`<button class="${i===ci?'active':''}" onclick="glossaryView(${i})">${x.ch}</button>`).join('')}</div>
+      <div class="story">${g.story}</div>
+      ${g.terms.map(t=>`<div class="tcard"><div class="t">${esc(t.t)}</div><div class="d">${esc(t.d)}</div></div>`).join('')}
+      <div class="fc-bar" style="margin-top:14px">
+        ${ci>0?`<button onclick="glossaryView(${ci-1})">← 前の章</button>`:''}
+        <button onclick="flashStart(${ci})">🃏 この章を暗記</button>
+        ${ci<GLOSSARY.length-1?`<button onclick="glossaryView(${ci+1})">次の章 →</button>`:''}
+      </div>
+      <button class="btn" onclick="home()" style="margin-top:8px;text-align:center">← ホームに戻る</button>
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+/* ---- フラッシュカード ---- */
+let fcList=[], fcI=0, fcBack=false, fcScope=-1;
+function flashHome(){
+  stopTimer(); examMode=false;
+  app.innerHTML = `
+    <div class="card">
+      <h2>🃏 フラッシュカード</h2>
+      <p class="sec-lead">範囲を選んでね。表に用語、タップで裏（意味）が出ます。</p>
+      <button class="btn primary" onclick="flashStart(-1)">🔀 全部（${GTERMS}語）をシャッフル</button>
+      <div style="margin-top:10px">
+        ${GLOSSARY.map((g,i)=>`<button class="btn" onclick="flashStart(${i})">${g.ch}<small>${g.terms.length}語</small></button>`).join('')}
+      </div>
+      <button class="btn" onclick="home()" style="margin-top:6px;text-align:center">← ホームに戻る</button>
+    </div>`;
+  window.scrollTo(0,0);
+}
+function flashStart(ci){
+  fcScope = ci;
+  let arr=[];
+  if(ci<0) GLOSSARY.forEach(g=>g.terms.forEach(t=>arr.push({...t,ch:g.ch})));
+  else GLOSSARY[ci].terms.forEach(t=>arr.push({...t,ch:GLOSSARY[ci].ch}));
+  fcList = shuffle(arr); fcI=0; fcBack=false;
+  flashRender(); window.scrollTo(0,0);
+}
+function flashFlip(){ fcBack=!fcBack; flashRender(); }
+function flashNext(){ fcI=(fcI+1)%fcList.length; fcBack=false; flashRender(); }
+function flashPrev(){ fcI=(fcI-1+fcList.length)%fcList.length; fcBack=false; flashRender(); }
+function flashRender(){
+  const c = fcList[fcI];
+  const pct = Math.round((fcI+1)/fcList.length*100);
+  app.innerHTML = `
+    <div class="topbar"><span>${c.ch}</span><span class="count">${fcI+1} / ${fcList.length}</span></div>
+    <div class="progress"><div style="width:${pct}%"></div></div>
+    <div class="card">
+      <div class="fcard" onclick="flashFlip()">
+        ${fcBack
+          ? `<div class="side">裏 · 意味</div><div class="fd">${esc(c.d)}</div>`
+          : `<div class="side">表 · 用語</div><div class="ft">${esc(c.t)}</div><div class="hint">タップして意味を表示</div>`}
+      </div>
+      <div class="fc-bar">
+        <button onclick="flashPrev()">← 前</button>
+        <button onclick="flashFlip()">${fcBack?'用語に戻す':'めくる'}</button>
+        <button onclick="flashNext()">次 →</button>
+      </div>
+      <div class="fc-bar" style="margin-top:8px">
+        <button onclick="flashStart(${fcScope})">🔀 シャッフル</button>
+        <button onclick="flashHome()">範囲変更</button>
+        <button onclick="home()">ホーム</button>
+      </div>
     </div>`;
 }
 
