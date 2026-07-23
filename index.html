@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>データベース応用 テスト対策</title>
+<style>
+  :root{
+    --bg:#0f172a; --card:#1e293b; --card2:#273449; --accent:#38bdf8;
+    --accent2:#818cf8; --ok:#22c55e; --ng:#ef4444; --text:#e2e8f0;
+    --muted:#94a3b8; --line:#334155; --code:#0b1220;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Segoe UI","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+    background:linear-gradient(160deg,#0f172a,#111a33);
+    color:var(--text); line-height:1.7; min-height:100vh;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 60px;}
+  header h1{font-size:1.4rem;margin:0 0 4px;}
+  header p{color:var(--muted);margin:0;font-size:.85rem;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:18px;box-shadow:0 8px 30px rgba(0,0,0,.25);}
+  h2{font-size:1.1rem;margin:0 0 12px;}
+  .btn{
+    display:block;width:100%;text-align:left;cursor:pointer;
+    background:var(--card2);color:var(--text);border:1px solid var(--line);
+    border-radius:12px;padding:14px 16px;margin:8px 0;font-size:1rem;
+    transition:.15s;
+  }
+  .btn:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#0b1220;font-weight:700;border:none;text-align:center;}
+  .btn small{display:block;color:var(--muted);font-size:.78rem;font-weight:400;margin-top:2px;}
+  .btn.primary small{color:#0b1220;opacity:.75;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .row .btn{flex:1;min-width:120px;margin:0;}
+  .topbar{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted);margin-bottom:6px;}
+  .progress{height:8px;background:var(--code);border-radius:99px;overflow:hidden;margin-bottom:16px;}
+  .progress > div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:.3s;}
+  .chip{display:inline-block;font-size:.72rem;padding:2px 10px;border-radius:99px;background:var(--code);color:var(--accent);border:1px solid var(--line);margin-bottom:10px;}
+  .q{font-size:1.08rem;font-weight:600;margin:0 0 4px;white-space:pre-wrap;}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;font-family:"Consolas","Courier New",monospace;font-size:.9rem;color:#c7d2fe;margin:10px 0;}
+  .opt{
+    display:block;width:100%;text-align:left;cursor:pointer;
+    background:var(--card2);color:var(--text);border:1px solid var(--line);
+    border-radius:12px;padding:12px 14px;margin:8px 0;font-size:.98rem;transition:.12s;
+    white-space:pre-wrap;
+  }
+  .opt:hover:not(:disabled){border-color:var(--accent);}
+  .opt:disabled{cursor:default;opacity:1;}
+  .opt.correct{background:rgba(34,197,94,.16);border-color:var(--ok);}
+  .opt.wrong{background:rgba(239,68,68,.16);border-color:var(--ng);}
+  .opt code{font-family:"Consolas",monospace;}
+  .fb{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:.92rem;display:none;}
+  .fb.show{display:block;}
+  .fb.ok{background:rgba(34,197,94,.12);border:1px solid var(--ok);}
+  .fb.ng{background:rgba(239,68,68,.12);border:1px solid var(--ng);}
+  .fb b{color:var(--accent);}
+  .nav{display:flex;justify-content:flex-end;margin-top:14px;}
+  .score{font-size:2.6rem;font-weight:800;text-align:center;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0;}
+  .muted{color:var(--muted);font-size:.85rem;}
+  .review{border-top:1px solid var(--line);padding-top:12px;margin-top:12px;}
+  .review .q{font-size:.95rem;}
+  .review .ans{font-size:.88rem;margin:2px 0 0;}
+  .review .ans .c{color:var(--ok);}
+  .review .ans .w{color:var(--ng);}
+  footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:28px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>📚 データベース応用 テスト対策</h1>
+    <p>鶴岡高専・データベース応用｜四択の用語問題＋SQLコード問題</p>
+  </header>
+  <div id="app"></div>
+  <footer>資料（第1〜10回）の記述に基づく練習問題です。実際の出題を保証するものではありません。</footer>
+</div>
+
+<script>
+/* ============ 問題データ ============ */
+/* type: term=用語四択 / code=コード四択  ch=章  */
+const BANK = [
+/* ---------- 第1回：DB基礎 ---------- */
+{ch:"第1回",type:"term",q:"「大量のデータを整理して保存し、必要なときにすぐ取り出せるようにした『データの倉庫』」を指す言葉は？",opts:["データベース（DB）","データモデル","トランザクション","スキーマ"],a:0,exp:"データベース（DB）＝大量のデータを整理して保存し、必要なときにすぐ取り出せる「データの倉庫」。"},
+{ch:"第1回",type:"term",q:"表（テーブル）形式でデータを管理し、MySQL・PostgreSQL・Oracleが代表例のDBは？",opts:["リレーショナルデータベース","NoSQLデータベース","階層型データベース","ネットワーク型データベース"],a:0,exp:"リレーショナルDB＝表（テーブル）形式でデータを管理。Excelの表に近いイメージ。現在の主流。"},
+{ch:"第1回",type:"term",q:"柔軟な形式でデータを保存し、SNSやビッグデータに適したDBは？（例：MongoDB, Redis）",opts:["NoSQLデータベース","リレーショナルデータベース","階層型データベース","表計算ソフト"],a:0,exp:"NoSQL＝柔軟な形式でデータを保存。SNSやビッグデータに適している。"},
+{ch:"第1回",type:"term",q:"「1件分のデータ（表の1行）」を表す用語は？",opts:["レコード（行）","フィールド（列）","テーブル","キー"],a:0,exp:"レコード（行）＝1件分のデータ。例：「田中太郎」の情報1行分。"},
+{ch:"第1回",type:"term",q:"「データの項目（表の列）」を表す用語は？",opts:["フィールド（列）","レコード（行）","テーブル","タプル"],a:0,exp:"フィールド（列）＝データの項目。例：「氏名」「学部」「学生ID」。"},
+{ch:"第1回",type:"term",q:"データベースに命令を出すための専用言語の略称は？",opts:["SQL","HTML","DBMS","URL"],a:0,exp:"SQL（Structured Query Language）＝データベースに命令を出すための専用言語。"},
+{ch:"第1回",type:"term",q:"SQLの基本操作CRUDのうち、「データを取得する（SELECT）」に当たるのは？",opts:["READ","CREATE","UPDATE","DELETE"],a:0,exp:"CRUD：C=CREATE(追加/INSERT)、R=READ(取得/SELECT)、U=UPDATE(更新)、D=DELETE(削除)。"},
+{ch:"第1回",type:"term",q:"「SQL」の正式名称は？",opts:["Structured Query Language","Simple Query Logic","System Query Language","Standard Question Language"],a:0,exp:"SQL = Structured Query Language。"},
+
+/* ---------- 第3回：データモデル・正規化 ---------- */
+{ch:"第3回",type:"term",q:"「現実世界のデータ構造をコンピュータ上で再現するための抽象的ルール・構造」を指す言葉は？",opts:["データモデル","データベース","エンティティ","インデックス"],a:0,exp:"データモデル＝現実世界のデータ構造をコンピュータ上で再現するための抽象的ルール・構造。「データの管理方法を決める設計図」。"},
+{ch:"第3回",type:"term",q:"ツリー構造（親子関係）でデータを管理し、1対多を表す最初期のデータモデルは？",opts:["階層型データモデル","ネットワーク型データモデル","リレーショナル型データモデル","ドキュメント型"],a:0,exp:"階層型モデル＝ツリー構造（親子関係）。1対多。IBMのIMSで実用化。"},
+{ch:"第3回",type:"term",q:"グラフ構造で多対多を表現でき、CODASYLによって標準化されたデータモデルは？",opts:["ネットワーク型データモデル","階層型データモデル","リレーショナル型データモデル","キー・バリュー型"],a:0,exp:"ネットワーク型モデル＝グラフ／ネットワーク構造。多対多を表現。CODASYL（コダシル）で標準化。"},
+{ch:"第3回",type:"term",q:"E.F.コードにより1970年に提唱され、データを行と列（テーブル形式）で管理するモデルは？",opts:["リレーショナル型データモデル","階層型データモデル","ネットワーク型データモデル","NoSQL"],a:0,exp:"リレーショナル型＝行と列（テーブル形式）で管理。E.F.コードが1970年に提唱。現在の主流DBの基盤。"},
+{ch:"第3回",type:"term",q:"「テーブル内で一意に識別する項目」を表すキーは？",opts:["主キー（Primary Key）","外部キー（Foreign Key）","候補キー","スーパーキー"],a:0,exp:"主キー（Primary Key）＝テーブル内で一意に識別する項目。重複不可・NULL不可。"},
+{ch:"第3回",type:"term",q:"「他テーブルの主キーを参照する項目」を表すキーは？",opts:["外部キー（Foreign Key）","主キー（Primary Key）","複合キー","代理キー"],a:0,exp:"外部キー（Foreign Key）＝他テーブルの主キーを参照する項目。テーブル同士を紐づける。"},
+{ch:"第3回",type:"term",q:"「表内のすべての値が単一の値になるようにする」正規形は？",opts:["第1正規形","第2正規形","第3正規形","ボイスコッド正規形"],a:0,exp:"第1正規形＝表内のすべての値を「単一の値」にする。カンマ区切りを1行ずつ分割。"},
+{ch:"第3回",type:"term",q:"「主キーの一部に依存する属性を別表に分割する（部分依存の排除）」正規形は？",opts:["第2正規形","第1正規形","第3正規形","第4正規形"],a:0,exp:"第2正規形＝主キーの一部にだけ依存する属性（部分関数従属）を別表に分離する。"},
+{ch:"第3回",type:"term",q:"「非キー属性が別の非キー属性に依存しないように分割する（推移的従属の排除）」正規形は？",opts:["第3正規形","第2正規形","第1正規形","第5正規形"],a:0,exp:"第3正規形＝非キー属性間の依存（推移的従属）を解消する。例：教師名→教師住所を教師表に分ける。"},
+{ch:"第3回",type:"term",q:"NoSQLのうち、JSONやBSON形式で1件のデータを保存する種類は？（代表：MongoDB）",opts:["ドキュメント型","グラフ型","カラム型","キー・バリュー型"],a:0,exp:"ドキュメント型＝JSON/BSON形式で保存。柔軟なスキーマ。代表：MongoDB、CouchDB。"},
+{ch:"第3回",type:"term",q:"NoSQLのうち、キーと値のペアでシンプルに超高速なのは？（代表：Redis）",opts:["キー・バリュー型","ドキュメント型","グラフ型","カラム型"],a:0,exp:"キー・バリュー型＝キーと値のペア。シンプルで超高速。代表：Redis、DynamoDB。"},
+{ch:"第3回",type:"term",q:"多対多の関係を表現するために導入する、2つの表の間をつなぐ表を何という？",opts:["中間テーブル（関係テーブル）","仮想テーブル","一時テーブル","親テーブル"],a:0,exp:"多対多は「中間テーブル（関係テーブル）」を導入して「1対多＋1対多」に分解する。"},
+
+/* ---------- 第4回：設計・ER図 ---------- */
+{ch:"第4回",type:"term",q:"「管理したい対象（人・物・出来事）」を表すER図の用語は？（例：学生、科目、教師）",opts:["エンティティ（Entity）","属性（Attribute）","リレーションシップ","ドメイン"],a:0,exp:"エンティティ（Entity）＝管理したい対象（人・物・出来事）。例：学生、科目、教師、教室。"},
+{ch:"第4回",type:"term",q:"「エンティティが持つ性質や情報項目」を表す用語は？（例：学籍番号、氏名、学年）",opts:["属性（Attribute）","エンティティ","リレーションシップ","カーディナリティ"],a:0,exp:"属性（Attribute）＝エンティティが持つ性質や情報項目。学生→学籍番号、氏名、学年。"},
+{ch:"第4回",type:"term",q:"「エンティティ同士のつながり」を表すER図の用語は？（例：学生―履修―科目）",opts:["リレーションシップ（Relationship）","属性","主キー","インデックス"],a:0,exp:"リレーションシップ＝エンティティ同士の“つながり”。例：学生―履修―科目。"},
+{ch:"第4回",type:"term",q:"データベース設計の3段階を正しい順に並べたものは？",opts:["概念設計 → 論理設計 → 物理設計","物理設計 → 論理設計 → 概念設計","論理設計 → 概念設計 → 物理設計","概念設計 → 物理設計 → 論理設計"],a:0,exp:"概念設計(ER図)→論理設計(テーブル定義・正規化)→物理設計(SQL/DBMS)。右に行くほど抽象→具体。"},
+{ch:"第4回",type:"term",q:"ER図の基本記号で「関係」を表す図形は？",opts:["ひし形","矩形（長方形）","楕円","三角形"],a:0,exp:"ER図：矩形＝エンティティ、ひし形＝関係、楕円＝属性。"},
+{ch:"第4回",type:"term",q:"「データベース管理システム」を表す略語は？",opts:["DBMS","DDL","DML","ACID"],a:0,exp:"DBMS＝データベース管理システム。データの保存・検索・更新を自動管理するソフトウェア。"},
+{ch:"第4回",type:"term",q:"「本の索引」のように検索を高速化する仕組みは？",opts:["インデックス","トランザクション","ビュー","カーソル"],a:0,exp:"インデックス＝「本の索引」のようなもの。よく検索する列に付けると高速化。付けすぎると更新が遅くなる。"},
+{ch:"第4回",type:"term",q:"「4桁固定の学籍番号」に最も適した、固定長文字列のデータ型は？",opts:["CHAR(n)","VARCHAR(n)","INT","TEXT"],a:0,exp:"CHAR(n)＝固定長文字列。4桁固定ならVARCHARよりCHAR(4)が効率的。"},
+
+/* ---------- 第5回：DDL ---------- */
+{ch:"第5回",type:"term",q:"データベースの「構造」を定義するための言語（CREATE/ALTER/DROP等）は？",opts:["DDL（Data Definition Language）","DML（Data Manipulation Language）","DCL","TCL"],a:0,exp:"DDL（Data Definition Language）＝データベースの構造を定義する言語。"},
+{ch:"第5回",type:"term",q:"既存の表の構造（列の追加・削除・型変更など）を変更するDDLコマンドは？",opts:["ALTER","CREATE","DROP","SELECT"],a:0,exp:"ALTER TABLE＝既存の表の構造を変更する命令。列の追加・削除・型変更・制約追加など。"},
+{ch:"第5回",type:"term",q:"「必ず値が必要（空欄＝NULLを許さない）」ことを示す制約は？",opts:["NOT NULL","UNIQUE","CHECK","DEFAULT"],a:0,exp:"NOT NULL＝空欄（NULL）を許さない制約。氏名・学籍番号など必須項目に使用。"},
+{ch:"第5回",type:"term",q:"「値が重複しないようにする」制約は？（例：emailの重複禁止）",opts:["UNIQUE","NOT NULL","PRIMARY KEY","CHECK"],a:0,exp:"UNIQUE＝値が重複しないようにする制約。メールアドレスやユーザー名などに使用。"},
+{ch:"第5回",type:"term",q:"「値が一定の条件を満たすかチェックし、不正なデータを防ぐ」制約は？（例：grade BETWEEN 1 AND 5）",opts:["CHECK","DEFAULT","UNIQUE","NOT NULL"],a:0,exp:"CHECK＝値が条件を満たすか確認する制約。例：CHECK(grade BETWEEN 1 AND 5)。"},
+{ch:"第5回",type:"term",q:"「値を指定しなかった時に自動で入る値」を定める制約は？",opts:["DEFAULT","CHECK","UNIQUE","AUTO_INCREMENT"],a:0,exp:"DEFAULT＝値を指定しなかった時に自動で入る値。例：DEFAULT CURRENT_TIMESTAMP。"},
+{ch:"第5回",type:"term",q:"「テーブル構造は残し、データだけを高速に全削除する」コマンドは？",opts:["TRUNCATE TABLE","DROP TABLE","DELETE","ALTER TABLE"],a:0,exp:"TRUNCATE TABLE＝テーブルは残し、データだけを高速に全削除。DELETEより高速（ログをほぼ書かない）。"},
+{ch:"第5回",type:"term",q:"存在しない表をDROPしてもエラーにせず、安全に削除するために付ける句は？",opts:["IF EXISTS","IF NULL","WHERE","CASCADE"],a:0,exp:"DROP TABLE IF EXISTS テーブル名; ＝存在しない表でもエラーにならない。初期化スクリプトで習慣化推奨。"},
+
+/* ---------- 第6回：DML・トランザクション ---------- */
+{ch:"第6回",type:"term",q:"データベースに保存されているデータそのものを操作する言語（INSERT/UPDATE/DELETE）は？",opts:["DML（Data Manipulation Language）","DDL（Data Definition Language）","DCL","SQLite"],a:0,exp:"DML（Data Manipulation Language）＝データそのものを操作する言語。INSERT/UPDATE/DELETE。"},
+{ch:"第6回",type:"term",q:"表に「新しい行（レコード）を追加する」DML命令は？",opts:["INSERT","UPDATE","DELETE","SELECT"],a:0,exp:"INSERT＝表に新しい行を追加する命令。INSERT INTO テーブル名(列...) VALUES(値...);"},
+{ch:"第6回",type:"term",q:"UPDATE文やDELETE文で「これを忘れると全件が変更／削除される」ため最重要な句は？",opts:["WHERE句","ORDER BY句","GROUP BY句","HAVING句"],a:0,exp:"WHERE句を忘れると全件が変更or削除される（実務で最も多い事故）。必ず確認してから実行。"},
+{ch:"第6回",type:"term",q:"複数のDML操作を「すべて成功」か「すべて取り消し」のどちらかに保証する仕組みは？",opts:["トランザクション","インデックス","ビュー","サブクエリ"],a:0,exp:"トランザクション＝複数のDML操作を1つの処理単位として扱い、全成功か全取消を保証する仕組み。"},
+{ch:"第6回",type:"term",q:"トランザクションの性質ACIDのうち「A」が表すものは？",opts:["Atomicity（原子性）","Availability（可用性）","Accuracy（正確性）","Authority（権限）"],a:0,exp:"ACID：A=Atomicity(原子性)、C=Consistency(一貫性)、I=Isolation(独立性)、D=Durability(永続性)。"},
+{ch:"第6回",type:"term",q:"トランザクションで「変更を確定する」コマンドは？",opts:["COMMIT","ROLLBACK","BEGIN","CANCEL"],a:0,exp:"COMMIT＝変更を確定。ROLLBACK＝実行前の状態に巻き戻す（取り消し）。"},
+{ch:"第6回",type:"term",q:"トランザクションで「誤りに気付き、実行前の状態に巻き戻す」コマンドは？",opts:["ROLLBACK","COMMIT","DROP","SAVE"],a:0,exp:"ROLLBACK＝すべて実行前の状態に巻き戻す。BEGINで開始→誤りならROLLBACK。"},
+
+/* ---------- 第7回：SELECT ---------- */
+{ch:"第7回",type:"term",q:"テーブルに保存されたデータを読み出す（検索する）読み取り専用の命令は？",opts:["SELECT","INSERT","UPDATE","CREATE"],a:0,exp:"SELECT＝データを読み出す（検索する）命令。データを変更しない読み取り専用（READ ONLY）で安全。"},
+{ch:"第7回",type:"term",q:"SELECT結果を指定した列の値で並べ替える句は？",opts:["ORDER BY","GROUP BY","WHERE","HAVING"],a:0,exp:"ORDER BY＝並べ替えの句。ASC(昇順・省略可)/DESC(降順)。"},
+{ch:"第7回",type:"term",q:"ORDER BY で「降順（大きい順）」に並べるキーワードは？",opts:["DESC","ASC","TOP","DOWN"],a:0,exp:"ASC＝昇順(デフォルト・省略可)、DESC＝降順(明示が必要)。"},
+{ch:"第7回",type:"term",q:"SELECT結果から「重複行を除外する」キーワードは？",opts:["DISTINCT","LIMIT","UNIQUE","EXCEPT"],a:0,exp:"DISTINCT＝重複行を除外。SELECTの直後に書く。「どんな種類があるか」を調べるのに便利。"},
+{ch:"第7回",type:"term",q:"取得する行数を制限するキーワードは？（Webアプリのページングで必須）",opts:["LIMIT","DISTINCT","HAVING","BETWEEN"],a:0,exp:"LIMIT＝取得する行数を制限。OFFSETと組み合わせてページングに使う。"},
+{ch:"第7回",type:"term",q:"複数のテーブルを「共通の列」で横につなげて1つの結果を得る操作は？",opts:["JOIN（結合）","UNION","DISTINCT","GROUP BY"],a:0,exp:"JOIN＝複数の表を共通の列で結合。正規化で分割された表をつなげて意味のある情報にする。"},
+{ch:"第7回",type:"term",q:"JOINのうち「両方のテーブルに存在する行だけ」を取得する最も基本的な結合は？",opts:["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL OUTER JOIN"],a:0,exp:"INNER JOIN＝両方に存在する行だけ取得。一致しない行は除外。"},
+{ch:"第7回",type:"term",q:"「左テーブルの全行＋右の一致行（右になければNULL）」を取得するJOINは？",opts:["LEFT JOIN","INNER JOIN","RIGHT JOIN","SELF JOIN"],a:0,exp:"LEFT JOIN＝左テーブルの全行を保持し、右に一致がなければNULLで埋める。未関連データの検出に便利。"},
+{ch:"第7回",type:"term",q:"「複数行のデータを1つの値にまとめる」関数の総称は？（COUNT/SUM/AVG/MIN/MAX）",opts:["集約関数","比較演算子","論理演算子","スカラ関数"],a:0,exp:"集約関数＝複数行を1つの値に集約する関数。COUNT/SUM/AVG/MIN/MAX。"},
+{ch:"第7回",type:"term",q:"行をグループ化する句と、集約後のグループを絞り込む句の正しい組み合わせは？",opts:["GROUP BY と HAVING","WHERE と ORDER BY","GROUP BY と WHERE","HAVING と LIMIT"],a:0,exp:"GROUP BY＝グループ化。HAVING＝集約(グループ化)後の条件。WHEREは集約前の行に対する条件。"},
+{ch:"第7回",type:"term",q:"「IF文のSQL版」で、条件に応じて異なる値を返す式は？",opts:["CASE式","LIKE式","IN式","EXISTS式"],a:0,exp:"CASE式＝条件に応じて異なる値を返す式（IF文のSQL版）。WHEN 条件 THEN 値 ... END。"},
+{ch:"第7回",type:"term",q:"「name LIKE '田%'」のようにパターン検索を行う際、%（パーセント）が意味するものは？",opts:["任意の文字列（0文字以上）","任意の1文字","空白のみ","数字のみ"],a:0,exp:"LIKE：%＝任意文字列、_＝1文字。'田%'は「田」で始まる名前に一致。"},
+{ch:"第7回",type:"term",q:"列がNULL（データなし）かどうかを判定する、SQLで正しい書き方は？",opts:["email IS NULL","email = NULL","email == NULL","email EQUALS NULL"],a:0,exp:"= NULL では判定できない。必ず IS NULL を使うのがSQLのルール。"},
+
+/* ---------- 第8回：サブクエリ・ビュー ---------- */
+{ch:"第8回",type:"term",q:"SQLの中で「別のSELECT文の結果」を利用する仕組みは？",opts:["サブクエリ","ビュー","トランザクション","インデックス"],a:0,exp:"サブクエリ＝SQLの中で別のSELECT文の結果を利用する仕組み。内側が先に実行される。"},
+{ch:"第8回",type:"term",q:"「1行1列の結果を返し、1つの値として扱われる」サブクエリは？",opts:["スカラサブクエリ","相関サブクエリ","INサブクエリ","派生表"],a:0,exp:"スカラサブクエリ＝1行1列の結果を返すサブクエリ。1行1列でないとSQLエラー。"},
+{ch:"第8回",type:"term",q:"「サブクエリ内部で外側のテーブルを参照し、行ごとに再実行される」サブクエリは？",opts:["相関サブクエリ","スカラサブクエリ","FROM句サブクエリ","単純サブクエリ"],a:0,exp:"相関サブクエリ＝サブクエリ内部で外側のテーブルを参照。外側の行1つにつき再実行され、処理が重い。"},
+{ch:"第8回",type:"term",q:"「SELECT文に名前を付けた仮想テーブル」で、実データを持たず定義だけを保存するものは？",opts:["ビュー","インデックス","中間テーブル","トリガー"],a:0,exp:"ビュー＝SELECT文に名前を付けた仮想テーブル。実データは持たず定義だけを保存。SQL再利用やセキュリティに使う。"},
+{ch:"第8回",type:"term",q:"FROM句に置くサブクエリが作る一時的なテーブルの呼び方は？（AS別名が必須）",opts:["派生表（インラインビュー）","スカラ値","相関表","主キー表"],a:0,exp:"FROM句のサブクエリ＝派生表（インラインビュー）。ASで別名が必須。"},
+{ch:"第8回",type:"term",q:"「NOT IN でNULLが含まれると結果が返らない」問題への推奨対策は？",opts:["NOT EXISTS に書き換える","GROUP BY を付ける","DISTINCT を付ける","LIMIT を付ける"],a:0,exp:"NOT IN (NULL,…)は常に偽になるため結果が返らない。対策はNOT EXISTSへの書き換え。"},
+{ch:"第8回",type:"term",q:"ビューを使って「passwordなど特定の列を隠し、見せる列だけを限定する」ことができる。これはビューの何という機能か？",opts:["アクセス制御（セキュリティ強化）","正規化","トランザクション","インデックス作成"],a:0,exp:"ビューは見せる列を限定できる＝アクセス制御（セキュリティの重要機能）。password列を隠せる。"},
+
+/* ---------- 仲間はずれ・誤り選択（過去問形式） ---------- */
+{ch:"総合",type:"term",q:"次のうち DDL（データ定義言語）のコマンドでないものはどれか？",opts:["SELECT","CREATE","ALTER","DROP"],a:0,exp:"CREATE/ALTER/DROPはDDL。SELECTはデータを取得するDML（データ操作言語）。"},
+{ch:"総合",type:"term",q:"次のうち DML（データ操作言語）に含まれる命令はどれか？",opts:["INSERT","CREATE","ALTER","DROP"],a:0,exp:"DMLはINSERT/UPDATE/DELETE（とSELECT）。CREATE/ALTER/DROPはDDL。"},
+{ch:"総合",type:"term",q:"次のうち「制約」に含まれないものはどれか？",opts:["ORDER BY","PRIMARY KEY","FOREIGN KEY","CHECK"],a:0,exp:"PRIMARY KEY/FOREIGN KEY/CHECK/NOT NULL/UNIQUEは制約。ORDER BYは並べ替えの句。"},
+{ch:"総合",type:"term",q:"次のうち「集約関数」でないものはどれか？",opts:["DISTINCT","COUNT","SUM","AVG"],a:0,exp:"集約関数はCOUNT/SUM/AVG/MIN/MAX。DISTINCTは重複排除のキーワード。"},
+{ch:"総合",type:"term",q:"次のうち JOIN（結合）の種類に含まれないものはどれか？",opts:["GROUP JOIN","INNER JOIN","LEFT JOIN","RIGHT JOIN"],a:0,exp:"JOINはINNER/LEFT/RIGHT/FULL OUTER JOIN、SELF JOIN。GROUP JOINは存在しない。"},
+{ch:"総合",type:"term",q:"トランザクションの性質「ACID」に含まれないものはどれか？",opts:["拡張性","原子性（Atomicity）","一貫性（Consistency）","独立性（Isolation）"],a:0,exp:"ACID＝原子性・一貫性・独立性・永続性（Durability）。拡張性は含まれない。"},
+{ch:"総合",type:"term",q:"次のうち NoSQL の種類に含まれないものはどれか？",opts:["リレーショナル型","ドキュメント型","グラフ型","キー・バリュー型"],a:0,exp:"NoSQLはドキュメント型・グラフ型・カラム型・キー・バリュー型。リレーショナル型はNoSQLではない。"},
+{ch:"総合",type:"term",q:"リレーショナルデータベースの説明として「誤っている」ものはどれか？",opts:["1つのセルに複数の値をカンマ区切りで入れる","データをテーブル（表）で管理する","テーブル同士をキーで関連付ける","SQLでデータを操作する"],a:0,exp:"1セルに複数値を入れるのは第1正規形違反。RDBは1セル1値が原則。"},
+{ch:"総合",type:"term",q:"正規化の目的として「誤っている」ものはどれか？",opts:["通信速度を上げる","重複データの排除","更新時の不整合防止","検索効率化"],a:0,exp:"正規化の目的は重複排除・更新不整合の防止・検索効率化。通信速度とは直接関係しない。"},
+{ch:"総合",type:"term",q:"主キー（Primary Key）の説明として「誤っている」ものはどれか？",opts:["1つのテーブルに複数設定できる","行を一意に識別する","値が重複してはいけない","NULLを許さない"],a:0,exp:"主キーは1テーブルに1つだけ。重複不可・NULL不可で行を一意に識別する。"},
+
+/* ---------- コード問題（四択） ---------- */
+{ch:"コード",type:"code",q:"Studentテーブルから「3年生（grade=3）」だけを取得する正しいSQLは？",code:null,opts:[
+  "SELECT * FROM Student WHERE grade = 3;",
+  "SELECT * FROM Student IF grade = 3;",
+  "SELECT * WHERE grade = 3 FROM Student;",
+  "GET * FROM Student WHERE grade = 3;"],a:0,exp:"行の絞り込みはWHERE句。SELECT 列 FROM 表 WHERE 条件; の順。"},
+
+{ch:"コード",type:"code",q:"「全学生の学年を1つ上げる（全件更新）」SQLとして正しいものは？",code:null,opts:[
+  "UPDATE Student SET grade = grade + 1;",
+  "UPDATE Student SET grade + 1;",
+  "UPDATE grade = grade + 1 FROM Student;",
+  "ALTER Student SET grade = grade + 1;"],a:0,exp:"UPDATE 表 SET 列 = 式; 現在の値を使った計算（grade+1）ができる。WHEREなしは全件更新。"},
+
+{ch:"コード",type:"code",q:"Studentテーブルに email 列（VARCHAR(100)）を追加する正しいSQLは？",code:null,opts:[
+  "ALTER TABLE Student ADD COLUMN email VARCHAR(100);",
+  "UPDATE TABLE Student ADD email VARCHAR(100);",
+  "ALTER TABLE Student NEW COLUMN email VARCHAR(100);",
+  "INSERT COLUMN email INTO Student VARCHAR(100);"],a:0,exp:"列追加は ALTER TABLE 表名 ADD COLUMN 列名 データ型; "},
+
+{ch:"コード",type:"code",q:"次のCREATE TABLE文の空欄①に入る、student_idを主キーにする制約は？",code:"CREATE TABLE Student (\n  student_id CHAR(4) ①,\n  name VARCHAR(50) NOT NULL\n);",opts:[
+  "PRIMARY KEY","FOREIGN KEY","UNIQUE KEY","CHECK KEY"],a:0,exp:"主キーは PRIMARY KEY。行を一意に識別し、重複不可・NULL不可。"},
+
+{ch:"コード",type:"code",q:"「点数(score)が高い順」に学生名と点数を並べる正しいSQLは？",code:null,opts:[
+  "SELECT name, score FROM students ORDER BY score DESC;",
+  "SELECT name, score FROM students ORDER BY score ASC;",
+  "SELECT name, score FROM students SORT score DESC;",
+  "SELECT name, score FROM students GROUP BY score DESC;"],a:0,exp:"降順（高い順）はORDER BY 列 DESC。ASCは昇順（低い順）。"},
+
+{ch:"コード",type:"code",q:"「平均点(AVG(score))が80点以上の科目コードごとの平均点」を出す正しいSQLは？",code:null,opts:[
+  "SELECT subject_id, AVG(score) FROM Enrollment GROUP BY subject_id HAVING AVG(score) >= 80;",
+  "SELECT subject_id, AVG(score) FROM Enrollment WHERE AVG(score) >= 80;",
+  "SELECT subject_id, AVG(score) FROM Enrollment GROUP BY subject_id WHERE AVG(score) >= 80;",
+  "SELECT subject_id, AVG(score) FROM Enrollment ORDER BY AVG(score) >= 80;"],a:0,exp:"集約後の絞り込みはHAVING（WHEREは集約前）。GROUP BYでグループ化してからHAVINGで条件。"},
+
+{ch:"コード",type:"code",q:"StudentとClubをstudent_idで内部結合する。空欄①に入るキーワードは？",code:"SELECT s.name, c.club_name\nFROM Student s\n① Club c ON s.id = c.student_id;",opts:[
+  "INNER JOIN","GROUP BY","WHERE","UNION"],a:0,exp:"両方に存在する行だけを結合するのはINNER JOIN。ON句で結合条件を指定する。"},
+
+{ch:"コード",type:"code",q:"「1回でも履修登録している学生の名前」を、INサブクエリで取り出す正しいSQLは？",code:null,opts:[
+  "SELECT name FROM Student WHERE student_id IN (SELECT student_id FROM Enrollment);",
+  "SELECT name FROM Student WHERE student_id = (SELECT student_id FROM Enrollment);",
+  "SELECT name FROM Student JOIN (SELECT student_id FROM Enrollment);",
+  "SELECT name FROM Student WHERE student_id IN Enrollment;"],a:0,exp:"集合との比較は WHERE 列 IN (SELECT ...)。=は1行1列（スカラ）専用で複数行だとエラー。"},
+
+{ch:"コード",type:"code",q:"「重複を排除して学年(grade)の一覧」を取得する正しいSQLは？",code:null,opts:[
+  "SELECT DISTINCT grade FROM students;",
+  "SELECT UNIQUE grade FROM students;",
+  "SELECT grade FROM students GROUP;",
+  "SELECT DISTINCT(grade) ONLY FROM students;"],a:0,exp:"重複排除は SELECT DISTINCT 列。全列が同じ行を1つにまとめる。"},
+
+{ch:"コード",type:"code",q:"「emailが未登録（空）の学生」を取り出す正しいSQLは？",code:null,opts:[
+  "SELECT name, email FROM students WHERE email IS NULL;",
+  "SELECT name, email FROM students WHERE email = NULL;",
+  "SELECT name, email FROM students WHERE email = '';",
+  "SELECT name, email FROM students WHERE email = EMPTY;"],a:0,exp:"NULL判定は必ず IS NULL。= NULL では判定できない（SQLのルール）。"},
+
+{ch:"コード",type:"code",q:"「点数が60点以上90点以下」の学生を範囲指定で取り出す正しいSQLは？",code:null,opts:[
+  "SELECT name, score FROM students WHERE score BETWEEN 60 AND 90;",
+  "SELECT name, score FROM students WHERE score IN 60 AND 90;",
+  "SELECT name, score FROM students WHERE 60 <= score <= 90;",
+  "SELECT name, score FROM students WHERE score BETWEEN 60 OR 90;"],a:0,exp:"範囲指定は BETWEEN 下限 AND 上限（両端を含む）。"},
+
+{ch:"コード",type:"code",q:"次のSQLの実行結果は？（Enrollmentのscoreは 85, 70, 60, 95, 80 の5件）",code:"SELECT AVG(score) FROM Enrollment;",opts:[
+  "78","390","95","5"],a:0,exp:"AVG＝平均。(85+70+60+95+80)/5 = 390/5 = 78。"},
+
+{ch:"コード",type:"code",q:"「学生ごとの平均点」ビュー v_avg を作成する正しいSQLは？",code:null,opts:[
+  "CREATE VIEW v_avg AS SELECT s.name, AVG(e.score) AS avg FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.name;",
+  "CREATE TABLE v_avg AS SELECT s.name, AVG(e.score) FROM Student s;",
+  "MAKE VIEW v_avg = SELECT name, AVG(score) FROM Student;",
+  "CREATE VIEW v_avg SELECT s.name, AVG(e.score) FROM Student s;"],a:0,exp:"ビュー作成は CREATE VIEW 名前 AS SELECT ...; ビューはSELECT文に名前を付けた仮想テーブル。"},
+
+{ch:"コード",type:"code",q:"外部キー制約があるとき、Enrollment が Student を参照している。学生を安全に削除する正しい順序は？",code:null,opts:[
+  "先に Enrollment（子）を削除 → 次に Student（親）を削除",
+  "先に Student（親）を削除 → 次に Enrollment（子）を削除",
+  "同時に両方を1つのDELETEで削除",
+  "順序は関係なく、どちらからでもよい"],a:0,exp:"参照している側（子・FKを持つEnrollment）→参照される側（親・Student）の順で削除する。"}
+];
+
+/* ============ アプリ本体 ============ */
+const app = document.getElementById('app');
+let quiz = [], idx = 0, correct = 0, answered = false, wrongList = [];
+let examMode = false, timeLeft = 0, timerId = null;
+
+const CHAPTERS = ["第1回","第3回","第4回","第5回","第6回","第7回","第8回"];
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* 選択肢をシャッフルしても正解を追える形に */
+function prepare(list){
+  return list.map(o=>{
+    const opts = o.opts.map((t,i)=>({t, ok:i===o.a}));
+    return {...o, sOpts:shuffle(opts)};
+  });
+}
+
+function home(){
+  stopTimer(); examMode=false;
+  idx=0;correct=0;wrongList=[];answered=false;
+  const termN = BANK.filter(x=>x.type==='term').length;
+  const codeN = BANK.filter(x=>x.type==='code').length;
+  app.innerHTML = `
+    <div class="card">
+      <h2>出題モードを選択</h2>
+      <button class="btn primary" onclick="start('exam')">🎯 本番モード（50問・50分・100点満点）<small>過去問と同じ形式：用語＋コードをまとめて／制限時間つき</small></button>
+      <button class="btn" onclick="start('all')" style="margin-top:10px">▶ おてがる20問<small>タイマーなし・全範囲ランダム</small></button>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" onclick="start('term')">用語だけ<small>四択 ${termN}問</small></button>
+        <button class="btn" onclick="start('code')">コードだけ<small>SQL ${codeN}問</small></button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>章別に演習</h2>
+      ${CHAPTERS.map(c=>{
+        const n = BANK.filter(x=>x.ch===c).length;
+        return `<button class="btn" onclick="start('ch:${c}')">${c}<small>${n}問｜${chTitle(c)}</small></button>`;
+      }).join('')}
+    </div>`;
+}
+
+function chTitle(c){
+  return {
+    "第1回":"データベースの基礎・SQL/CRUD",
+    "第3回":"データモデル・正規化・NoSQL",
+    "第4回":"データベース設計・ER図",
+    "第5回":"DDL・制約",
+    "第6回":"DML・トランザクション",
+    "第7回":"SELECT・JOIN・集約",
+    "第8回":"サブクエリ・ビュー"
+  }[c]||"";
+}
+
+function start(mode){
+  let list;
+  examMode = (mode==='exam');
+  if(mode==='exam'){
+    // 本番：用語45問＋コード5問（不足分は全問）＝最大50問
+    const terms = shuffle(BANK.filter(x=>x.type==='term')).slice(0,45);
+    const codes = shuffle(BANK.filter(x=>x.type==='code')).slice(0,5);
+    list = shuffle([...terms,...codes]);
+  } else if(mode==='all'){
+    // 用語15問＋コード5問を目安に混ぜる
+    const terms = shuffle(BANK.filter(x=>x.type==='term')).slice(0,15);
+    const codes = shuffle(BANK.filter(x=>x.type==='code')).slice(0,5);
+    list = shuffle([...terms,...codes]);
+  } else if(mode==='term'){
+    list = shuffle(BANK.filter(x=>x.type==='term'));
+  } else if(mode==='code'){
+    list = shuffle(BANK.filter(x=>x.type==='code'));
+  } else if(mode.startsWith('ch:')){
+    list = shuffle(BANK.filter(x=>x.ch===mode.slice(3)));
+  }
+  quiz = prepare(list);
+  idx=0;correct=0;wrongList=[];
+  stopTimer();
+  if(examMode){ timeLeft = 50*60; startTimer(); }
+  render();
+}
+
+function startTimer(){
+  timerId = setInterval(()=>{
+    timeLeft--;
+    const el=document.getElementById('timer');
+    if(el) el.textContent='⏱ '+fmtTime(timeLeft);
+    if(timeLeft<=0){ stopTimer(); result(true); }
+  },1000);
+}
+function stopTimer(){ if(timerId){clearInterval(timerId);timerId=null;} }
+function fmtTime(s){const m=Math.floor(s/60);const ss=s%60;return m+':'+String(ss).padStart(2,'0');}
+
+function render(){
+  answered=false;
+  const q = quiz[idx];
+  const pct = Math.round((idx)/quiz.length*100);
+  const tag = q.type==='code' ? 'SQLコード問題' : '用語問題';
+  app.innerHTML = `
+    <div class="topbar"><span>第 ${idx+1} / ${quiz.length} 問</span><span>${examMode?`<span id="timer">⏱ ${fmtTime(timeLeft)}</span>`:`正解 ${correct}`}</span></div>
+    <div class="progress"><div style="width:${pct}%"></div></div>
+    <div class="card">
+      <span class="chip">${q.ch}・${tag}</span>
+      <p class="q">${esc(q.q)}</p>
+      ${q.code?`<pre>${esc(q.code)}</pre>`:''}
+      <div id="opts">
+        ${q.sOpts.map((o,i)=>`<button class="opt" data-i="${i}" onclick="choose(${i})">${esc(o.t)}</button>`).join('')}
+      </div>
+      <div id="fb" class="fb"></div>
+      <div class="nav" id="nav"></div>
+    </div>`;
+}
+
+function choose(i){
+  if(answered) return;
+  answered=true;
+  const q = quiz[idx];
+  const chosen = q.sOpts[i];
+  const btns = [...document.querySelectorAll('.opt')];
+  btns.forEach((b,j)=>{
+    b.disabled=true;
+    if(q.sOpts[j].ok) b.classList.add('correct');
+    if(j===i && !chosen.ok) b.classList.add('wrong');
+  });
+  const fb = document.getElementById('fb');
+  if(chosen.ok){
+    correct++;
+    fb.className='fb show ok';
+    fb.innerHTML=`⭕ 正解！<br><b>解説：</b>${esc(q.exp)}`;
+  }else{
+    const ans = q.sOpts.find(o=>o.ok).t;
+    fb.className='fb show ng';
+    fb.innerHTML=`❌ 不正解。正解は「${esc(ans)}」<br><b>解説：</b>${esc(q.exp)}`;
+    wrongList.push({q, chosen:chosen.t, ans});
+  }
+  const nav=document.getElementById('nav');
+  const last = idx===quiz.length-1;
+  nav.innerHTML=`<button class="btn primary" style="width:auto;padding:10px 24px" onclick="next()">${last?'結果を見る ▶':'次の問題 ▶'}</button>`;
+}
+
+function next(){
+  if(idx===quiz.length-1){ result(); return; }
+  idx++; render();
+}
+
+function result(timeUp){
+  stopTimer();
+  const total=quiz.length;
+  const pct=Math.round(correct/total*100);
+  let msg = pct===100?"満点！完璧です🎉":pct>=80?"good！あと少し💪":pct>=60?"合格ライン。復習しよう📖":"要復習。資料を見直そう🔥";
+  const pts = examMode ? `<div class="score">${correct*2} 点 <span style="font-size:1rem;color:var(--muted)">/ ${total*2}点</span></div>` : `<div class="score">${correct} / ${total}</div>`;
+  app.innerHTML=`
+    <div class="card" style="text-align:center">
+      <h2>結果${timeUp?'（時間切れ）':''}</h2>
+      ${pts}
+      <p class="muted">正解 ${correct}/${total}　正答率 ${pct}%　${msg}</p>
+      <div class="row" style="margin-top:14px">
+        <button class="btn primary" onclick="home()">最初に戻る</button>
+        <button class="btn" onclick="retry()" style="text-align:center">もう一度（同じ範囲）</button>
+      </div>
+    </div>
+    ${wrongList.length?`
+    <div class="card">
+      <h2>間違えた問題（${wrongList.length}）</h2>
+      ${wrongList.map(w=>`
+        <div class="review">
+          <p class="q">${esc(w.q.q)}</p>
+          ${w.q.code?`<pre>${esc(w.q.code)}</pre>`:''}
+          <p class="ans"><span class="w">あなた：${esc(w.chosen)}</span></p>
+          <p class="ans"><span class="c">正解：${esc(w.ans)}</span></p>
+          <p class="ans muted">${esc(w.q.exp)}</p>
+        </div>`).join('')}
+    </div>`:`<div class="card" style="text-align:center">全問正解！間違いはありません✨</div>`}
+  `;
+  window.scrollTo(0,0);
+}
+
+let lastMode=null;
+const _start=start;
+start=function(m){lastMode=m;_start(m);};
+function retry(){ quiz=prepare(shuffle(quiz)); idx=0;correct=0;wrongList=[]; render(); window.scrollTo(0,0);}
+
+home();
+</script>
+</body>
+</html>
