@@ -106,181 +106,181 @@
 /* type: term=用語四択 / code=コード四択  ch=章  */
 const BANK = [
 /* ---------- 第1回：DB基礎 ---------- */
-{ch:"第1回",type:"term",q:"「大量のデータを整理して保存し、必要なときにすぐ取り出せるようにした『データの倉庫』」を指す言葉は？",opts:["データベース（DB）","データモデル","トランザクション","スキーマ"],a:0,exp:"データベース（DB）＝大量のデータを整理して保存し、必要なときにすぐ取り出せる「データの倉庫」。"},
-{ch:"第1回",type:"term",q:"表（テーブル）形式でデータを管理し、MySQL・PostgreSQL・Oracleが代表例のDBは？",opts:["リレーショナルデータベース","NoSQLデータベース","階層型データベース","ネットワーク型データベース"],a:0,exp:"リレーショナルDB＝表（テーブル）形式でデータを管理。Excelの表に近いイメージ。現在の主流。"},
-{ch:"第1回",type:"term",q:"柔軟な形式でデータを保存し、SNSやビッグデータに適したDBは？（例：MongoDB, Redis）",opts:["NoSQLデータベース","リレーショナルデータベース","階層型データベース","表計算ソフト"],a:0,exp:"NoSQL＝柔軟な形式でデータを保存。SNSやビッグデータに適している。"},
-{ch:"第1回",type:"term",q:"「1件分のデータ（表の1行）」を表す用語は？",opts:["レコード（行）","フィールド（列）","テーブル","キー"],a:0,exp:"レコード（行）＝1件分のデータ。例：「田中太郎」の情報1行分。"},
-{ch:"第1回",type:"term",q:"「データの項目（表の列）」を表す用語は？",opts:["フィールド（列）","レコード（行）","テーブル","タプル"],a:0,exp:"フィールド（列）＝データの項目。例：「氏名」「学部」「学生ID」。"},
-{ch:"第1回",type:"term",q:"データベースに命令を出すための専用言語の略称は？",opts:["SQL","HTML","DBMS","URL"],a:0,exp:"SQL（Structured Query Language）＝データベースに命令を出すための専用言語。"},
-{ch:"第1回",type:"term",q:"SQLの基本操作CRUDのうち、「データを取得する（SELECT）」に当たるのは？",opts:["READ","CREATE","UPDATE","DELETE"],a:0,exp:"CRUD：C=CREATE(追加/INSERT)、R=READ(取得/SELECT)、U=UPDATE(更新)、D=DELETE(削除)。"},
-{ch:"第1回",type:"term",q:"「SQL」の正式名称は？",opts:["Structured Query Language","Simple Query Logic","System Query Language","Standard Question Language"],a:0,exp:"SQL = Structured Query Language。"},
+{ch:"第1回",type:"term",q:"「大量のデータを整理して保存し、必要なときにすぐ取り出せるようにした『データの倉庫』」を指す言葉は？",opts:["データベース（DB）","データモデル","トランザクション","スキーマ"],a:0,exp:"✅ 答えは「データベース（DB）」。\n🔑 なぜ: バラバラのデータを整理してしまい、必要なとき即取り出せる“倉庫”のこと。\n⚠️ 紛らわしい語: データモデル=保存方法の設計図、スキーマ=構造の定義。倉庫そのものがDB。"},
+{ch:"第1回",type:"term",q:"表（テーブル）形式でデータを管理し、MySQL・PostgreSQL・Oracleが代表例のDBは？",opts:["リレーショナルデータベース","NoSQLデータベース","階層型データベース","ネットワーク型データベース"],a:0,exp:"✅ 答えは「リレーショナルDB」。\n🔑 なぜ: データを“表(テーブル)”で管理する方式。ExcelっぽくてMySQL等が代表、いまの主流。\n⚠️ NoSQLは表を使わない対極。階層型/ネットワーク型は昔の方式。"},
+{ch:"第1回",type:"term",q:"柔軟な形式でデータを保存し、SNSやビッグデータに適したDBは？（例：MongoDB, Redis）",opts:["NoSQLデータベース","リレーショナルデータベース","階層型データベース","表計算ソフト"],a:0,exp:"✅ 答えは「NoSQL」。\n🔑 なぜ: 表の形に縛られず柔軟に保存でき、大量・多様なSNSやビッグデータ向き。\n⚠️ MongoDB/Redisが代表。RDBの対極と覚える。"},
+{ch:"第1回",type:"term",q:"「1件分のデータ（表の1行）」を表す用語は？",opts:["レコード（行）","フィールド（列）","テーブル","キー"],a:0,exp:"✅ 答えは「レコード（行）」。\n🔑 なぜ: 表を横に1本切り出した“1件分”のかたまり(例:田中太郎の1行)。\n⚠️ 縦1列は「フィールド(列)」。行=レコード・列=フィールドを対で暗記。"},
+{ch:"第1回",type:"term",q:"「データの項目（表の列）」を表す用語は？",opts:["フィールド（列）","レコード（行）","テーブル","タプル"],a:0,exp:"✅ 答えは「フィールド（列）」。\n🔑 なぜ: 「氏名」「学年」など“項目の種類”を表す縦1列。\n⚠️ 1件分の横1行は「レコード」。左右(列)=フィールド、上下(行)=レコード。"},
+{ch:"第1回",type:"term",q:"データベースに命令を出すための専用言語の略称は？",opts:["SQL","HTML","DBMS","URL"],a:0,exp:"✅ 答えは「SQL」。\n🔑 なぜ: DBに「取り出せ/入れろ」と命令する専用言語。\n⚠️ DBMSはDBを動かすソフト本体、HTMLはWebページ用。命令する言語=SQL。"},
+{ch:"第1回",type:"term",q:"SQLの基本操作CRUDのうち、「データを取得する（SELECT）」に当たるのは？",opts:["READ","CREATE","UPDATE","DELETE"],a:0,exp:"✅ 答えは「READ」。\n🔑 なぜ: CRUD=Create(追加)/Read(取得)/Update(更新)/Delete(削除)。取得＝Read＝SELECT。\n⚠️ Createは追加(INSERT)。“読む=Read=SELECT”とつなげて覚える。"},
+{ch:"第1回",type:"term",q:"「SQL」の正式名称は？",opts:["Structured Query Language","Simple Query Logic","System Query Language","Standard Question Language"],a:0,exp:"✅ 答えは「Structured Query Language」。\n🔑 なぜ: 直訳「構造化された問い合わせ言語」。DBに問い合わせ(Query)する言語の意味。\n⚠️ 他はそれっぽい造語。Structured/Query/Languageの3語で固定。"},
 
 /* ---------- 第2回：DBの役割と概要 ---------- */
-{ch:"第2回",type:"term",q:"「事実や数値などの記録で、それ自体は意味を持たない生のもの」を指す用語は？",opts:["データ（Data）","情報（Information）","知識","データベース"],a:0,exp:"データ（Data）＝事実や数値などの記録。意味を持たない生データ。"},
-{ch:"第2回",type:"term",q:"「データを加工・整理して意味を持たせ、判断に使えるようにしたもの」を指す用語は？",opts:["情報（Information）","データ（Data）","レコード","フィールド"],a:0,exp:"情報（Information）＝データを加工・整理して意味を持たせたもの。例:体温37,36.5,38→平均37.2℃→発熱疑い。"},
-{ch:"第2回",type:"term",q:"データベースの定義として最も適切なものは？",opts:["大量のデータを効率的に保存・検索・更新・管理するための仕組み","データを1つのファイルに集めて置いた場所","表計算ソフトで作った大きな表","データを画面に表示するプログラム"],a:0,exp:"DBは単純な「データの置き場」ではなく「整理されたデータの集合」。効率的に保存・検索・更新・管理する仕組み。"},
-{ch:"第2回",type:"term",q:"データベースの役割として「誤っている」ものはどれか？",opts:["プログラムのソースコードを自動生成する","蓄積と整理","検索と抽出","同時アクセス制御"],a:0,exp:"DBの役割は①蓄積と整理②検索と抽出③同時アクセス制御④整合性・安全性管理の4つ。"},
-{ch:"第2回",type:"term",q:"ファイル管理と比べたデータベース管理の特徴として正しいものは？",opts:["一元管理されたテーブルをSQLで高速検索できる","散在したファイルを手作業で検索する","更新時に重複や不整合が起きやすい","共有には手動のやり取りが必要"],a:0,exp:"ファイル管理=散在・手作業検索・不整合リスク・手動共有。DB=一元管理・SQLで高速検索・自動的に整合性維持・同時アクセス可能。"},
-{ch:"第2回",type:"term",q:"NoSQLデータベースの特徴を表す言葉はどれか？",opts:["スキーマレス","固定長レコード","第3正規形","参照整合性"],a:0,exp:"NoSQLはスキーマレスで柔軟性が高い。用途例:SNS、IoTログ、大量分散データ処理。"},
-{ch:"第2回",type:"term",q:"「無料・高速で、Webサービス全般に広く使われるRDB」はどれか？",opts:["MySQL","PostgreSQL","SQLite","MongoDB"],a:0,exp:"MySQL＝RDB、無料／高速、用途はWebサービス全般。"},
-{ch:"第2回",type:"term",q:"「拡張性・安定性に優れ、組織内システムに使われるRDB」はどれか？",opts:["PostgreSQL","MySQL","SQLite","MongoDB"],a:0,exp:"PostgreSQL＝RDB、拡張性／安定性、用途は組織内システム。"},
-{ch:"第2回",type:"term",q:"「組込みが可能で、スマホやIoT機器で使われるRDB」はどれか？",opts:["SQLite","MySQL","PostgreSQL","MongoDB"],a:0,exp:"SQLite＝RDB、組込み可能、用途はスマホ／IoT機器。"},
-{ch:"第2回",type:"term",q:"データから情報へ加工するプロセスの流れとして正しいものは？",opts:["収集 → 整理 → 加工 → 可視化 → 共有 → 意思決定","意思決定 → 収集 → 加工 → 共有 → 整理","加工 → 収集 → 整理 → 可視化 → 共有","収集 → 意思決定 → 整理 → 加工 → 可視化"],a:0,exp:"生データ→収集→整理→加工→可視化→共有→意思決定。DBはこの一連の流れを効率化するツール。"},
+{ch:"第2回",type:"term",q:"「事実や数値などの記録で、それ自体は意味を持たない生のもの」を指す用語は？",opts:["データ（Data）","情報（Information）","知識","データベース"],a:0,exp:"✅ 答えは「データ（Data）」。\n🔑 なぜ: 37,36.5,38 のような“ただの数字・記録”。単体では判断に使えない。\n⚠️ 加工して意味を持たせると「情報」。データ→情報の向きに注意。"},
+{ch:"第2回",type:"term",q:"「データを加工・整理して意味を持たせ、判断に使えるようにしたもの」を指す用語は？",opts:["情報（Information）","データ（Data）","レコード","フィールド"],a:0,exp:"✅ 答えは「情報（Information）」。\n🔑 なぜ: データを整理・加工して意味づけしたもの(例:平均37.2℃→発熱疑い)。\n⚠️ 生の数字は「データ」。“判断に使える”がキーワードなら情報。"},
+{ch:"第2回",type:"term",q:"データベースの定義として最も適切なものは？",opts:["大量のデータを効率的に保存・検索・更新・管理するための仕組み","データを1つのファイルに集めて置いた場所","表計算ソフトで作った大きな表","データを画面に表示するプログラム"],a:0,exp:"✅ 答えは「効率的に保存・検索・更新・管理する仕組み」。\n🔑 なぜ: DBは単なる“置き場”でなく“整理された集合”。だから素早く探せる。\n⚠️ 「1ファイルに集めた」「大きな表」は置き場発想でNG。"},
+{ch:"第2回",type:"term",q:"データベースの役割として「誤っている」ものはどれか？",opts:["プログラムのソースコードを自動生成する","蓄積と整理","検索と抽出","同時アクセス制御"],a:0,exp:"✅ 答え(誤り)は「ソースコードを自動生成する」。\n🔑 なぜ: DBの役割は①蓄積と整理②検索と抽出③同時アクセス制御④整合性・安全性の4つ。コード生成は無関係。\n⚠️ “誤りを選ぶ”問題。正しい役割に混ざった異物を探す。"},
+{ch:"第2回",type:"term",q:"ファイル管理と比べたデータベース管理の特徴として正しいものは？",opts:["一元管理されたテーブルをSQLで高速検索できる","散在したファイルを手作業で検索する","更新時に重複や不整合が起きやすい","共有には手動のやり取りが必要"],a:0,exp:"✅ 答えは「一元管理された表をSQLで高速検索できる」。\n🔑 なぜ: これはDBの長所。他3つはファイル管理側の“短所”。\n⚠️ ファイル=散在・手作業・不整合・手動共有。DB側の利点はどれか、で見分ける。"},
+{ch:"第2回",type:"term",q:"NoSQLデータベースの特徴を表す言葉はどれか？",opts:["スキーマレス","固定長レコード","第3正規形","参照整合性"],a:0,exp:"✅ 答えは「スキーマレス」。\n🔑 なぜ: NoSQLは表の構造を事前固定しなくてよい＝柔軟。だからSNS/IoTログ向き。\n⚠️ 固定長・第3正規形・参照整合性はRDB側の話。"},
+{ch:"第2回",type:"term",q:"「無料・高速で、Webサービス全般に広く使われるRDB」はどれか？",opts:["MySQL","PostgreSQL","SQLite","MongoDB"],a:0,exp:"✅ 答えは「MySQL」。\n🔑 なぜ: 無料・高速でWeb全般の定番RDB。\n⚠️ PostgreSQL=組織内、SQLite=組込み、MongoDB=NoSQL。“無料/高速/Web”ならMySQL。"},
+{ch:"第2回",type:"term",q:"「拡張性・安定性に優れ、組織内システムに使われるRDB」はどれか？",opts:["PostgreSQL","MySQL","SQLite","MongoDB"],a:0,exp:"✅ 答えは「PostgreSQL」。\n🔑 なぜ: 拡張性・安定性が高く、しっかりした組織内システム向き。\n⚠️ “Web定番”はMySQL。用途で区別する。"},
+{ch:"第2回",type:"term",q:"「組込みが可能で、スマホやIoT機器で使われるRDB」はどれか？",opts:["SQLite","MySQL","PostgreSQL","MongoDB"],a:0,exp:"✅ 答えは「SQLite」。\n🔑 なぜ: アプリに組み込める軽量DB。スマホ/IoT機器で動く。\n⚠️ サーバ型のMySQL/PostgreSQLと違い“組込み”がキーワード。"},
+{ch:"第2回",type:"term",q:"データから情報へ加工するプロセスの流れとして正しいものは？",opts:["収集 → 整理 → 加工 → 可視化 → 共有 → 意思決定","意思決定 → 収集 → 加工 → 共有 → 整理","加工 → 収集 → 整理 → 可視化 → 共有","収集 → 意思決定 → 整理 → 加工 → 可視化"],a:0,exp:"✅ 答えは「収集→整理→加工→可視化→共有→意思決定」。\n🔑 なぜ: 生データを段階的に価値へ変える流れ。DBはこの流れ全体を効率化する。\n⚠️ 意思決定が最後。順序を入れ替えた選択肢に注意。"},
 
 /* ---------- 第3回：データモデル・正規化 ---------- */
-{ch:"第3回",type:"term",q:"「現実世界のデータ構造をコンピュータ上で再現するための抽象的ルール・構造」を指す言葉は？",opts:["データモデル","データベース","エンティティ","インデックス"],a:0,exp:"データモデル＝現実世界のデータ構造をコンピュータ上で再現するための抽象的ルール・構造。「データの管理方法を決める設計図」。"},
-{ch:"第3回",type:"term",q:"ツリー構造（親子関係）でデータを管理し、1対多を表す最初期のデータモデルは？",opts:["階層型データモデル","ネットワーク型データモデル","リレーショナル型データモデル","ドキュメント型"],a:0,exp:"階層型モデル＝ツリー構造（親子関係）。1対多。IBMのIMSで実用化。"},
-{ch:"第3回",type:"term",q:"グラフ構造で多対多を表現でき、CODASYLによって標準化されたデータモデルは？",opts:["ネットワーク型データモデル","階層型データモデル","リレーショナル型データモデル","キー・バリュー型"],a:0,exp:"ネットワーク型モデル＝グラフ／ネットワーク構造。多対多を表現。CODASYL（コダシル）で標準化。"},
-{ch:"第3回",type:"term",q:"E.F.コードにより1970年に提唱され、データを行と列（テーブル形式）で管理するモデルは？",opts:["リレーショナル型データモデル","階層型データモデル","ネットワーク型データモデル","NoSQL"],a:0,exp:"リレーショナル型＝行と列（テーブル形式）で管理。E.F.コードが1970年に提唱。現在の主流DBの基盤。"},
-{ch:"第3回",type:"term",q:"「テーブル内で一意に識別する項目」を表すキーは？",opts:["主キー（Primary Key）","外部キー（Foreign Key）","候補キー","スーパーキー"],a:0,exp:"主キー（Primary Key）＝テーブル内で一意に識別する項目。重複不可・NULL不可。"},
-{ch:"第3回",type:"term",q:"「他テーブルの主キーを参照する項目」を表すキーは？",opts:["外部キー（Foreign Key）","主キー（Primary Key）","複合キー","代理キー"],a:0,exp:"外部キー（Foreign Key）＝他テーブルの主キーを参照する項目。テーブル同士を紐づける。"},
-{ch:"第3回",type:"term",q:"「表内のすべての値が単一の値になるようにする」正規形は？",opts:["第1正規形","第2正規形","第3正規形","ボイスコッド正規形"],a:0,exp:"第1正規形＝表内のすべての値を「単一の値」にする。カンマ区切りを1行ずつ分割。"},
-{ch:"第3回",type:"term",q:"「主キーの一部に依存する属性を別表に分割する（部分依存の排除）」正規形は？",opts:["第2正規形","第1正規形","第3正規形","第4正規形"],a:0,exp:"第2正規形＝主キーの一部にだけ依存する属性（部分関数従属）を別表に分離する。"},
-{ch:"第3回",type:"term",q:"「非キー属性が別の非キー属性に依存しないように分割する（推移的従属の排除）」正規形は？",opts:["第3正規形","第2正規形","第1正規形","第5正規形"],a:0,exp:"第3正規形＝非キー属性間の依存（推移的従属）を解消する。例：教師名→教師住所を教師表に分ける。"},
-{ch:"第3回",type:"term",q:"NoSQLのうち、JSONやBSON形式で1件のデータを保存する種類は？（代表：MongoDB）",opts:["ドキュメント型","グラフ型","カラム型","キー・バリュー型"],a:0,exp:"ドキュメント型＝JSON/BSON形式で保存。柔軟なスキーマ。代表：MongoDB、CouchDB。"},
-{ch:"第3回",type:"term",q:"NoSQLのうち、キーと値のペアでシンプルに超高速なのは？（代表：Redis）",opts:["キー・バリュー型","ドキュメント型","グラフ型","カラム型"],a:0,exp:"キー・バリュー型＝キーと値のペア。シンプルで超高速。代表：Redis、DynamoDB。"},
-{ch:"第3回",type:"term",q:"多対多の関係を表現するために導入する、2つの表の間をつなぐ表を何という？",opts:["中間テーブル（関係テーブル）","仮想テーブル","一時テーブル","親テーブル"],a:0,exp:"多対多は「中間テーブル（関係テーブル）」を導入して「1対多＋1対多」に分解する。"},
+{ch:"第3回",type:"term",q:"「現実世界のデータ構造をコンピュータ上で再現するための抽象的ルール・構造」を指す言葉は？",opts:["データモデル","データベース","エンティティ","インデックス"],a:0,exp:"✅ 答えは「データモデル」。\n🔑 なぜ: 現実のデータ構造をコンピュータ上でどう表すかの“設計図(抽象ルール)”。\n⚠️ エンティティは“対象”、インデックスは高速化の仕組み。設計図＝モデル。"},
+{ch:"第3回",type:"term",q:"ツリー構造（親子関係）でデータを管理し、1対多を表す最初期のデータモデルは？",opts:["階層型データモデル","ネットワーク型データモデル","リレーショナル型データモデル","ドキュメント型"],a:0,exp:"✅ 答えは「階層型データモデル」。\n🔑 なぜ: 親→子のツリーで1対多を表す最初期の方式(IBM IMS)。\n⚠️ 多対多はネットワーク型。“ツリー・親子・1対多”なら階層型。"},
+{ch:"第3回",type:"term",q:"グラフ構造で多対多を表現でき、CODASYLによって標準化されたデータモデルは？",opts:["ネットワーク型データモデル","階層型データモデル","リレーショナル型データモデル","キー・バリュー型"],a:0,exp:"✅ 答えは「ネットワーク型データモデル」。\n🔑 なぜ: 網目状(グラフ)で多対多を表現。CODASYLで標準化。\n⚠️ 階層型は1対多だけ。“多対多・CODASYL”ならネットワーク型。"},
+{ch:"第3回",type:"term",q:"E.F.コードにより1970年に提唱され、データを行と列（テーブル形式）で管理するモデルは？",opts:["リレーショナル型データモデル","階層型データモデル","ネットワーク型データモデル","NoSQL"],a:0,exp:"✅ 答えは「リレーショナル型データモデル」。\n🔑 なぜ: 行と列の表で管理。E.F.コードが1970年提唱、今の主流。\n⚠️ “行と列・1970・コード”のキーワードで即決。"},
+{ch:"第3回",type:"term",q:"「テーブル内で一意に識別する項目」を表すキーは？",opts:["主キー（Primary Key）","外部キー（Foreign Key）","候補キー","スーパーキー"],a:0,exp:"✅ 答えは「主キー（Primary Key）」。\n🔑 なぜ: 表の中で行を1つに特定する目印。だから重複もNULLも不可。\n⚠️ 外部キーは“他の表を指す”役。自分の表の識別＝主キー。"},
+{ch:"第3回",type:"term",q:"「他テーブルの主キーを参照する項目」を表すキーは？",opts:["外部キー（Foreign Key）","主キー（Primary Key）","複合キー","代理キー"],a:0,exp:"✅ 答えは「外部キー（Foreign Key）」。\n🔑 なぜ: 他テーブルの主キーを指して表同士をつなぐ列。\n⚠️ 自分の表の識別は主キー。“他の表を参照”なら外部キー。"},
+{ch:"第3回",type:"term",q:"「表内のすべての値が単一の値になるようにする」正規形は？",opts:["第1正規形","第2正規形","第3正規形","ボイスコッド正規形"],a:0,exp:"✅ 答えは「第1正規形」。\n🔑 なぜ: 1セルに値は1つだけ。『数学,英語』の詰め込みを1行ずつに割る。\n⚠️ 2NF=部分依存の排除、3NF=推移的従属の排除。“1セル1値”なら1NF。"},
+{ch:"第3回",type:"term",q:"「主キーの一部に依存する属性を別表に分割する（部分依存の排除）」正規形は？",opts:["第2正規形","第1正規形","第3正規形","第4正規形"],a:0,exp:"✅ 答えは「第2正規形」。\n🔑 なぜ: 複合主キーの“一部だけ”で決まる列(部分関数従属)を別表に出す。\n⚠️ 1NF=1セル1値、3NF=非キー同士の依存。“主キーの一部に依存”なら2NF。"},
+{ch:"第3回",type:"term",q:"「非キー属性が別の非キー属性に依存しないように分割する（推移的従属の排除）」正規形は？",opts:["第3正規形","第2正規形","第1正規形","第5正規形"],a:0,exp:"✅ 答えは「第3正規形」。\n🔑 なぜ: 非キー→非キーの連鎖(推移的従属)を断つ。例:教師名→教師住所を別表へ。\n⚠️ 2NFは“キーの一部”依存。“キーでない列どうし”の依存なら3NF。"},
+{ch:"第3回",type:"term",q:"NoSQLのうち、JSONやBSON形式で1件のデータを保存する種類は？（代表：MongoDB）",opts:["ドキュメント型","グラフ型","カラム型","キー・バリュー型"],a:0,exp:"✅ 答えは「ドキュメント型」。\n🔑 なぜ: JSON/BSONで1件をまるごと保存。代表はMongoDB。\n⚠️ キー・バリュー型(Redis)やグラフ型(Neo4j)と混同しない。“JSON”ならドキュメント型。"},
+{ch:"第3回",type:"term",q:"NoSQLのうち、キーと値のペアでシンプルに超高速なのは？（代表：Redis）",opts:["キー・バリュー型","ドキュメント型","グラフ型","カラム型"],a:0,exp:"✅ 答えは「キー・バリュー型」。\n🔑 なぜ: 「キー→値」の単純ペアだから超高速。代表はRedis。\n⚠️ JSON保存はドキュメント型。“最もシンプル/高速/Redis”ならKV型。"},
+{ch:"第3回",type:"term",q:"多対多の関係を表現するために導入する、2つの表の間をつなぐ表を何という？",opts:["中間テーブル（関係テーブル）","仮想テーブル","一時テーブル","親テーブル"],a:0,exp:"✅ 答えは「中間テーブル（関係テーブル）」。\n🔑 なぜ: 多対多はそのまま表せないので、間に表を挟み「1対多＋1対多」に分解する。\n⚠️ 仮想テーブル=ビュー、一時テーブルは作業用。“多対多をほどく表”が中間テーブル。"},
 
 /* ---------- 第4回：設計・ER図 ---------- */
-{ch:"第4回",type:"term",q:"「管理したい対象（人・物・出来事）」を表すER図の用語は？（例：学生、科目、教師）",opts:["エンティティ（Entity）","属性（Attribute）","リレーションシップ","ドメイン"],a:0,exp:"エンティティ（Entity）＝管理したい対象（人・物・出来事）。例：学生、科目、教師、教室。"},
-{ch:"第4回",type:"term",q:"「エンティティが持つ性質や情報項目」を表す用語は？（例：学籍番号、氏名、学年）",opts:["属性（Attribute）","エンティティ","リレーションシップ","カーディナリティ"],a:0,exp:"属性（Attribute）＝エンティティが持つ性質や情報項目。学生→学籍番号、氏名、学年。"},
-{ch:"第4回",type:"term",q:"「エンティティ同士のつながり」を表すER図の用語は？（例：学生―履修―科目）",opts:["リレーションシップ（Relationship）","属性","主キー","インデックス"],a:0,exp:"リレーションシップ＝エンティティ同士の“つながり”。例：学生―履修―科目。"},
-{ch:"第4回",type:"term",q:"データベース設計の3段階を正しい順に並べたものは？",opts:["概念設計 → 論理設計 → 物理設計","物理設計 → 論理設計 → 概念設計","論理設計 → 概念設計 → 物理設計","概念設計 → 物理設計 → 論理設計"],a:0,exp:"概念設計(ER図)→論理設計(テーブル定義・正規化)→物理設計(SQL/DBMS)。右に行くほど抽象→具体。"},
-{ch:"第4回",type:"term",q:"ER図の基本記号で「関係」を表す図形は？",opts:["ひし形","矩形（長方形）","楕円","三角形"],a:0,exp:"ER図：矩形＝エンティティ、ひし形＝関係、楕円＝属性。"},
-{ch:"第4回",type:"term",q:"「データベース管理システム」を表す略語は？",opts:["DBMS","DDL","DML","ACID"],a:0,exp:"DBMS＝データベース管理システム。データの保存・検索・更新を自動管理するソフトウェア。"},
-{ch:"第4回",type:"term",q:"「本の索引」のように検索を高速化する仕組みは？",opts:["インデックス","トランザクション","ビュー","カーソル"],a:0,exp:"インデックス＝「本の索引」のようなもの。よく検索する列に付けると高速化。付けすぎると更新が遅くなる。"},
-{ch:"第4回",type:"term",q:"「4桁固定の学籍番号」に最も適した、固定長文字列のデータ型は？",opts:["CHAR(n)","VARCHAR(n)","INT","TEXT"],a:0,exp:"CHAR(n)＝固定長文字列。4桁固定ならVARCHARよりCHAR(4)が効率的。"},
+{ch:"第4回",type:"term",q:"「管理したい対象（人・物・出来事）」を表すER図の用語は？（例：学生、科目、教師）",opts:["エンティティ（Entity）","属性（Attribute）","リレーションシップ","ドメイン"],a:0,exp:"✅ 答えは「エンティティ（Entity）」。\n🔑 なぜ: 管理したい“対象そのもの”(学生・科目・教師)。ER図では矩形。\n⚠️ 中身の項目は「属性」、つながりは「リレーションシップ」。"},
+{ch:"第4回",type:"term",q:"「エンティティが持つ性質や情報項目」を表す用語は？（例：学籍番号、氏名、学年）",opts:["属性（Attribute）","エンティティ","リレーションシップ","カーディナリティ"],a:0,exp:"✅ 答えは「属性（Attribute）」。\n🔑 なぜ: エンティティが持つ情報項目(学籍番号・氏名・学年)。ER図では楕円。\n⚠️ 対象そのものはエンティティ。“項目・情報”なら属性。"},
+{ch:"第4回",type:"term",q:"「エンティティ同士のつながり」を表すER図の用語は？（例：学生―履修―科目）",opts:["リレーションシップ（Relationship）","属性","主キー","インデックス"],a:0,exp:"✅ 答えは「リレーションシップ」。\n🔑 なぜ: エンティティ同士のつながり(学生―履修―科目)。ER図ではひし形。\n⚠️ 主キーは識別、インデックスは高速化。“つながり”なら関係。"},
+{ch:"第4回",type:"term",q:"データベース設計の3段階を正しい順に並べたものは？",opts:["概念設計 → 論理設計 → 物理設計","物理設計 → 論理設計 → 概念設計","論理設計 → 概念設計 → 物理設計","概念設計 → 物理設計 → 論理設計"],a:0,exp:"✅ 答えは「概念→論理→物理」。\n🔑 なぜ: 抽象(ER図)→形(テーブル/正規化)→実装(SQL/DBMS)と、ふわっと→具体へ進む。\n⚠️ 逆順や入替の選択肢に注意。“概念が最初・物理が最後”。"},
+{ch:"第4回",type:"term",q:"ER図の基本記号で「関係」を表す図形は？",opts:["ひし形","矩形（長方形）","楕円","三角形"],a:0,exp:"✅ 答えは「ひし形」。\n🔑 なぜ: ER図は 矩形=エンティティ／楕円=属性／ひし形=関係。\n⚠️ 矩形と取り違えやすい。関係(つながり)=ひし形をセットで暗記。"},
+{ch:"第4回",type:"term",q:"「データベース管理システム」を表す略語は？",opts:["DBMS","DDL","DML","ACID"],a:0,exp:"✅ 答えは「DBMS」。\n🔑 なぜ: DataBase Management System＝DBを動かすソフト本体(MySQL等)。\n⚠️ DDL/DMLはSQLの種類、ACIDはトランザクションの性質。ソフト＝DBMS。"},
+{ch:"第4回",type:"term",q:"「本の索引」のように検索を高速化する仕組みは？",opts:["インデックス","トランザクション","ビュー","カーソル"],a:0,exp:"✅ 答えは「インデックス」。\n🔑 なぜ: 本の巻末索引と同じで、全ページ探さず目的地へ直行＝検索が速い。\n⚠️ 付けすぎると追加/更新が遅くなる副作用あり。"},
+{ch:"第4回",type:"term",q:"「4桁固定の学籍番号」に最も適した、固定長文字列のデータ型は？",opts:["CHAR(n)","VARCHAR(n)","INT","TEXT"],a:0,exp:"✅ 答えは「CHAR(n)」。\n🔑 なぜ: 桁数が“固定”なら固定長のCHARが無駄なく効率的。\n⚠️ VARCHARは長さがバラつく可変長向け。4桁固定ならCHAR(4)。"},
 
 /* ---------- 第5回：DDL ---------- */
-{ch:"第5回",type:"term",q:"データベースの「構造」を定義するための言語（CREATE/ALTER/DROP等）は？",opts:["DDL（Data Definition Language）","DML（Data Manipulation Language）","DCL","TCL"],a:0,exp:"DDL（Data Definition Language）＝データベースの構造を定義する言語。"},
-{ch:"第5回",type:"term",q:"既存の表の構造（列の追加・削除・型変更など）を変更するDDLコマンドは？",opts:["ALTER","CREATE","DROP","SELECT"],a:0,exp:"ALTER TABLE＝既存の表の構造を変更する命令。列の追加・削除・型変更・制約追加など。"},
-{ch:"第5回",type:"term",q:"「必ず値が必要（空欄＝NULLを許さない）」ことを示す制約は？",opts:["NOT NULL","UNIQUE","CHECK","DEFAULT"],a:0,exp:"NOT NULL＝空欄（NULL）を許さない制約。氏名・学籍番号など必須項目に使用。"},
-{ch:"第5回",type:"term",q:"「値が重複しないようにする」制約は？（例：emailの重複禁止）",opts:["UNIQUE","NOT NULL","PRIMARY KEY","CHECK"],a:0,exp:"UNIQUE＝値が重複しないようにする制約。メールアドレスやユーザー名などに使用。"},
-{ch:"第5回",type:"term",q:"「値が一定の条件を満たすかチェックし、不正なデータを防ぐ」制約は？（例：grade BETWEEN 1 AND 5）",opts:["CHECK","DEFAULT","UNIQUE","NOT NULL"],a:0,exp:"CHECK＝値が条件を満たすか確認する制約。例：CHECK(grade BETWEEN 1 AND 5)。"},
-{ch:"第5回",type:"term",q:"「値を指定しなかった時に自動で入る値」を定める制約は？",opts:["DEFAULT","CHECK","UNIQUE","AUTO_INCREMENT"],a:0,exp:"DEFAULT＝値を指定しなかった時に自動で入る値。例：DEFAULT CURRENT_TIMESTAMP。"},
-{ch:"第5回",type:"term",q:"「テーブル構造は残し、データだけを高速に全削除する」コマンドは？",opts:["TRUNCATE TABLE","DROP TABLE","DELETE","ALTER TABLE"],a:0,exp:"TRUNCATE TABLE＝テーブルは残し、データだけを高速に全削除。DELETEより高速（ログをほぼ書かない）。"},
-{ch:"第5回",type:"term",q:"存在しない表をDROPしてもエラーにせず、安全に削除するために付ける句は？",opts:["IF EXISTS","IF NULL","WHERE","CASCADE"],a:0,exp:"DROP TABLE IF EXISTS テーブル名; ＝存在しない表でもエラーにならない。初期化スクリプトで習慣化推奨。"},
+{ch:"第5回",type:"term",q:"データベースの「構造」を定義するための言語（CREATE/ALTER/DROP等）は？",opts:["DDL（Data Definition Language）","DML（Data Manipulation Language）","DCL","TCL"],a:0,exp:"✅ 答えは「DDL」。\n🔑 なぜ: Data Definition Language＝表の“構造(器)”を作る/変える/消す言語。\n⚠️ 中身のデータを操るのはDML。“CREATE/ALTER/DROP”ならDDL。"},
+{ch:"第5回",type:"term",q:"既存の表の構造（列の追加・削除・型変更など）を変更するDDLコマンドは？",opts:["ALTER","CREATE","DROP","SELECT"],a:0,exp:"✅ 答えは「ALTER」。\n🔑 なぜ: 既にある表の構造を後から変更(列追加・型変更・制約追加)する。\n⚠️ CREATEは新規作成、DROPは表ごと削除。“既存を変更”ならALTER。"},
+{ch:"第5回",type:"term",q:"「必ず値が必要（空欄＝NULLを許さない）」ことを示す制約は？",opts:["NOT NULL","UNIQUE","CHECK","DEFAULT"],a:0,exp:"✅ 答えは「NOT NULL」。\n🔑 なぜ: 空欄(NULL)を禁止＝必ず値を入れさせる。氏名や学籍番号など必須項目に。\n⚠️ UNIQUE=重複禁止、CHECK=範囲チェック。“空を許さない”ならNOT NULL。"},
+{ch:"第5回",type:"term",q:"「値が重複しないようにする」制約は？（例：emailの重複禁止）",opts:["UNIQUE","NOT NULL","PRIMARY KEY","CHECK"],a:0,exp:"✅ 答えは「UNIQUE」。\n🔑 なぜ: 同じ値を2回入れさせない(email重複禁止など)。\n⚠️ 主キーは「重複禁止＋NULL禁止＋1つだけ」。単なる重複禁止はUNIQUE。"},
+{ch:"第5回",type:"term",q:"「値が一定の条件を満たすかチェックし、不正なデータを防ぐ」制約は？（例：grade BETWEEN 1 AND 5）",opts:["CHECK","DEFAULT","UNIQUE","NOT NULL"],a:0,exp:"✅ 答えは「CHECK」。\n🔑 なぜ: 値が条件を満たすか見張る(例:grade BETWEEN 1 AND 5)。範囲外を弾く。\n⚠️ DEFAULTは初期値。“条件で弾く”ならCHECK。"},
+{ch:"第5回",type:"term",q:"「値を指定しなかった時に自動で入る値」を定める制約は？",opts:["DEFAULT","CHECK","UNIQUE","AUTO_INCREMENT"],a:0,exp:"✅ 答えは「DEFAULT」。\n🔑 なぜ: 値を書かなかったとき自動で入る初期値(例:登録日時)。\n⚠️ CHECKは条件チェック、AUTO_INCREMENTは連番。“未指定なら自動で入る”はDEFAULT。"},
+{ch:"第5回",type:"term",q:"「テーブル構造は残し、データだけを高速に全削除する」コマンドは？",opts:["TRUNCATE TABLE","DROP TABLE","DELETE","ALTER TABLE"],a:0,exp:"✅ 答えは「TRUNCATE TABLE」。\n🔑 なぜ: 表(器)は残して中身を全消し。ログをほぼ書かないのでDELETEより速い。\n⚠️ DROPは表ごと消す、DELETEは条件付きで遅め。“中身だけ高速全消し”はTRUNCATE。"},
+{ch:"第5回",type:"term",q:"存在しない表をDROPしてもエラーにせず、安全に削除するために付ける句は？",opts:["IF EXISTS","IF NULL","WHERE","CASCADE"],a:0,exp:"✅ 答えは「IF EXISTS」。\n🔑 なぜ: 無い表をDROPするとエラー。IF EXISTSを付ければ“無ければ何もしない”で安全。\n⚠️ 初期化スクリプトで毎回作り直す時の定番。"},
 
 /* ---------- 第6回：DML・トランザクション ---------- */
-{ch:"第6回",type:"term",q:"データベースに保存されているデータそのものを操作する言語（INSERT/UPDATE/DELETE）は？",opts:["DML（Data Manipulation Language）","DDL（Data Definition Language）","DCL","SQLite"],a:0,exp:"DML（Data Manipulation Language）＝データそのものを操作する言語。INSERT/UPDATE/DELETE。"},
-{ch:"第6回",type:"term",q:"表に「新しい行（レコード）を追加する」DML命令は？",opts:["INSERT","UPDATE","DELETE","SELECT"],a:0,exp:"INSERT＝表に新しい行を追加する命令。INSERT INTO テーブル名(列...) VALUES(値...);"},
-{ch:"第6回",type:"term",q:"UPDATE文やDELETE文で「これを忘れると全件が変更／削除される」ため最重要な句は？",opts:["WHERE句","ORDER BY句","GROUP BY句","HAVING句"],a:0,exp:"WHERE句を忘れると全件が変更or削除される（実務で最も多い事故）。必ず確認してから実行。"},
-{ch:"第6回",type:"term",q:"複数のDML操作を「すべて成功」か「すべて取り消し」のどちらかに保証する仕組みは？",opts:["トランザクション","インデックス","ビュー","サブクエリ"],a:0,exp:"トランザクション＝複数のDML操作を1つの処理単位として扱い、全成功か全取消を保証する仕組み。"},
-{ch:"第6回",type:"term",q:"トランザクションの性質ACIDのうち「A」が表すものは？",opts:["Atomicity（原子性）","Availability（可用性）","Accuracy（正確性）","Authority（権限）"],a:0,exp:"ACID：A=Atomicity(原子性)、C=Consistency(一貫性)、I=Isolation(独立性)、D=Durability(永続性)。"},
-{ch:"第6回",type:"term",q:"トランザクションで「変更を確定する」コマンドは？",opts:["COMMIT","ROLLBACK","BEGIN","CANCEL"],a:0,exp:"COMMIT＝変更を確定。ROLLBACK＝実行前の状態に巻き戻す（取り消し）。"},
-{ch:"第6回",type:"term",q:"トランザクションで「誤りに気付き、実行前の状態に巻き戻す」コマンドは？",opts:["ROLLBACK","COMMIT","DROP","SAVE"],a:0,exp:"ROLLBACK＝すべて実行前の状態に巻き戻す。BEGINで開始→誤りならROLLBACK。"},
+{ch:"第6回",type:"term",q:"データベースに保存されているデータそのものを操作する言語（INSERT/UPDATE/DELETE）は？",opts:["DML（Data Manipulation Language）","DDL（Data Definition Language）","DCL","SQLite"],a:0,exp:"✅ 答えは「DML」。\n🔑 なぜ: Data Manipulation Language＝表の“中身のデータ”を操る言語。\n⚠️ 器(構造)を作るのはDDL。“データを足す/変える/消す”ならDML。"},
+{ch:"第6回",type:"term",q:"表に「新しい行（レコード）を追加する」DML命令は？",opts:["INSERT","UPDATE","DELETE","SELECT"],a:0,exp:"✅ 答えは「INSERT」。\n🔑 なぜ: 新しい行を追加する命令(INSERT INTO 表(列) VALUES(値))。\n⚠️ UPDATEは既存の変更、DELETEは削除。“追加”ならINSERT。"},
+{ch:"第6回",type:"term",q:"UPDATE文やDELETE文で「これを忘れると全件が変更／削除される」ため最重要な句は？",opts:["WHERE句","ORDER BY句","GROUP BY句","HAVING句"],a:0,exp:"✅ 答えは「WHERE句」。\n🔑 なぜ: “どの行に効かせるか”を絞る条件。UPDATE/DELETEで忘れると全件に効く＝大事故。\n⚠️ ORDER BYは並べ替え。実行前にSELECTで対象確認を習慣に。"},
+{ch:"第6回",type:"term",q:"複数のDML操作を「すべて成功」か「すべて取り消し」のどちらかに保証する仕組みは？",opts:["トランザクション","インデックス","ビュー","サブクエリ"],a:0,exp:"✅ 答えは「トランザクション」。\n🔑 なぜ: 複数操作を1セットにし“全部成功 or 全部なかったこと”にできる。中途半端を防ぐ。\n⚠️ インデックス=高速化、ビュー=仮想表。“全成功か全取消”はトランザクション。"},
+{ch:"第6回",type:"term",q:"トランザクションの性質ACIDのうち「A」が表すものは？",opts:["Atomicity（原子性）","Availability（可用性）","Accuracy（正確性）","Authority（権限）"],a:0,exp:"✅ 答えは「Atomicity（原子性）」。\n🔑 なぜ: A=これ以上分けられない1かたまり＝全部やるか全部やらないか。\n⚠️ ACID=原子性/一貫性/独立性/永続性。可用性(Availability)は含まれないひっかけ。"},
+{ch:"第6回",type:"term",q:"トランザクションで「変更を確定する」コマンドは？",opts:["COMMIT","ROLLBACK","BEGIN","CANCEL"],a:0,exp:"✅ 答えは「COMMIT」。\n🔑 なぜ: ここまでの変更を“確定”して保存する合図。\n⚠️ ROLLBACKは取り消し、BEGINは開始。“確定”ならCOMMIT。"},
+{ch:"第6回",type:"term",q:"トランザクションで「誤りに気付き、実行前の状態に巻き戻す」コマンドは？",opts:["ROLLBACK","COMMIT","DROP","SAVE"],a:0,exp:"✅ 答えは「ROLLBACK」。\n🔑 なぜ: 誤ったのでBEGIN時点まで巻き戻して無かったことにする。\n⚠️ COMMITは確定(戻せない)。“取り消し・巻き戻し”ならROLLBACK。"},
 
 /* ---------- 第7回：SELECT ---------- */
-{ch:"第7回",type:"term",q:"テーブルに保存されたデータを読み出す（検索する）読み取り専用の命令は？",opts:["SELECT","INSERT","UPDATE","CREATE"],a:0,exp:"SELECT＝データを読み出す（検索する）命令。データを変更しない読み取り専用（READ ONLY）で安全。"},
-{ch:"第7回",type:"term",q:"SELECT結果を指定した列の値で並べ替える句は？",opts:["ORDER BY","GROUP BY","WHERE","HAVING"],a:0,exp:"ORDER BY＝並べ替えの句。ASC(昇順・省略可)/DESC(降順)。"},
-{ch:"第7回",type:"term",q:"ORDER BY で「降順（大きい順）」に並べるキーワードは？",opts:["DESC","ASC","TOP","DOWN"],a:0,exp:"ASC＝昇順(デフォルト・省略可)、DESC＝降順(明示が必要)。"},
-{ch:"第7回",type:"term",q:"SELECT結果から「重複行を除外する」キーワードは？",opts:["DISTINCT","LIMIT","UNIQUE","EXCEPT"],a:0,exp:"DISTINCT＝重複行を除外。SELECTの直後に書く。「どんな種類があるか」を調べるのに便利。"},
-{ch:"第7回",type:"term",q:"取得する行数を制限するキーワードは？（Webアプリのページングで必須）",opts:["LIMIT","DISTINCT","HAVING","BETWEEN"],a:0,exp:"LIMIT＝取得する行数を制限。OFFSETと組み合わせてページングに使う。"},
-{ch:"第7回",type:"term",q:"複数のテーブルを「共通の列」で横につなげて1つの結果を得る操作は？",opts:["JOIN（結合）","UNION","DISTINCT","GROUP BY"],a:0,exp:"JOIN＝複数の表を共通の列で結合。正規化で分割された表をつなげて意味のある情報にする。"},
-{ch:"第7回",type:"term",q:"JOINのうち「両方のテーブルに存在する行だけ」を取得する最も基本的な結合は？",opts:["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL OUTER JOIN"],a:0,exp:"INNER JOIN＝両方に存在する行だけ取得。一致しない行は除外。"},
-{ch:"第7回",type:"term",q:"「左テーブルの全行＋右の一致行（右になければNULL）」を取得するJOINは？",opts:["LEFT JOIN","INNER JOIN","RIGHT JOIN","SELF JOIN"],a:0,exp:"LEFT JOIN＝左テーブルの全行を保持し、右に一致がなければNULLで埋める。未関連データの検出に便利。"},
-{ch:"第7回",type:"term",q:"「複数行のデータを1つの値にまとめる」関数の総称は？（COUNT/SUM/AVG/MIN/MAX）",opts:["集約関数","比較演算子","論理演算子","スカラ関数"],a:0,exp:"集約関数＝複数行を1つの値に集約する関数。COUNT/SUM/AVG/MIN/MAX。"},
-{ch:"第7回",type:"term",q:"行をグループ化する句と、集約後のグループを絞り込む句の正しい組み合わせは？",opts:["GROUP BY と HAVING","WHERE と ORDER BY","GROUP BY と WHERE","HAVING と LIMIT"],a:0,exp:"GROUP BY＝グループ化。HAVING＝集約(グループ化)後の条件。WHEREは集約前の行に対する条件。"},
-{ch:"第7回",type:"term",q:"「IF文のSQL版」で、条件に応じて異なる値を返す式は？",opts:["CASE式","LIKE式","IN式","EXISTS式"],a:0,exp:"CASE式＝条件に応じて異なる値を返す式（IF文のSQL版）。WHEN 条件 THEN 値 ... END。"},
-{ch:"第7回",type:"term",q:"「name LIKE '田%'」のようにパターン検索を行う際、%（パーセント）が意味するものは？",opts:["任意の文字列（0文字以上）","任意の1文字","空白のみ","数字のみ"],a:0,exp:"LIKE：%＝任意文字列、_＝1文字。'田%'は「田」で始まる名前に一致。"},
-{ch:"第7回",type:"term",q:"列がNULL（データなし）かどうかを判定する、SQLで正しい書き方は？",opts:["email IS NULL","email = NULL","email == NULL","email EQUALS NULL"],a:0,exp:"= NULL では判定できない。必ず IS NULL を使うのがSQLのルール。"},
+{ch:"第7回",type:"term",q:"テーブルに保存されたデータを読み出す（検索する）読み取り専用の命令は？",opts:["SELECT","INSERT","UPDATE","CREATE"],a:0,exp:"✅ 答えは「SELECT」。\n🔑 なぜ: データを読み出すだけの命令。書き換えないので安全(READ ONLY)。\n⚠️ INSERT/UPDATE/CREATEはデータや構造を変える。“取り出す/検索”ならSELECT。"},
+{ch:"第7回",type:"term",q:"SELECT結果を指定した列の値で並べ替える句は？",opts:["ORDER BY","GROUP BY","WHERE","HAVING"],a:0,exp:"✅ 答えは「ORDER BY」。\n🔑 なぜ: 結果を指定列で並べ替える(ASC昇順/DESC降順)。\n⚠️ GROUP BYはグループ化、WHEREは絞り込み。“並べ替え”ならORDER BY。"},
+{ch:"第7回",type:"term",q:"ORDER BY で「降順（大きい順）」に並べるキーワードは？",opts:["DESC","ASC","TOP","DOWN"],a:0,exp:"✅ 答えは「DESC」。\n🔑 なぜ: Descending＝下る＝大きい順(降順)。\n⚠️ ASCは小さい順で省略可(既定)。DESCは書かないと降順にならない。"},
+{ch:"第7回",type:"term",q:"SELECT結果から「重複行を除外する」キーワードは？",opts:["DISTINCT","LIMIT","UNIQUE","EXCEPT"],a:0,exp:"✅ 答えは「DISTINCT」。\n🔑 なぜ: 同じ行をまとめて重複を消す。“何種類あるか”を見るのに便利。\n⚠️ LIMITは件数制限。“重複を消す”ならDISTINCT。"},
+{ch:"第7回",type:"term",q:"取得する行数を制限するキーワードは？（Webアプリのページングで必須）",opts:["LIMIT","DISTINCT","HAVING","BETWEEN"],a:0,exp:"✅ 答えは「LIMIT」。\n🔑 なぜ: 取得件数を制限。OFFSET(開始位置)と組み合わせページ送りに使う。\n⚠️ DISTINCTは重複排除。“先頭◯件だけ”ならLIMIT。"},
+{ch:"第7回",type:"term",q:"複数のテーブルを「共通の列」で横につなげて1つの結果を得る操作は？",opts:["JOIN（結合）","UNION","DISTINCT","GROUP BY"],a:0,exp:"✅ 答えは「JOIN（結合）」。\n🔑 なぜ: 正規化で分かれた表を“共通の列”で横につなぎ、意味ある形に戻す。\n⚠️ UNIONは縦に積む、DISTINCTは重複排除。“表を横につなぐ”ならJOIN。"},
+{ch:"第7回",type:"term",q:"JOINのうち「両方のテーブルに存在する行だけ」を取得する最も基本的な結合は？",opts:["INNER JOIN","LEFT JOIN","RIGHT JOIN","FULL OUTER JOIN"],a:0,exp:"✅ 答えは「INNER JOIN」。\n🔑 なぜ: 両方にそろって存在する行だけ残す最も基本の結合。\n⚠️ LEFT JOINは左を全部残す。“共通部分だけ”ならINNER。"},
+{ch:"第7回",type:"term",q:"「左テーブルの全行＋右の一致行（右になければNULL）」を取得するJOINは？",opts:["LEFT JOIN","INNER JOIN","RIGHT JOIN","SELF JOIN"],a:0,exp:"✅ 答えは「LEFT JOIN」。\n🔑 なぜ: 左の表は全部残し、右に相手がいなければNULLで埋める。未所属の検出に便利。\n⚠️ INNERは一致のみ。“左を漏らさず全部”ならLEFT。"},
+{ch:"第7回",type:"term",q:"「複数行のデータを1つの値にまとめる」関数の総称は？（COUNT/SUM/AVG/MIN/MAX）",opts:["集約関数","比較演算子","論理演算子","スカラ関数"],a:0,exp:"✅ 答えは「集約関数」。\n🔑 なぜ: 複数行を1つの値へまとめる(COUNT/SUM/AVG/MIN/MAX)。\n⚠️ 比較演算子(=,>)は条件用。“合計/平均/件数”系はまとめて集約関数。"},
+{ch:"第7回",type:"term",q:"行をグループ化する句と、集約後のグループを絞り込む句の正しい組み合わせは？",opts:["GROUP BY と HAVING","WHERE と ORDER BY","GROUP BY と WHERE","HAVING と LIMIT"],a:0,exp:"✅ 答えは「GROUP BY と HAVING」。\n🔑 なぜ: GROUP BYで仲間分けし、HAVINGで“集約後”の結果を絞る。\n⚠️ WHEREは集約“前”の行に効く。集約後の条件はHAVING。"},
+{ch:"第7回",type:"term",q:"「IF文のSQL版」で、条件に応じて異なる値を返す式は？",opts:["CASE式","LIKE式","IN式","EXISTS式"],a:0,exp:"✅ 答えは「CASE式」。\n🔑 なぜ: 条件で返す値を変える、SQL版のif。WHEN 条件 THEN 値 … END。\n⚠️ 合否ラベル付けなどに使う。“条件分岐”ならCASE。"},
+{ch:"第7回",type:"term",q:"「name LIKE '田%'」のようにパターン検索を行う際、%（パーセント）が意味するものは？",opts:["任意の文字列（0文字以上）","任意の1文字","空白のみ","数字のみ"],a:0,exp:"✅ 答えは「任意の文字列（0文字以上）」。\n🔑 なぜ: LIKEで %=何文字でも、_=ちょうど1文字。'田%'は田で始まる名前全部。\n⚠️ _(アンダースコア)と役割を取り違えない。%は“ワイルドカード”。"},
+{ch:"第7回",type:"term",q:"列がNULL（データなし）かどうかを判定する、SQLで正しい書き方は？",opts:["email IS NULL","email = NULL","email == NULL","email EQUALS NULL"],a:0,exp:"✅ 答えは「email IS NULL」。\n🔑 なぜ: NULLは“値が無い”特別状態で、= では比較できない。専用のIS NULLで判定。\n⚠️ = NULL は常に判定不能で結果が返らない典型ミス。"},
 
 /* ---------- 第8回：サブクエリ・ビュー ---------- */
-{ch:"第8回",type:"term",q:"SQLの中で「別のSELECT文の結果」を利用する仕組みは？",opts:["サブクエリ","ビュー","トランザクション","インデックス"],a:0,exp:"サブクエリ＝SQLの中で別のSELECT文の結果を利用する仕組み。内側が先に実行される。"},
-{ch:"第8回",type:"term",q:"「1行1列の結果を返し、1つの値として扱われる」サブクエリは？",opts:["スカラサブクエリ","相関サブクエリ","INサブクエリ","派生表"],a:0,exp:"スカラサブクエリ＝1行1列の結果を返すサブクエリ。1行1列でないとSQLエラー。"},
-{ch:"第8回",type:"term",q:"「サブクエリ内部で外側のテーブルを参照し、行ごとに再実行される」サブクエリは？",opts:["相関サブクエリ","スカラサブクエリ","FROM句サブクエリ","単純サブクエリ"],a:0,exp:"相関サブクエリ＝サブクエリ内部で外側のテーブルを参照。外側の行1つにつき再実行され、処理が重い。"},
-{ch:"第8回",type:"term",q:"「SELECT文に名前を付けた仮想テーブル」で、実データを持たず定義だけを保存するものは？",opts:["ビュー","インデックス","中間テーブル","トリガー"],a:0,exp:"ビュー＝SELECT文に名前を付けた仮想テーブル。実データは持たず定義だけを保存。SQL再利用やセキュリティに使う。"},
-{ch:"第8回",type:"term",q:"FROM句に置くサブクエリが作る一時的なテーブルの呼び方は？（AS別名が必須）",opts:["派生表（インラインビュー）","スカラ値","相関表","主キー表"],a:0,exp:"FROM句のサブクエリ＝派生表（インラインビュー）。ASで別名が必須。"},
-{ch:"第8回",type:"term",q:"「NOT IN でNULLが含まれると結果が返らない」問題への推奨対策は？",opts:["NOT EXISTS に書き換える","GROUP BY を付ける","DISTINCT を付ける","LIMIT を付ける"],a:0,exp:"NOT IN (NULL,…)は常に偽になるため結果が返らない。対策はNOT EXISTSへの書き換え。"},
-{ch:"第8回",type:"term",q:"ビューを使って「passwordなど特定の列を隠し、見せる列だけを限定する」ことができる。これはビューの何という機能か？",opts:["アクセス制御（セキュリティ強化）","正規化","トランザクション","インデックス作成"],a:0,exp:"ビューは見せる列を限定できる＝アクセス制御（セキュリティの重要機能）。password列を隠せる。"},
+{ch:"第8回",type:"term",q:"SQLの中で「別のSELECT文の結果」を利用する仕組みは？",opts:["サブクエリ","ビュー","トランザクション","インデックス"],a:0,exp:"✅ 答えは「サブクエリ」。\n🔑 なぜ: SQLの中に入れ子でSELECTを書く仕組み。内側が先に計算され外側で使われる。\n⚠️ ビューは“名前を付けて保存した仮想表”。その場の入れ子はサブクエリ。"},
+{ch:"第8回",type:"term",q:"「1行1列の結果を返し、1つの値として扱われる」サブクエリは？",opts:["スカラサブクエリ","相関サブクエリ","INサブクエリ","派生表"],a:0,exp:"✅ 答えは「スカラサブクエリ」。\n🔑 なぜ: 結果が1行1列＝“1個の値”。だから = で比較できる。\n⚠️ 複数行返すとエラー。1個の値だけ返すのがスカラ。"},
+{ch:"第8回",type:"term",q:"「サブクエリ内部で外側のテーブルを参照し、行ごとに再実行される」サブクエリは？",opts:["相関サブクエリ","スカラサブクエリ","FROM句サブクエリ","単純サブクエリ"],a:0,exp:"✅ 答えは「相関サブクエリ」。\n🔑 なぜ: 内側が外側の各行を参照するので、行ごとに何度も実行され重い。\n⚠️ 外を参照しない普通のサブクエリは1回で済む。“行ごとに再実行”なら相関。"},
+{ch:"第8回",type:"term",q:"「SELECT文に名前を付けた仮想テーブル」で、実データを持たず定義だけを保存するものは？",opts:["ビュー","インデックス","中間テーブル","トリガー"],a:0,exp:"✅ 答えは「ビュー」。\n🔑 なぜ: よく使うSELECTに名前を付けた“仮想の表”。実データは持たず定義だけ保存。\n⚠️ 中間テーブルは実データを持つ。“定義だけの仮想表”はビュー。"},
+{ch:"第8回",type:"term",q:"FROM句に置くサブクエリが作る一時的なテーブルの呼び方は？（AS別名が必須）",opts:["派生表（インラインビュー）","スカラ値","相関表","主キー表"],a:0,exp:"✅ 答えは「派生表（インラインビュー）」。\n🔑 なぜ: FROMに置いたサブクエリが作るその場の一時表。だからAS別名が必須。\n⚠️ WHEREのサブクエリは条件用。FROMの入れ子＝派生表。"},
+{ch:"第8回",type:"term",q:"「NOT IN でNULLが含まれると結果が返らない」問題への推奨対策は？",opts:["NOT EXISTS に書き換える","GROUP BY を付ける","DISTINCT を付ける","LIMIT を付ける"],a:0,exp:"✅ 答えは「NOT EXISTS に書き換える」。\n🔑 なぜ: NOT INは候補にNULLがあると全体が“不明”になり0件に。NOT EXISTSはこの罠を避けられる。\n⚠️ DISTINCTやLIMITでは直らない。NULL対策＝NOT EXISTS。"},
+{ch:"第8回",type:"term",q:"ビューを使って「passwordなど特定の列を隠し、見せる列だけを限定する」ことができる。これはビューの何という機能か？",opts:["アクセス制御（セキュリティ強化）","正規化","トランザクション","インデックス作成"],a:0,exp:"✅ 答えは「アクセス制御（セキュリティ強化）」。\n🔑 なぜ: 見せてよい列だけのビューを作れば、password等を隠して公開できる。\n⚠️ 正規化やインデックスとは別目的。“列を隠す”はビューのセキュリティ用途。"},
 
 /* ---------- 仲間はずれ・誤り選択（過去問形式） ---------- */
-{ch:"総合",type:"term",q:"次のうち DDL（データ定義言語）のコマンドでないものはどれか？",opts:["SELECT","CREATE","ALTER","DROP"],a:0,exp:"CREATE/ALTER/DROPはDDL。SELECTはデータを取得するDML（データ操作言語）。"},
-{ch:"総合",type:"term",q:"次のうち DML（データ操作言語）に含まれる命令はどれか？",opts:["INSERT","CREATE","ALTER","DROP"],a:0,exp:"DMLはINSERT/UPDATE/DELETE（とSELECT）。CREATE/ALTER/DROPはDDL。"},
-{ch:"総合",type:"term",q:"次のうち「制約」に含まれないものはどれか？",opts:["ORDER BY","PRIMARY KEY","FOREIGN KEY","CHECK"],a:0,exp:"PRIMARY KEY/FOREIGN KEY/CHECK/NOT NULL/UNIQUEは制約。ORDER BYは並べ替えの句。"},
-{ch:"総合",type:"term",q:"次のうち「集約関数」でないものはどれか？",opts:["DISTINCT","COUNT","SUM","AVG"],a:0,exp:"集約関数はCOUNT/SUM/AVG/MIN/MAX。DISTINCTは重複排除のキーワード。"},
-{ch:"総合",type:"term",q:"次のうち JOIN（結合）の種類に含まれないものはどれか？",opts:["GROUP JOIN","INNER JOIN","LEFT JOIN","RIGHT JOIN"],a:0,exp:"JOINはINNER/LEFT/RIGHT/FULL OUTER JOIN、SELF JOIN。GROUP JOINは存在しない。"},
-{ch:"総合",type:"term",q:"トランザクションの性質「ACID」に含まれないものはどれか？",opts:["拡張性","原子性（Atomicity）","一貫性（Consistency）","独立性（Isolation）"],a:0,exp:"ACID＝原子性・一貫性・独立性・永続性（Durability）。拡張性は含まれない。"},
-{ch:"総合",type:"term",q:"次のうち NoSQL の種類に含まれないものはどれか？",opts:["リレーショナル型","ドキュメント型","グラフ型","キー・バリュー型"],a:0,exp:"NoSQLはドキュメント型・グラフ型・カラム型・キー・バリュー型。リレーショナル型はNoSQLではない。"},
-{ch:"総合",type:"term",q:"リレーショナルデータベースの説明として「誤っている」ものはどれか？",opts:["1つのセルに複数の値をカンマ区切りで入れる","データをテーブル（表）で管理する","テーブル同士をキーで関連付ける","SQLでデータを操作する"],a:0,exp:"1セルに複数値を入れるのは第1正規形違反。RDBは1セル1値が原則。"},
-{ch:"総合",type:"term",q:"正規化の目的として「誤っている」ものはどれか？",opts:["通信速度を上げる","重複データの排除","更新時の不整合防止","検索効率化"],a:0,exp:"正規化の目的は重複排除・更新不整合の防止・検索効率化。通信速度とは直接関係しない。"},
-{ch:"総合",type:"term",q:"主キー（Primary Key）の説明として「誤っている」ものはどれか？",opts:["1つのテーブルに複数設定できる","行を一意に識別する","値が重複してはいけない","NULLを許さない"],a:0,exp:"主キーは1テーブルに1つだけ。重複不可・NULL不可で行を一意に識別する。"},
+{ch:"総合",type:"term",q:"次のうち DDL（データ定義言語）のコマンドでないものはどれか？",opts:["SELECT","CREATE","ALTER","DROP"],a:0,exp:"✅ 答え(仲間はずれ)は「SELECT」。\n🔑 なぜ: CREATE/ALTER/DROPは構造をいじるDDL。SELECTは中身を読むDMLなので別グループ。\n⚠️ “DDLでないもの”を選ぶ問題。読む/書く系(SELECT等)はDML。"},
+{ch:"総合",type:"term",q:"次のうち DML（データ操作言語）に含まれる命令はどれか？",opts:["INSERT","CREATE","ALTER","DROP"],a:0,exp:"✅ 答えは「INSERT」。\n🔑 なぜ: DMLは中身を操作する系＝INSERT/UPDATE/DELETE/SELECT。\n⚠️ CREATE/ALTER/DROPは構造のDDL。“データを足す”INSERTがDML。"},
+{ch:"総合",type:"term",q:"次のうち「制約」に含まれないものはどれか？",opts:["ORDER BY","PRIMARY KEY","FOREIGN KEY","CHECK"],a:0,exp:"✅ 答え(仲間はずれ)は「ORDER BY」。\n🔑 なぜ: PRIMARY KEY/FOREIGN KEY/CHECKは列を縛る制約。ORDER BYは並べ替えの句で無関係。\n⚠️ 制約=データの“ルール”、句=SQLの“文法パーツ”と区別。"},
+{ch:"総合",type:"term",q:"次のうち「集約関数」でないものはどれか？",opts:["DISTINCT","COUNT","SUM","AVG"],a:0,exp:"✅ 答え(仲間はずれ)は「DISTINCT」。\n🔑 なぜ: COUNT/SUM/AVGは複数行を1値にまとめる集約関数。DISTINCTは重複を消すキーワード。\n⚠️ 集計するか(集約)/消すか(DISTINCT)で別物。"},
+{ch:"総合",type:"term",q:"次のうち JOIN（結合）の種類に含まれないものはどれか？",opts:["GROUP JOIN","INNER JOIN","LEFT JOIN","RIGHT JOIN"],a:0,exp:"✅ 答え(存在しない)は「GROUP JOIN」。\n🔑 なぜ: JOINはINNER/LEFT/RIGHT/FULL OUTER(＋SELF)。GROUP JOINという結合は無い。\n⚠️ GROUP BYと混ぜた造語のひっかけ。"},
+{ch:"総合",type:"term",q:"トランザクションの性質「ACID」に含まれないものはどれか？",opts:["拡張性","原子性（Atomicity）","一貫性（Consistency）","独立性（Isolation）"],a:0,exp:"✅ 答え(含まれない)は「拡張性」。\n🔑 なぜ: ACID=原子性・一貫性・独立性・永続性。拡張性は入っていない。\n⚠️ それっぽい別の“〜性”を混ぜる定番ひっかけ。4つを丸暗記。"},
+{ch:"総合",type:"term",q:"次のうち NoSQL の種類に含まれないものはどれか？",opts:["リレーショナル型","ドキュメント型","グラフ型","キー・バリュー型"],a:0,exp:"✅ 答え(仲間はずれ)は「リレーショナル型」。\n🔑 なぜ: NoSQLはドキュメント/グラフ/カラム/キー・バリュー型。リレーショナル型はNoSQLの対極。\n⚠️ “No(非)SQL”に表形式のRDBは入らない。"},
+{ch:"総合",type:"term",q:"リレーショナルデータベースの説明として「誤っている」ものはどれか？",opts:["1つのセルに複数の値をカンマ区切りで入れる","データをテーブル（表）で管理する","テーブル同士をキーで関連付ける","SQLでデータを操作する"],a:0,exp:"✅ 答え(誤り)は「1セルに複数値をカンマ区切りで入れる」。\n🔑 なぜ: それは第1正規形違反。RDBは1セル1値が原則。\n⚠️ 他3つ(表で管理/キーで関連/SQLで操作)は正しいRDBの説明。"},
+{ch:"総合",type:"term",q:"正規化の目的として「誤っている」ものはどれか？",opts:["通信速度を上げる","重複データの排除","更新時の不整合防止","検索効率化"],a:0,exp:"✅ 答え(誤り)は「通信速度を上げる」。\n🔑 なぜ: 正規化の狙いは重複排除・更新不整合の防止・検索効率化。通信速度は目的外。\n⚠️ もっともらしい“効率”系で釣るひっかけ。目的3つを押さえる。"},
+{ch:"総合",type:"term",q:"主キー（Primary Key）の説明として「誤っている」ものはどれか？",opts:["1つのテーブルに複数設定できる","行を一意に識別する","値が重複してはいけない","NULLを許さない"],a:0,exp:"✅ 答え(誤り)は「1つの表に複数設定できる」。\n🔑 なぜ: 主キーは1表に1つだけ。行を一意にし、重複もNULLも不可。\n⚠️ 複数列をまとめた“複合主キー”でも、主キーという枠は1つ。"},
 
 /* ---------- コード問題（四択） ---------- */
 {ch:"コード",type:"code",q:"Studentテーブルから「3年生（grade=3）」だけを取得する正しいSQLは？",code:null,opts:[
   "SELECT * FROM Student WHERE grade = 3;",
   "SELECT * FROM Student IF grade = 3;",
   "SELECT * WHERE grade = 3 FROM Student;",
-  "GET * FROM Student WHERE grade = 3;"],a:0,exp:"行の絞り込みはWHERE句。SELECT 列 FROM 表 WHERE 条件; の順。"},
+  "GET * FROM Student WHERE grade = 3;"],a:0,exp:"✅ 答えは SELECT * FROM Student WHERE grade = 3;\n🔑 なぜ: 行の絞り込みはWHERE。並びは SELECT列→FROM表→WHERE条件 が鉄則。\n⚠️ IFやGETはSQLに無い。WHEREをFROMより前に書くのも誤り。"},
 
 {ch:"コード",type:"code",q:"「全学生の学年を1つ上げる（全件更新）」SQLとして正しいものは？",code:null,opts:[
   "UPDATE Student SET grade = grade + 1;",
   "UPDATE Student SET grade + 1;",
   "UPDATE grade = grade + 1 FROM Student;",
-  "ALTER Student SET grade = grade + 1;"],a:0,exp:"UPDATE 表 SET 列 = 式; 現在の値を使った計算（grade+1）ができる。WHEREなしは全件更新。"},
+  "ALTER Student SET grade = grade + 1;"],a:0,exp:"✅ 答えは UPDATE Student SET grade = grade + 1;\n🔑 なぜ: 変更はUPDATE 表 SET 列=式。grade+1のように今の値を使う計算もOK。WHERE無しで全員に効く。\n⚠️ SET grade+1(=が無い)・FROM付き・ALTER(構造変更)は誤り。"},
 
 {ch:"コード",type:"code",q:"Studentテーブルに email 列（VARCHAR(100)）を追加する正しいSQLは？",code:null,opts:[
   "ALTER TABLE Student ADD COLUMN email VARCHAR(100);",
   "UPDATE TABLE Student ADD email VARCHAR(100);",
   "ALTER TABLE Student NEW COLUMN email VARCHAR(100);",
-  "INSERT COLUMN email INTO Student VARCHAR(100);"],a:0,exp:"列追加は ALTER TABLE 表名 ADD COLUMN 列名 データ型; "},
+  "INSERT COLUMN email INTO Student VARCHAR(100);"],a:0,exp:"✅ 答えは ALTER TABLE Student ADD COLUMN email VARCHAR(100);\n🔑 なぜ: 列の追加は“構造変更”＝ALTER TABLE … ADD COLUMN 列 型。\n⚠️ UPDATEは中身用、INSERTは行追加用。NEW COLUMNという構文は無い。"},
 
 {ch:"コード",type:"code",q:"次のCREATE TABLE文の空欄①に入る、student_idを主キーにする制約は？",code:"CREATE TABLE Student (\n  student_id CHAR(4) ①,\n  name VARCHAR(50) NOT NULL\n);",opts:[
-  "PRIMARY KEY","FOREIGN KEY","UNIQUE KEY","CHECK KEY"],a:0,exp:"主キーは PRIMARY KEY。行を一意に識別し、重複不可・NULL不可。"},
+  "PRIMARY KEY","FOREIGN KEY","UNIQUE KEY","CHECK KEY"],a:0,exp:"✅ 答えは PRIMARY KEY。\n🔑 なぜ: 行を一意に識別する主キー＝PRIMARY KEY(重複・NULL不可)。\n⚠️ FOREIGN KEYは他表参照。UNIQUE KEY/CHECK KEYはここでは不適。"},
 
 {ch:"コード",type:"code",q:"「点数(score)が高い順」に学生名と点数を並べる正しいSQLは？",code:null,opts:[
   "SELECT name, score FROM students ORDER BY score DESC;",
   "SELECT name, score FROM students ORDER BY score ASC;",
   "SELECT name, score FROM students SORT score DESC;",
-  "SELECT name, score FROM students GROUP BY score DESC;"],a:0,exp:"降順（高い順）はORDER BY 列 DESC。ASCは昇順（低い順）。"},
+  "SELECT name, score FROM students GROUP BY score DESC;"],a:0,exp:"✅ 答えは …ORDER BY score DESC;\n🔑 なぜ: “高い順”＝降順＝DESC。ASCだと低い順になる。\n⚠️ SORTという命令は無い。GROUP BYは集計用で並べ替えではない。"},
 
 {ch:"コード",type:"code",q:"「平均点(AVG(score))が80点以上の科目コードごとの平均点」を出す正しいSQLは？",code:null,opts:[
   "SELECT subject_id, AVG(score) FROM Enrollment GROUP BY subject_id HAVING AVG(score) >= 80;",
   "SELECT subject_id, AVG(score) FROM Enrollment WHERE AVG(score) >= 80;",
   "SELECT subject_id, AVG(score) FROM Enrollment GROUP BY subject_id WHERE AVG(score) >= 80;",
-  "SELECT subject_id, AVG(score) FROM Enrollment ORDER BY AVG(score) >= 80;"],a:0,exp:"集約後の絞り込みはHAVING（WHEREは集約前）。GROUP BYでグループ化してからHAVINGで条件。"},
+  "SELECT subject_id, AVG(score) FROM Enrollment ORDER BY AVG(score) >= 80;"],a:0,exp:"✅ 答えは …GROUP BY subject_id HAVING AVG(score) >= 80;\n🔑 なぜ: まずGROUP BYで科目ごとに集計→集計結果の条件はHAVING。\n⚠️ WHEREは集計“前”なのでAVGを条件にできずエラー。ORDER BYは並べ替えで絞り込めない。"},
 
 {ch:"コード",type:"code",q:"StudentとClubをstudent_idで内部結合する。空欄①に入るキーワードは？",code:"SELECT s.name, c.club_name\nFROM Student s\n① Club c ON s.id = c.student_id;",opts:[
-  "INNER JOIN","GROUP BY","WHERE","UNION"],a:0,exp:"両方に存在する行だけを結合するのはINNER JOIN。ON句で結合条件を指定する。"},
+  "INNER JOIN","GROUP BY","WHERE","UNION"],a:0,exp:"✅ 答えは INNER JOIN。\n🔑 なぜ: 両方にそろう行だけをONの条件でつなぐのがINNER JOIN。\n⚠️ WHEREだけでは結合の宣言にならず、GROUP BY/UNIONは別機能。"},
 
 {ch:"コード",type:"code",q:"「1回でも履修登録している学生の名前」を、INサブクエリで取り出す正しいSQLは？",code:null,opts:[
   "SELECT name FROM Student WHERE student_id IN (SELECT student_id FROM Enrollment);",
   "SELECT name FROM Student WHERE student_id = (SELECT student_id FROM Enrollment);",
   "SELECT name FROM Student JOIN (SELECT student_id FROM Enrollment);",
-  "SELECT name FROM Student WHERE student_id IN Enrollment;"],a:0,exp:"集合との比較は WHERE 列 IN (SELECT ...)。=は1行1列（スカラ）専用で複数行だとエラー。"},
+  "SELECT name FROM Student WHERE student_id IN Enrollment;"],a:0,exp:"✅ 答えは …WHERE student_id IN (SELECT student_id FROM Enrollment);\n🔑 なぜ: “履修者の集合に入っているか”＝IN(サブクエリ)。集合との照合はIN。\n⚠️ = は1個の値専用でサブクエリが複数行だとエラー。IN Enrollment(表名直書き)も不可。"},
 
 {ch:"コード",type:"code",q:"「重複を排除して学年(grade)の一覧」を取得する正しいSQLは？",code:null,opts:[
   "SELECT DISTINCT grade FROM students;",
   "SELECT UNIQUE grade FROM students;",
   "SELECT grade FROM students GROUP;",
-  "SELECT DISTINCT(grade) ONLY FROM students;"],a:0,exp:"重複排除は SELECT DISTINCT 列。全列が同じ行を1つにまとめる。"},
+  "SELECT DISTINCT(grade) ONLY FROM students;"],a:0,exp:"✅ 答えは SELECT DISTINCT grade FROM students;\n🔑 なぜ: 重複を消して種類を見るのはDISTINCT(SELECTの直後)。\n⚠️ UNIQUEは制約であって取得句ではない。GROUP;だけでは不完全。"},
 
 {ch:"コード",type:"code",q:"「emailが未登録（空）の学生」を取り出す正しいSQLは？",code:null,opts:[
   "SELECT name, email FROM students WHERE email IS NULL;",
   "SELECT name, email FROM students WHERE email = NULL;",
   "SELECT name, email FROM students WHERE email = '';",
-  "SELECT name, email FROM students WHERE email = EMPTY;"],a:0,exp:"NULL判定は必ず IS NULL。= NULL では判定できない（SQLのルール）。"},
+  "SELECT name, email FROM students WHERE email = EMPTY;"],a:0,exp:"✅ 答えは …WHERE email IS NULL;\n🔑 なぜ: “未登録＝値が無い＝NULL”はIS NULLで判定。\n⚠️ = NULL は必ず判定不能で0件。'' (空文字)はNULLとは別物。"},
 
 {ch:"コード",type:"code",q:"「点数が60点以上90点以下」の学生を範囲指定で取り出す正しいSQLは？",code:null,opts:[
   "SELECT name, score FROM students WHERE score BETWEEN 60 AND 90;",
   "SELECT name, score FROM students WHERE score IN 60 AND 90;",
   "SELECT name, score FROM students WHERE 60 <= score <= 90;",
-  "SELECT name, score FROM students WHERE score BETWEEN 60 OR 90;"],a:0,exp:"範囲指定は BETWEEN 下限 AND 上限（両端を含む）。"},
+  "SELECT name, score FROM students WHERE score BETWEEN 60 OR 90;"],a:0,exp:"✅ 答えは …WHERE score BETWEEN 60 AND 90;\n🔑 なぜ: 範囲はBETWEEN 下限 AND 上限(両端含む)。\n⚠️ 60<=score<=90 とは書けない。IN/ORとの組合せも誤り。"},
 
 {ch:"コード",type:"code",q:"次のSQLの実行結果は？（Enrollmentのscoreは 85, 70, 60, 95, 80 の5件）",code:"SELECT AVG(score) FROM Enrollment;",opts:[
-  "78","390","95","5"],a:0,exp:"AVG＝平均。(85+70+60+95+80)/5 = 390/5 = 78。"},
+  "78","390","95","5"],a:0,exp:"✅ 答えは 78。\n🔑 なぜ: AVGは平均。(85+70+60+95+80)=390、390÷5=78。\n⚠️ 390は合計(SUM)、5は件数(COUNT)。“平均”を聞かれている点に注意。"},
 
 {ch:"コード",type:"code",q:"「学生ごとの平均点」ビュー v_avg を作成する正しいSQLは？",code:null,opts:[
   "CREATE VIEW v_avg AS SELECT s.name, AVG(e.score) AS avg FROM Student s JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.name;",
   "CREATE TABLE v_avg AS SELECT s.name, AVG(e.score) FROM Student s;",
   "MAKE VIEW v_avg = SELECT name, AVG(score) FROM Student;",
-  "CREATE VIEW v_avg SELECT s.name, AVG(e.score) FROM Student s;"],a:0,exp:"ビュー作成は CREATE VIEW 名前 AS SELECT ...; ビューはSELECT文に名前を付けた仮想テーブル。"},
+  "CREATE VIEW v_avg SELECT s.name, AVG(e.score) FROM Student s;"],a:0,exp:"✅ 答えは CREATE VIEW v_avg AS SELECT … GROUP BY s.name;\n🔑 なぜ: ビュー作成は CREATE VIEW 名 AS SELECT…。長い集計に名前を付け再利用できる。\n⚠️ CREATE TABLEは実表を作る別物。MAKE VIEWやASの無い形は構文エラー。"},
 
 {ch:"コード",type:"code",q:"外部キー制約があるとき、Enrollment が Student を参照している。学生を安全に削除する正しい順序は？",code:null,opts:[
   "先に Enrollment（子）を削除 → 次に Student（親）を削除",
   "先に Student（親）を削除 → 次に Enrollment（子）を削除",
   "同時に両方を1つのDELETEで削除",
-  "順序は関係なく、どちらからでもよい"],a:0,exp:"参照している側（子・FKを持つEnrollment）→参照される側（親・Student）の順で削除する。"}
+  "順序は関係なく、どちらからでもよい"],a:0,exp:"✅ 答えは 先にEnrollment(子)→次にStudent(親)。\n🔑 なぜ: 子が親を外部キーで参照中に親を消すと参照整合性が壊れる。だから参照している子から消す。\n⚠️ 親から消すと『参照エラー』。順序が逆・無関係の選択肢はNG。"}
 ];
 
 /* ============ 単語解説集（章ごとに流れで解説） ============ */
@@ -288,134 +288,134 @@ const GLOSSARY = [
 {ch:"第1回 DBの基礎",
  story:"世の中は<b>データ</b>であふれている——名前、点数、注文…。それを整理して倉庫にしまい、必要なときすぐ取り出せる仕組みが<b>データベース(DB)</b>。倉庫を管理する係が<b>DBMS</b>だ。DBにも型があり、いまの主流は表で管理する<b>リレーショナルDB(RDB)</b>、柔軟な形で保存する<b>NoSQL</b>もある。RDBでは、データは<b>テーブル(表)</b>に入り、横1行が<b>レコード</b>、縦1列が<b>フィールド</b>。行を見分ける目印が<b>主キー</b>、別の表とつなぐ橋が<b>外部キー</b>、この表同士のつながりが<b>リレーション</b>。倉庫に指示を出す専用言語が<b>SQL</b>、その基本4操作が<b>CRUD</b>。ここが全ての出発点。",
  terms:[
-  {t:"データベース（DB）",d:"大量のデータを整理して保存し、必要なときにすぐ取り出せるようにした「データの倉庫」。"},
-  {t:"DBMS",d:"データベース管理システム。データの保存・検索・更新を自動で管理するソフトウェア。倉庫でいう「倉庫係」。"},
-  {t:"リレーショナルDB（RDB）",d:"表（テーブル）形式でデータを管理するDB。Excelの表に近く現在の主流。例:MySQL, PostgreSQL, Oracle。"},
-  {t:"NoSQL",d:"表以外の柔軟な形式でデータを保存するDB。SNSやビッグデータ向き。例:MongoDB, Redis。"},
-  {t:"テーブル（表）",d:"データをまとめた表。Excelのシートに相当する。"},
-  {t:"レコード（行）",d:"1件分のデータ（表の横1行）。例:「田中太郎」の情報1行分。"},
-  {t:"フィールド（列）",d:"データの項目（表の縦1列）。例:「氏名」「学部」「学生ID」。"},
-  {t:"主キー（PK）",d:"行を一意に識別する目印の列。重複不可・NULL不可。同姓同名でも区別できる。"},
-  {t:"外部キー（FK）",d:"他テーブルの主キーを参照し、表と表をつなぐ列。"},
-  {t:"リレーション（関係）",d:"共通の項目（キー）でテーブル同士をつなぐこと。RDBの核となる考え方。"},
-  {t:"SQL",d:"データベースに命令を出す専用言語（Structured Query Language）。"},
-  {t:"CRUD",d:"データ操作の4基本:Create(追加/INSERT)・Read(取得/SELECT)・Update(更新)・Delete(削除)。"}
+  {t:"データベース（DB）",d:"大量のデータを整理して保存し、必要なときすぐ取り出せる“データの倉庫”。\n🔑 ただ置くのでなく“整理して”が肝。だから高速に探せる。"},
+  {t:"DBMS",d:"DBを保存・検索・更新まで自動で管理するソフト本体(MySQL等)。“倉庫係”のイメージ。\n🔑 DB=倉庫、DBMS=それを動かす係、と役割を分ける。"},
+  {t:"リレーショナルDB（RDB）",d:"データを表(テーブル)で管理する主流のDB。Excelの表に近い。例:MySQL,PostgreSQL,Oracle。\n🔑 表・行・列・キーで整理。NoSQLは表を使わない対極。"},
+  {t:"NoSQL",d:"表の形に縛られず柔軟に保存するDB。大量・多様なデータ向き。例:MongoDB,Redis。\n🔑 “No(非)SQL”＝RDBの制約を外した仲間。SNS/IoT/ログで活躍。"},
+  {t:"テーブル（表）",d:"データをまとめた表。Excelの1シートに相当。\n🔑 縦横のマス目そのもの。行(レコード)と列(フィールド)でできている。"},
+  {t:"レコード（行）",d:"1件分のデータ＝表の横1行(例:田中太郎の情報)。\n🔑 “件数”を数えるときの1件。列(フィールド)と対で覚える。"},
+  {t:"フィールド（列）",d:"データの項目＝表の縦1列(氏名・学年など)。\n🔑 “項目の種類”がフィールド。1件まるごとの横1行がレコード。"},
+  {t:"主キー（PK）",d:"行を1つに特定する目印の列。重複もNULLも不可。\n🔑 一意にできるから同姓同名でも取り違えない。1表に1つだけ。"},
+  {t:"外部キー（FK）",d:"他テーブルの主キーを指して表と表をつなぐ列。\n🔑 これで“存在しないID”を弾ける(参照整合性)。自分の識別は主キー。"},
+  {t:"リレーション（関係）",d:"共通の項目(キー)で表同士をつなぐこと。RDBの核。\n🔑 分けて保存→キーで再結合、が正規化とJOINの土台。"},
+  {t:"SQL",d:"DBに命令を出す専用言語(Structured Query Language)。\n🔑 英語に似た文で“取り出せ/入れろ”と指示。DBMS(ソフト本体)とは別。"},
+  {t:"CRUD",d:"データ操作の4基本:Create(追加)/Read(取得)/Update(更新)/Delete(削除)。\n🔑 それぞれINSERT/SELECT/UPDATE/DELETEに対応。“作る・読む・直す・消す”。"}
  ]},
 {ch:"第2回 DBの役割と概要",
  story:"まず区別したいのが<b>データ</b>と<b>情報</b>。体温「37, 36.5, 38」はただの数字＝データだが、平均37.2℃→発熱疑い、と意味づければ<b>情報</b>になる。生データは<b>収集→整理→加工→可視化→共有→意思決定</b>という流れで価値に変わり、この流れを効率化する道具が<b>データベース</b>——「大量のデータを効率的に保存・検索・更新・管理するための仕組み」だ。担う役割は4つ:<b>蓄積と整理</b>／<b>検索と抽出</b>／<b>同時アクセス制御</b>／<b>整合性・安全性管理</b>。Excelのような<b>ファイル管理</b>だと、ファイルが散在し手作業で探し、重複や不整合が起き、共有も手動…という限界がある。DBはこれを一元管理とSQLで解決する。種類は表形式の<b>RDB</b>と、<b>スキーマレス</b>で柔軟な<b>NoSQL</b>。そして操作・管理するソフトが<b>DBMS</b>で、<b>MySQL</b>（無料/高速/Web）、<b>PostgreSQL</b>（拡張性/組織内）、<b>SQLite</b>（組込み/スマホIoT）、<b>MongoDB</b>（NoSQL/ビッグデータ）と使い分ける。EC・SNS・成績管理・電子カルテ・IoTと、身の回りは全部この上に乗っている。",
  terms:[
-  {t:"データ（Data）",d:"事実や数値などの記録。それ自体は意味を持たない生データ。例:37, 36.5, 38。"},
-  {t:"情報（Information）",d:"データを加工・整理して意味を持たせたもの。判断の材料になる。例:平均体温37.2℃→発熱疑い。"},
-  {t:"データ→情報の加工プロセス",d:"生データを 収集→整理→加工→可視化→共有→意思決定 と流していく過程。DBはこの流れを効率化する。"},
-  {t:"データベースの定義",d:"大量のデータを効率的に保存・検索・更新・管理するための仕組み。単なる置き場ではなく「整理されたデータの集合」。"},
-  {t:"データベースの4つの役割",d:"①蓄積と整理 ②検索と抽出 ③同時アクセス制御 ④整合性・安全性管理。"},
-  {t:"ファイル管理との違い",d:"ファイル=散在・手作業で検索・重複や不整合のリスク・手動共有。DB=一元管理されたテーブル・SQLで高速検索・自動的に整合性維持・同時アクセス可能。"},
-  {t:"スキーマレス",d:"NoSQLの特徴。表の構造を事前に固定しなくてよく柔軟性が高い。用途:SNS、IoTログ、大量分散データ処理。"},
-  {t:"DBMSの機能",d:"データ格納、安全性確保、同時アクセス制御、障害対策など。代表例:MySQL, PostgreSQL, Oracle, SQL Server, SQLite。"},
-  {t:"MySQL",d:"RDB。無料／高速。用途はWebサービス全般。"},
-  {t:"PostgreSQL",d:"RDB。拡張性／安定性に優れる。用途は組織内システム。"},
-  {t:"SQLite",d:"RDB。組込み可能。用途はスマホ／IoT機器。"},
-  {t:"MongoDB",d:"NoSQL（ドキュメント型）。用途はIoT・ビッグデータ。"}
+  {t:"データ（Data）",d:"事実や数値などの記録そのもの。単体では意味を持たない(例:37,36.5,38)。\n🔑 加工して意味づけすると“情報”に。データ→情報の向きに注意。"},
+  {t:"情報（Information）",d:"データを整理・加工して意味を持たせ、判断に使えるようにしたもの。\n🔑 例:体温の平均37.2℃→発熱疑い。“判断材料になる”なら情報。"},
+  {t:"データ→情報の加工プロセス",d:"生データを 収集→整理→加工→可視化→共有→意思決定 と流して価値に変える過程。\n🔑 DBはこの流れ全体を効率化する道具。最後が意思決定。"},
+  {t:"データベースの定義",d:"大量のデータを効率的に保存・検索・更新・管理する仕組み。\n🔑 単なる“置き場”でなく“整理された集合”。だから素早く扱える。"},
+  {t:"データベースの4つの役割",d:"①蓄積と整理 ②検索と抽出 ③同時アクセス制御 ④整合性・安全性管理。\n🔑 “ためる/探す/みんなで使う/壊さない”の4点で暗記。"},
+  {t:"ファイル管理との違い",d:"ファイル=散在・手作業検索・不整合・手動共有。DB=一元管理・SQLで高速検索・自動整合性・同時アクセス可。\n🔑 “Excelの限界をDBが解決”という対比で覚える。"},
+  {t:"スキーマレス",d:"表の構造を事前に固定しなくてよいNoSQLの特徴。柔軟。用途:SNS,IoTログ,分散データ。\n🔑 “形を決めずに入れられる”＝RDBの固い表と対照的。"},
+  {t:"DBMSの機能",d:"データ格納・安全性確保・同時アクセス制御・障害対策など。例:MySQL,PostgreSQL,Oracle,SQL Server,SQLite。\n🔑 DBを“安全にみんなで使える”ようにする土台ソフト。"},
+  {t:"MySQL",d:"無料・高速で、Web全般に使われる定番RDB。\n🔑 “Webといえばこれ”。PostgreSQL(組織内)やSQLite(組込み)と用途で区別。"},
+  {t:"PostgreSQL",d:"拡張性・安定性が高く、しっかりした組織内システム向けのRDB。\n🔑 高機能寄り。手軽なWebはMySQL、と対で覚える。"},
+  {t:"SQLite",d:"アプリに組み込める軽量RDB。スマホ/IoT機器で動く。\n🔑 サーバ不要の“組込み”がキーワード。MySQL等はサーバ型。"},
+  {t:"MongoDB",d:"JSON風で保存するNoSQL(ドキュメント型)。IoT・ビッグデータ向き。\n🔑 唯一のNoSQL枠。RDB三兄弟(MySQL/PostgreSQL/SQLite)と区別。"}
  ]},
 {ch:"第3回 データモデル・正規化",
  story:"データを「どう保存するか」の設計図が<b>データモデル</b>。歴史をたどると、まず親子のツリーで管理する<b>階層型</b>、次に網目状で多対多を扱える<b>ネットワーク型</b>、そして1970年にE.F.コードが提唱した<b>リレーショナル型</b>が主流になった。RDBでは表を<b>主キー</b>と<b>外部キー</b>でつなぐ。ただ1枚の表に詰め込むと重複や矛盾が起きるので、<b>正規化</b>で段階的に分ける——1セル1値の<b>第1正規形</b>、複合キーの一部依存を外す<b>第2正規形</b>、非キー同士の依存(推移的従属)を外す<b>第3正規形</b>。多対多は<b>中間テーブル</b>で受け止める。RDBを補うのが<b>NoSQL</b>で、<b>ドキュメント型</b>・<b>グラフ型</b>・<b>カラム型</b>・<b>キー・バリュー型</b>の4種類。",
  terms:[
-  {t:"データモデル",d:"現実世界のデータ構造をコンピュータ上で再現する抽象的なルール・構造。「データの管理方法を決める設計図」。"},
-  {t:"階層型データモデル",d:"ツリー構造（親子関係）で1対多を管理する最初期のモデル。IBMのIMSで実用化。"},
-  {t:"ネットワーク型データモデル",d:"グラフ構造で多対多を表現できるモデル。CODASYL（コダシル）で標準化。"},
-  {t:"リレーショナル型データモデル",d:"行と列（テーブル）で管理するモデル。E.F.コードが1970年に提唱、現在の主流。"},
-  {t:"1対多 / 多対多",d:"1件が複数と対応するのが1対多、互いに複数対応するのが多対多。多対多は中間テーブルで表す。"},
-  {t:"正規化",d:"重複の排除・更新時の不整合防止・検索効率化のため、テーブルを段階的に分割する作業。"},
-  {t:"第1正規形（1NF）",d:"1つのセルに1つの値だけにする（単一値の原則）。カンマ区切りを1行ずつ分割。"},
-  {t:"第2正規形（2NF）",d:"複合主キーの一部にだけ依存する属性（部分関数従属）を別表に分ける。"},
-  {t:"第3正規形（3NF）",d:"非キー属性が別の非キー属性に依存する（推移的従属）のを解消する。例:教師名→教師住所を分離。"},
-  {t:"中間テーブル",d:"多対多を「1対多＋1対多」に分解するために設ける関係テーブル。"},
-  {t:"ドキュメント型（NoSQL）",d:"JSON/BSON形式で1件を保存。柔軟なスキーマ。例:MongoDB, CouchDB。"},
-  {t:"グラフ型（NoSQL）",d:"ノードとエッジで関係を表現し、複雑なつながりを高速探索。例:Neo4j, Amazon Neptune。"},
-  {t:"カラム型（NoSQL）",d:"列ごとにデータを管理し、分析・検索性能が高い。例:Cassandra, HBase。"},
-  {t:"キー・バリュー型（NoSQL）",d:"キーと値のペアでシンプル超高速。例:Redis, DynamoDB。"}
+  {t:"データモデル",d:"現実のデータ構造をコンピュータ上でどう表すかの抽象的な設計図(ルール)。\n🔑 “管理方法を決める設計図”。具体的な倉庫(DB)とは別レイヤー。"},
+  {t:"階層型データモデル",d:"親→子のツリー構造で1対多を管理する最初期モデル(IBM IMS)。\n🔑 “ツリー・親子・1対多”。多対多が苦手なのが弱点。"},
+  {t:"ネットワーク型データモデル",d:"網目状(グラフ)で多対多を表現できるモデル。CODASYLで標準化。\n🔑 階層型の“多対多できない”を克服。ただし構造が複雑。"},
+  {t:"リレーショナル型データモデル",d:"行と列の表で管理するモデル。E.F.コードが1970年提唱、現在の主流。\n🔑 キーで柔軟につなぎSQLで操作できるのが強み。"},
+  {t:"1対多 / 多対多",d:"1件が複数と対応＝1対多、互いに複数対応＝多対多。\n🔑 多対多はそのまま表に入らないので“中間テーブル”に分解する。"},
+  {t:"正規化",d:"重複排除・更新不整合の防止・検索効率化のため表を段階的に分割する作業。\n🔑 1つの大表→1NF→2NF→3NFと少しずつ整理する。"},
+  {t:"第1正規形（1NF）",d:"1セルに値は1つだけ(単一値)。『数学,英語』を1行ずつに割る。\n🔑 まずカンマ詰め込みを解消。正規化のスタート地点。"},
+  {t:"第2正規形（2NF）",d:"複合主キーの“一部だけ”で決まる列(部分関数従属)を別表へ。\n🔑 例:氏名が学籍番号だけで決まるなら学生表に移す。1NFの次。"},
+  {t:"第3正規形（3NF）",d:"非キー→非キーの依存(推移的従属)を断つ。例:教師名→教師住所を別表へ。\n🔑 2NFは“キーの一部”、3NFは“キーでない列どうし”の依存を外す。"},
+  {t:"中間テーブル",d:"多対多を「1対多＋1対多」に分けるため間に挟む関係テーブル。\n🔑 履修表(学籍番号+科目コード)が典型。多対多を見たらこれ。"},
+  {t:"ドキュメント型（NoSQL）",d:"JSON/BSONで1件をまるごと保存。柔軟なスキーマ。例:MongoDB,CouchDB。\n🔑 階層的なデータに強い。“JSON”ならこれ。"},
+  {t:"グラフ型（NoSQL）",d:"ノードとエッジで関係を表し、複雑なつながりを高速探索。例:Neo4j。\n🔑 SNSの友達関係や経路探索が得意。ネットワーク型の思想の進化形。"},
+  {t:"カラム型（NoSQL）",d:"列ごとに管理し、集計・分析が速い。例:Cassandra,HBase。\n🔑 大量データの分析向き。行単位のRDBと発想が逆。"},
+  {t:"キー・バリュー型（NoSQL）",d:"「キー→値」の単純ペアで超高速。例:Redis,DynamoDB。\n🔑 最もシンプル。キャッシュ用途の定番。JSON保存はドキュメント型。"}
  ]},
 {ch:"第4回 設計・ER図",
  story:"設計とは、現実世界を機械が扱える形へ「翻訳」する作業。進め方は3段階。まず<b>概念設計</b>で、登場人物＝<b>エンティティ</b>、その性質＝<b>属性</b>、つながり＝<b>リレーションシップ</b>を洗い出し、<b>ER図</b>(矩形=実体・楕円=属性・ひし形=関係)に描く。関係の数の対応が<b>多重度</b>(1対1・1対多・多対多)。次に<b>論理設計</b>でER図をテーブルに変換し、正規化して主キー・外部キーを決める。外部キーが効くと<b>参照整合性</b>が保たれ、存在しないIDは入らない。最後に<b>物理設計</b>で、実際のDBMSに合わせ<b>データ型</b>や高速化の<b>インデックス</b>を決め、CREATE文に落とす。抽象→具体へ、一貫性を保つのが鍵。",
  terms:[
-  {t:"データベース設計",d:"現実世界（人・物・出来事）をDBで再現できるように構造化すること。誤ると後の修正コストが大きい。"},
-  {t:"概念設計",d:"現実の情報をモデル化する最初の段階。成果物はER図。"},
-  {t:"論理設計",d:"ER図をテーブル形式に変換する段階。テーブル定義・正規化を行う。DBMSに依存しない。"},
-  {t:"物理設計",d:"実際のDBMSで最適に動くよう具体化する段階。データ型・索引・制約・CREATE文（DDL）。"},
-  {t:"エンティティ",d:"管理したい対象（人・物・出来事）。例:学生、科目、教師。ER図では矩形。"},
-  {t:"属性",d:"エンティティが持つ性質や情報項目。例:学籍番号、氏名、学年。ER図では楕円。"},
-  {t:"リレーションシップ",d:"エンティティ同士のつながり。例:学生―履修―科目。ER図ではひし形。"},
-  {t:"ER図",d:"エンティティ・属性・関係を可視化した図。開発者と利用者の共通理解を作る。"},
-  {t:"多重度（カーディナリティ）",d:"関係の数の対応。1対1・1対多・多対多。鳥足記法で線の形として表す。"},
-  {t:"参照整合性",d:"外部キーにより「存在しないIDは登録できない」＝間違ったデータが入らない仕組み。"},
-  {t:"データ型",d:"列に入るデータの種類。INT/CHAR/VARCHAR/DATE/DATETIME/BOOLEAN/TEXT/BLOB。性質に合わせて選ぶ。"},
-  {t:"インデックス",d:"「本の索引」のように検索を高速化する仕組み。付けすぎると更新（INSERT/UPDATE）が遅くなる。"}
+  {t:"データベース設計",d:"現実(人・物・出来事)をDBで再現できるよう構造化する作業。\n🔑 設計を誤ると後の修正コストが大。だから最初に丁寧に。"},
+  {t:"概念設計",d:"現実の情報をモデル化する最初の段階。成果物はER図。\n🔑 “何を管理するか(実体・関係)”を洗い出す段階。まだSQLは書かない。"},
+  {t:"論理設計",d:"ER図を表の形に変換する段階。テーブル定義・正規化を行う。DBMSに依存しない。\n🔑 “形を決める”段階。製品固有の話は次の物理設計で。"},
+  {t:"物理設計",d:"実際のDBMSで最適に動くよう具体化。データ型・索引・制約・CREATE文。\n🔑 “動く形にする”最終段階。ここで初めて製品(MySQL等)を意識。"},
+  {t:"エンティティ",d:"管理したい対象そのもの(学生・科目・教師)。ER図では矩形。\n🔑 中身の項目は属性、つながりは関係。“モノ・コト”がエンティティ。"},
+  {t:"属性",d:"エンティティが持つ情報項目(学籍番号・氏名・学年)。ER図では楕円。\n🔑 対象そのものはエンティティ。“その特徴・項目”が属性。"},
+  {t:"リレーションシップ",d:"エンティティ同士のつながり(学生―履修―科目)。ER図ではひし形。\n🔑 記号は 矩形/楕円/ひし形。関係＝ひし形をセットで暗記。"},
+  {t:"ER図",d:"エンティティ・属性・関係を図にしたもの。関係者の共通理解を作る。\n🔑 概念設計の成果物。記号:矩形=実体/楕円=属性/ひし形=関係。"},
+  {t:"多重度（カーディナリティ）",d:"関係の数の対応(1対1・1対多・多対多)。鳥足記法で線の形で表す。\n🔑 多対多と分かれば中間テーブルが必要、と設計に直結。"},
+  {t:"参照整合性",d:"外部キーにより“存在しないIDは登録できない”＝矛盾したデータが入らない仕組み。\n🔑 だから親を消す前に子を消す、の順序が必要になる。"},
+  {t:"データ型",d:"列に入る値の種類(INT/CHAR/VARCHAR/DATE/BOOLEAN/TEXT等)。性質で選ぶ。\n🔑 適切な型は保存も検索も効率的。桁固定はCHAR、可変はVARCHAR。"},
+  {t:"インデックス",d:"本の索引のように検索を高速化する仕組み。\n🔑 主キーには自動で付く。付けすぎると追加/更新が遅くなる副作用に注意。"}
  ]},
 {ch:"第5回 DDL・制約",
  story:"ここからは実際のSQL。まずは器づくりの言語<b>DDL</b>。表を作るのが<b>CREATE TABLE</b>、構造を直すのが<b>ALTER TABLE</b>、丸ごと消すのが<b>DROP TABLE</b>。作るときは列に「見張り番」＝制約をつける:必ず値を求める<b>NOT NULL</b>、重複を防ぐ<b>UNIQUE</b>、範囲を縛る<b>CHECK</b>、未指定時の初期値<b>DEFAULT</b>、他表とつなぐ<b>FOREIGN KEY</b>。2列で一意にするのが<b>複合主キー</b>。補助として、データだけ高速全消しの<b>TRUNCATE</b>、安全に消す<b>IF EXISTS</b>、連動削除の<b>CASCADE</b>、定義を確認する<b>DESCRIBE</b>。DROP・ALTERは元に戻せないので慎重に。",
  terms:[
-  {t:"DDL",d:"データの構造を定義する言語（Data Definition Language）。CREATE/ALTER/DROPなど。"},
-  {t:"CREATE TABLE",d:"新しい表を作る命令。列名・データ型・制約を定義する。"},
-  {t:"ALTER TABLE",d:"既存の表の構造を変更する命令。列の追加(ADD)/削除(DROP)/変更(MODIFY)/制約追加など。"},
-  {t:"DROP TABLE",d:"表そのものを削除する命令。データも構造も消え、元に戻せないことが多い。"},
-  {t:"NOT NULL制約",d:"空欄（NULL）を許さず、必ず値が必要とする制約。"},
-  {t:"UNIQUE制約",d:"値が重複しないようにする制約。例:emailの重複禁止。"},
-  {t:"CHECK制約",d:"値が条件を満たすか確認し、不正なデータを防ぐ。例:CHECK(grade BETWEEN 1 AND 5)。"},
-  {t:"DEFAULT",d:"値を指定しなかったとき自動で入る初期値。例:DEFAULT CURRENT_TIMESTAMP。"},
-  {t:"FOREIGN KEY制約",d:"他表の主キーを参照する制約。参照整合性を保証する。"},
-  {t:"複合主キー",d:"2つ以上の列を組み合わせて一意にする主キー。例:履修表（学籍番号＋科目コード）。"},
-  {t:"TRUNCATE TABLE",d:"表は残しデータだけを高速に全削除。DELETEより速い（ログをほぼ書かない）。"},
-  {t:"IF EXISTS",d:"存在しない表をDROPしてもエラーにしない句。初期化スクリプトで習慣化する。"},
-  {t:"CASCADE",d:"連動削除。親を消すと関連する子も削除される。大規模DBでは危険。"},
-  {t:"DESCRIBE / SHOW CREATE TABLE",d:"テーブルの定義（列・型・キー・制約名）を確認するコマンド。"}
+  {t:"DDL",d:"表の“構造(器)”を定義する言語(Data Definition Language)。CREATE/ALTER/DROP。\n🔑 中身を操るDMLと対。“器を作る/変える/壊す”がDDL。"},
+  {t:"CREATE TABLE",d:"新しい表を作る命令。列名・データ型・制約を定義する。\n🔑 設計(論理・物理)をSQLで形にする第一歩。"},
+  {t:"ALTER TABLE",d:"既存の表の構造を後から変更(列追加/削除/型変更/制約追加)。\n🔑 新規はCREATE、丸ごと削除はDROP。“既存を直す”のがALTER。"},
+  {t:"DROP TABLE",d:"表そのものを削除。データも構造も消え、戻せないことが多い。\n🔑 中身だけ消すTRUNCATEとは別。IF EXISTSやバックアップで安全に。"},
+  {t:"NOT NULL制約",d:"空欄(NULL)を禁止し、必ず値を入れさせる制約。\n🔑 氏名・学籍番号など“無いと困る”列に付ける。"},
+  {t:"UNIQUE制約",d:"同じ値を2回入れさせない制約(email重複禁止など)。\n🔑 主キーは「UNIQUE＋NULL禁止＋1表に1つ」。単なる重複禁止はUNIQUE。"},
+  {t:"CHECK制約",d:"値が条件を満たすか見張る制約。例:CHECK(grade BETWEEN 1 AND 5)。\n🔑 範囲外の変な値を入口で弾く。DEFAULT(初期値)とは別役割。"},
+  {t:"DEFAULT",d:"値を書かなかったとき自動で入る初期値。例:DEFAULT CURRENT_TIMESTAMP。\n🔑 “未指定なら自動で入る”。条件チェックのCHECKと混同しない。"},
+  {t:"FOREIGN KEY制約",d:"他表の主キーを参照する制約。参照整合性を保証する。\n🔑 存在しないIDの登録を防ぐ。削除順(子→親)にも関わる。"},
+  {t:"複合主キー",d:"2つ以上の列を組み合わせて一意にする主キー。例:履修表(学籍番号＋科目コード)。\n🔑 単独では重複する列も、組み合わせれば一意にできる。"},
+  {t:"TRUNCATE TABLE",d:"表は残し中身を全消し。ログをほぼ書かずDELETEより高速。\n🔑 DROPは表ごと、DELETEは条件付きで遅め。“初期化”がTRUNCATE。"},
+  {t:"IF EXISTS",d:"無い表をDROPしてもエラーにしない句。\n🔑 毎回作り直す初期化スクリプトで安全に使うのが定番。"},
+  {t:"CASCADE",d:"連動削除。親を消すと参照する子も一緒に消える。\n🔑 便利だが大量に巻き込むので大規模DBでは危険。使用は慎重に。"},
+  {t:"DESCRIBE / SHOW CREATE TABLE",d:"表の定義(列・型・キー・制約名)を確認するコマンド。\n🔑 外部キーを消す前に制約名を調べる等、確認に使う。"}
  ]},
 {ch:"第6回 DML・トランザクション",
  story:"器ができたら中身を操る言語<b>DML</b>。行を足す<b>INSERT</b>、書き換える<b>UPDATE</b>、消す<b>DELETE</b>の3本柱。ここで命綱になるのが<b>WHERE句</b>——付け忘れると全件が変わる/消える最大の事故になる。番号を自動採番する<b>AUTO_INCREMENT</b>も便利。そして安全装置が<b>トランザクション</b>。<b>BEGIN</b>で始め、良ければ<b>COMMIT</b>、間違えたら<b>ROLLBACK</b>で巻き戻す。その品質を支える4性質が<b>ACID</b>。似て非なる<b>DELETE/TRUNCATE/DROP</b>の違いも押さえよう:行を選んで消す／全行を高速に消す／表ごと消す。",
  terms:[
-  {t:"DML",d:"データそのものを操作する言語（Data Manipulation Language）。INSERT/UPDATE/DELETE。"},
-  {t:"INSERT",d:"表に新しい行を追加する命令。INSERT INTO 表(列…) VALUES(値…);"},
-  {t:"UPDATE",d:"既存の行を変更する命令。WHEREを忘れると全件更新の危険。"},
-  {t:"DELETE",d:"行を削除する命令。WHEREを忘れると全件削除。DMLで最も危険な操作。"},
-  {t:"WHERE句",d:"どの行を対象にするかを絞る条件。UPDATE/DELETEでは必須級（忘れは事故の元）。"},
-  {t:"AUTO_INCREMENT",d:"行ごとに重複しない通し番号を自動で割り当てる機能。主キーと組み合わせて使う。"},
-  {t:"トランザクション",d:"複数のDML操作を1つの単位として扱い、「全て成功」か「全て取消」を保証する仕組み。"},
-  {t:"BEGIN / COMMIT / ROLLBACK",d:"BEGINで開始、COMMITで変更を確定、ROLLBACKで実行前に巻き戻す。"},
-  {t:"ACID",d:"トランザクションの4性質:原子性(A)・一貫性(C)・独立性(I)・永続性(D)。"},
-  {t:"DELETE / TRUNCATE / DROP の違い",d:"DELETE=行を選んで削除(取消可)、TRUNCATE=全行を高速削除、DROP=表ごと削除。"}
+  {t:"DML",d:"表の“中身のデータ”を操る言語(Data Manipulation Language)。INSERT/UPDATE/DELETE。\n🔑 構造を作るDDLと対。“足す・変える・消す”がDML。"},
+  {t:"INSERT",d:"表に新しい行を追加する命令。INSERT INTO 表(列) VALUES(値)。\n🔑 存在しない外部キーIDを入れると制約違反になる点に注意。"},
+  {t:"UPDATE",d:"既存の行を書き換える命令。\n🔑 WHEREを忘れると全行が変わる大事故。必ず条件を付ける。"},
+  {t:"DELETE",d:"行を削除する命令。DMLで最も危険。\n🔑 WHERE無しは全件削除。子→親の順や、実行前SELECT確認を習慣に。"},
+  {t:"WHERE句",d:"“どの行に効かせるか”を絞る条件。\n🔑 UPDATE/DELETEでの付け忘れが実務の最頻事故。まずWHEREを書く癖を。"},
+  {t:"AUTO_INCREMENT",d:"行ごとに重複しない通し番号を自動で振る機能。\n🔑 主キーと組み合わせるのが定番。id指定不要で楽。"},
+  {t:"トランザクション",d:"複数の操作を1セットにし、全部成功か全部取消かにする仕組み。\n🔑 中途半端を防ぐ。BEGIN→(操作)→COMMIT/ROLLBACK。"},
+  {t:"BEGIN / COMMIT / ROLLBACK",d:"BEGINで開始、COMMITで確定、ROLLBACKで実行前に巻き戻す。\n🔑 “試して、良ければ確定・ダメなら取消”の3点セット。"},
+  {t:"ACID",d:"トランザクションの4性質:原子性(A)・一貫性(C)・独立性(I)・永続性(D)。\n🔑 “分けない/矛盾させない/干渉させない/消えない”。可用性は含まれない。"},
+  {t:"DELETE / TRUNCATE / DROP の違い",d:"DELETE=行を選んで削除(取消可)/TRUNCATE=全行を高速削除/DROP=表ごと削除。\n🔑 消す範囲が 行→全行→表 と大きくなる。取消できるのはDELETE。"}
  ]},
 {ch:"第7回 SELECT・JOIN・集約",
  story:"データを取り出す主役が<b>SELECT</b>。読み取り専用だから安全。ポイントは<b>実行順序</b>——書く順と処理順(FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY)は違う。行を絞るのが<b>WHERE</b>で、<b>AND/OR/NOT</b>や<b>BETWEEN・IN・LIKE・IS NULL</b>を組み合わせる。並べ替えは<b>ORDER BY</b>、見出しを変える<b>AS</b>、重複を消す<b>DISTINCT</b>、件数を絞る<b>LIMIT/OFFSET</b>、条件分岐の<b>CASE式</b>。分かれた表をつなぐのが<b>JOIN</b>——両方一致だけの<b>INNER</b>、左を全部残す<b>LEFT</b>、自分同士の<b>自己結合</b>。最後にまとめる<b>集約関数</b>を<b>GROUP BY</b>でグループ化し、<b>HAVING</b>で集約後に絞る。",
  terms:[
-  {t:"SELECT",d:"データを読み出す（検索する）読み取り専用の命令。データを壊さず安全。"},
-  {t:"実行順序",d:"書く順と処理順は違う。処理は FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY の順。"},
-  {t:"WHERE（絞り込み）",d:"条件に合う行だけを取り出す。= <> > < >= <= などの比較演算子を使う。"},
-  {t:"AND / OR / NOT",d:"複数条件を組み合わせる論理演算子。混在時は括弧で優先順位を明示する。"},
-  {t:"BETWEEN / IN / LIKE / IS NULL",d:"範囲/複数値/パターン(% _)/NULL判定。NULLは=でなくIS NULLで判定する。"},
-  {t:"ORDER BY",d:"指定した列で並べ替える。ASC=昇順(既定・省略可)、DESC=降順。"},
-  {t:"AS（別名）",d:"列や表に別名を付けて見出しを変える・短く書く。元データは変わらない。"},
-  {t:"DISTINCT",d:"重複行を除外する。「どんな種類があるか」を調べるのに便利。"},
-  {t:"LIMIT / OFFSET",d:"取得行数の制限と開始位置のスキップ。Webのページングで必須。"},
-  {t:"CASE式",d:"条件で異なる値を返す式（IF文のSQL版）。WHEN 条件 THEN 値 … END。"},
-  {t:"JOIN（結合）",d:"複数の表を共通の列でつなぐ。ON句で結合条件を指定する。"},
-  {t:"INNER JOIN",d:"両方に存在する行だけを取得する最も基本の結合。"},
-  {t:"LEFT JOIN",d:"左表の全行＋右の一致行（無ければNULL）。未関連データの検出に便利。"},
-  {t:"自己結合（SELF JOIN）",d:"同じ表を別名で2回使い、自分自身と結合する手法。"},
-  {t:"集約関数",d:"複数行を1つの値にまとめる関数:COUNT/SUM/AVG/MIN/MAX。"},
-  {t:"GROUP BY / HAVING",d:"GROUP BYで列ごとにグループ化、HAVINGで集約後のグループを絞る（WHEREは集約前）。"}
+  {t:"SELECT",d:"データを読み出す(検索する)命令。書き換えないので安全。\n🔑 SELECT列 FROM表 WHERE条件… が基本形。まずこの形を固める。"},
+  {t:"実行順序",d:"書く順と処理順は違う。処理は FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY。\n🔑 だからWHEREでは別名(AS)が使えない等の“なぜ”が説明できる。"},
+  {t:"WHERE（絞り込み）",d:"条件に合う行だけ取り出す句。= <> > < >= <= を使う。\n🔑 集約前の“1行ずつ”に効く。集約後の条件はHAVING。"},
+  {t:"AND / OR / NOT",d:"複数条件を組み合わせる論理演算子。\n🔑 ANDとORの混在は括弧で優先順位を明示。曖昧だと意図とズレる。"},
+  {t:"BETWEEN / IN / LIKE / IS NULL",d:"範囲/複数値/パターン(% _)/NULL判定の便利条件。\n🔑 NULLは=で比較できずIS NULLを使う、が最頻の落とし穴。"},
+  {t:"ORDER BY",d:"指定列で並べ替える句。ASC=昇順(既定)、DESC=降順。\n🔑 付けないと並び順は保証されない。処理順では最後に効く。"},
+  {t:"AS（別名）",d:"列や表に別名を付けて見出しを変える/短く書く。元データは変わらない。\n🔑 JOINでテーブルに短い別名を付けるのも定番。"},
+  {t:"DISTINCT",d:"重複行を除いて“種類”を見るキーワード。SELECTの直後に書く。\n🔑 何種類あるか調べたい時に。件数制限のLIMITとは別物。"},
+  {t:"LIMIT / OFFSET",d:"取得件数の制限(LIMIT)と開始位置スキップ(OFFSET)。\n🔑 “11件目から5件”のようにページ送りに使う。Webで必須。"},
+  {t:"CASE式",d:"条件で返す値を変える、SQL版のif。WHEN 条件 THEN 値 … END。\n🔑 点数→合否ラベルなど、その場で分類したい時に使う。"},
+  {t:"JOIN（結合）",d:"複数の表を共通の列でつなぐ。ONで結合条件を指定。\n🔑 正規化で分けた表を意味ある形に戻す。ON忘れは全組合せ(直積)に。"},
+  {t:"INNER JOIN",d:"両方にそろって存在する行だけを取る基本の結合。\n🔑 一致しない行は消える。“共通部分だけ”がINNER。"},
+  {t:"LEFT JOIN",d:"左表は全部残し、右に相手がいなければNULLで埋める。\n🔑 “未所属の学生も出す”等、漏れなく確認したい時に。INNERは一致のみ。"},
+  {t:"自己結合（SELF JOIN）",d:"同じ表を別名で2回使い、自分自身と結合する手法。\n🔑 同学年ペア作りや上司-部下の表現に。a.id<b.idで重複ペアを防ぐ。"},
+  {t:"集約関数",d:"複数行を1つの値にまとめる関数:COUNT/SUM/AVG/MIN/MAX。\n🔑 GROUP BYと組むとグループごとに集計できる。"},
+  {t:"GROUP BY / HAVING",d:"GROUP BYで仲間分け、HAVINGで集約後の結果を絞る。\n🔑 WHEREは集約“前”、HAVINGは集約“後”。ここが最頻の勘違い。"}
  ]},
 {ch:"第8回 サブクエリ・ビュー",
  story:"仕上げは複雑な問い合わせ。SQLの中にSQLを入れるのが<b>サブクエリ</b>で、内側が先に動く。1つの値を返す<b>スカラサブクエリ</b>、集合と照らす<b>IN/NOT IN</b>、外側の行を参照して行ごとに動く重い<b>相関サブクエリ</b>、FROMに置いて中間表を作る<b>派生表</b>。存在チェックの<b>EXISTS/NOT EXISTS</b>はNOT INのNULL問題の逃げ道。そして長いSQLに名前を付けて仮想テーブルにするのが<b>ビュー</b>。1表の<b>単純ビュー</b>は更新できることが多く、JOINや集約を含む<b>複合ビュー</b>は通常更新不可。見せる列だけのビューで<b>アクセス制御</b>(password隠し)ができ、結果をキャッシュする<b>マテリアライズドビュー</b>もある。",
  terms:[
-  {t:"サブクエリ",d:"SQLの中で別のSELECT文の結果を利用する仕組み。内側が先に実行される。"},
-  {t:"スカラサブクエリ",d:"1行1列の結果を返し「1つの値」として扱う。複数行を返すとエラー。"},
-  {t:"IN / NOT IN サブクエリ",d:"集合との比較。含む/含まない。NOT INはNULLがあると結果が返らない点に注意。"},
-  {t:"相関サブクエリ",d:"内側から外側の表を参照するサブクエリ。行ごとに再実行され処理が重い。"},
-  {t:"派生表（FROM句サブクエリ）",d:"FROM句に置くサブクエリが作る一時表（インラインビュー）。AS別名が必須。"},
-  {t:"EXISTS / NOT EXISTS",d:"行が存在するかで判定する。NOT INのNULL問題の対策としてNOT EXISTSが推奨。"},
-  {t:"ビュー",d:"SELECT文に名前を付けた仮想テーブル。実データは持たず定義だけを保存。再利用に便利。"},
-  {t:"単純ビュー / 複合ビュー",d:"単純=1表・更新可の場合が多い。複合=複数表JOINや集約を含み通常は更新不可。"},
-  {t:"ビューによるアクセス制御",d:"見せる列だけのビューを作りpassword等を隠せる＝セキュリティ機能。"},
-  {t:"マテリアライズドビュー",d:"結果をキャッシュ（実体化）するビュー。毎回のフルスキャンを避けられる。"}
+  {t:"サブクエリ",d:"SQLの中に入れ子で書くSELECT。内側が先に計算され外側で使われる。\n🔑 その場限りの計算。名前を付けて保存すればビューになる。"},
+  {t:"スカラサブクエリ",d:"結果が1行1列＝“1個の値”を返すサブクエリ。\n🔑 だから = で比較できる。複数行返すとエラーになる。"},
+  {t:"IN / NOT IN サブクエリ",d:"集合との照合。含む(IN)/含まない(NOT IN)。\n🔑 NOT INは候補にNULLがあると0件になる罠。対策はNOT EXISTS。"},
+  {t:"相関サブクエリ",d:"内側が外側の各行を参照するサブクエリ。行ごとに再実行され重い。\n🔑 “各学生の平均を超える”等、行ごとの比較に強いが遅い。"},
+  {t:"派生表（FROM句サブクエリ）",d:"FROMに置くサブクエリが作るその場の一時表(インラインビュー)。\n🔑 集計結果をさらに並べ替える時などに。AS別名が必須。"},
+  {t:"EXISTS / NOT EXISTS",d:"行が存在するかで判定する。\n🔑 NOT INのNULL問題を避ける安全策がNOT EXISTS。“いる/いない”判定に。"},
+  {t:"ビュー",d:"よく使うSELECTに名前を付けた仮想の表。実データは持たず定義だけ保存。\n🔑 長いSQLを再利用でき常に最新。中間テーブルは実データ持ちで別物。"},
+  {t:"単純ビュー / 複合ビュー",d:"単純=1表ベースで更新できることが多い。複合=複数表JOINや集約を含み通常更新不可。\n🔑 集計を含むビューは値を書き換えられない、と覚える。"},
+  {t:"ビューによるアクセス制御",d:"見せてよい列だけのビューを作り、password等を隠して公開する使い方。\n🔑 列は物理的に存在しても“見えない”。セキュリティの重要機能。"},
+  {t:"マテリアライズドビュー",d:"結果をキャッシュ(実体化)するビュー。毎回のフルスキャンを避けられる。\n🔑 普通のビューは毎回SELECTが走る。重い集計の高速化に。"}
  ]}
 ];
 const GTERMS = GLOSSARY.reduce((s,g)=>s+g.terms.length,0);
@@ -433,6 +433,7 @@ function shuffle(arr){
   return a;
 }
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function expFmt(s){return esc(s).replace(/\n/g,'<br>');}
 
 /* 選択肢をシャッフルしても正解を追える形に */
 function prepare(list){
@@ -483,7 +484,7 @@ function glossaryView(ci){
       <p class="sec-lead">章を選んで、流れ（ストーリー）で覚えよう。<span class="count">全${GTERMS}語</span></p>
       <div class="gnav">${GLOSSARY.map((x,i)=>`<button class="${i===ci?'active':''}" onclick="glossaryView(${i})">${x.ch}</button>`).join('')}</div>
       <div class="story">${g.story}</div>
-      ${g.terms.map(t=>`<div class="tcard"><div class="t">${esc(t.t)}</div><div class="d">${esc(t.d)}</div></div>`).join('')}
+      ${g.terms.map(t=>`<div class="tcard"><div class="t">${esc(t.t)}</div><div class="d">${expFmt(t.d)}</div></div>`).join('')}
       <div class="fc-bar" style="margin-top:14px">
         ${ci>0?`<button onclick="glossaryView(${ci-1})">← 前の章</button>`:''}
         <button onclick="flashStart(${ci})">🃏 この章を暗記</button>
@@ -530,7 +531,7 @@ function flashRender(){
     <div class="card">
       <div class="fcard" onclick="flashFlip()">
         ${fcBack
-          ? `<div class="side">裏 · 意味</div><div class="fd">${esc(c.d)}</div>`
+          ? `<div class="side">裏 · 意味</div><div class="fd">${expFmt(c.d)}</div>`
           : `<div class="side">表 · 用語</div><div class="ft">${esc(c.t)}</div><div class="hint">タップして意味を表示</div>`}
       </div>
       <div class="fc-bar">
@@ -632,11 +633,11 @@ function choose(i){
   if(chosen.ok){
     correct++;
     fb.className='fb show ok';
-    fb.innerHTML=`⭕ 正解！<br><b>解説：</b>${esc(q.exp)}`;
+    fb.innerHTML=`⭕ 正解！<br><b>解説</b><br>${expFmt(q.exp)}`;
   }else{
     const ans = q.sOpts.find(o=>o.ok).t;
     fb.className='fb show ng';
-    fb.innerHTML=`❌ 不正解。正解は「${esc(ans)}」<br><b>解説：</b>${esc(q.exp)}`;
+    fb.innerHTML=`❌ 不正解。正解は「${esc(ans)}」<br><br><b>解説</b><br>${expFmt(q.exp)}`;
     wrongList.push({q, chosen:chosen.t, ans});
   }
   const nav=document.getElementById('nav');
@@ -679,7 +680,7 @@ function result(timeUp){
           ${w.q.code?`<pre>${esc(w.q.code)}</pre>`:''}
           <p class="ans"><span class="w">あなた：${esc(w.chosen)}</span></p>
           <p class="ans"><span class="c">正解：${esc(w.ans)}</span></p>
-          <p class="ans muted">${esc(w.q.exp)}</p>
+          <p class="ans muted">${expFmt(w.q.exp)}</p>
         </div>`).join('')}
     </div>`:`<div class="card" style="text-align:center">全問正解！間違いはありません✨</div>`}
   `;
