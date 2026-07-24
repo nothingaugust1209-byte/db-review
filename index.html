@@ -86,6 +86,8 @@
   .fc-bar{display:flex;gap:8px;margin-top:12px;}
   .fc-bar button{flex:1;padding:11px 8px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--text);cursor:pointer;font-size:.9rem;transition:.12s;}
   .fc-bar button:hover{border-color:var(--accent);}
+  .mini{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:4px 11px;font-size:.75rem;cursor:pointer;transition:.12s;white-space:nowrap;}
+  .mini:hover{border-color:var(--accent);color:var(--accent);}
   footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:28px;}
 </style>
 </head>
@@ -475,6 +477,7 @@ function glossaryView(ci){
   stopTimer(); examMode=false;
   const g = GLOSSARY[ci];
   app.innerHTML = `
+    <div class="topbar"><button class="mini" onclick="home()">← ホームに戻る</button><span class="count">${g.ch}</span></div>
     <div class="card">
       <h2>📗 単語解説集</h2>
       <p class="sec-lead">章を選んで、流れ（ストーリー）で覚えよう。<span class="count">全${GTERMS}語</span></p>
@@ -522,7 +525,7 @@ function flashRender(){
   const c = fcList[fcI];
   const pct = Math.round((fcI+1)/fcList.length*100);
   app.innerHTML = `
-    <div class="topbar"><span>${c.ch}</span><span class="count">${fcI+1} / ${fcList.length}</span></div>
+    <div class="topbar"><button class="mini" onclick="home()">← ホーム</button><span>${c.ch}</span><span class="count">${fcI+1} / ${fcList.length}</span></div>
     <div class="progress"><div style="width:${pct}%"></div></div>
     <div class="card">
       <div class="fcard" onclick="flashFlip()">
@@ -600,7 +603,7 @@ function render(){
   const pct = Math.round((idx)/quiz.length*100);
   const tag = q.type==='code' ? 'SQLコード問題' : '用語問題';
   app.innerHTML = `
-    <div class="topbar"><span>第 ${idx+1} / ${quiz.length} 問</span><span>${examMode?`<span id="timer">⏱ ${fmtTime(timeLeft)}</span>`:`正解 ${correct}`}</span></div>
+    <div class="topbar"><button class="mini" onclick="quitQuiz()">✕ 中断してホーム</button><span>第 ${idx+1} / ${quiz.length} 問</span><span>${examMode?`<span id="timer">⏱ ${fmtTime(timeLeft)}</span>`:`正解 ${correct}`}</span></div>
     <div class="progress"><div style="width:${pct}%"></div></div>
     <div class="card">
       <span class="chip">${q.ch}・${tag}</span>
@@ -644,6 +647,11 @@ function choose(i){
 function next(){
   if(idx===quiz.length-1){ result(); return; }
   idx++; render();
+}
+
+function quitQuiz(){
+  const started = (idx>0 || answered);
+  if(!started || confirm('演習を中断してホームに戻りますか？\n（ここまでの成績は保存されません）')) home();
 }
 
 function result(timeUp){
