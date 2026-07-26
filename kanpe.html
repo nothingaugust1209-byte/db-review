@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DB応用 最強カンペ 🎯</title>
+<style>
+  :root{
+    --bg:#0f1115; --bg2:#161a22; --card:#1c2230; --card2:#232b3b;
+    --text:#e8edf5; --muted:#9aa7bd; --line:#2c3648;
+    --accent:#4f9cff; --accent2:#7c5cff; --mark:#ffd66b; --star:#ffcf3f;
+    --code-bg:#0c0f16; --code-text:#c9e6ff;
+    --shadow:0 6px 18px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#f4f6fb; --bg2:#ffffff; --card:#ffffff; --card2:#f0f3fa;
+    --text:#16202e; --muted:#5a6a82; --line:#dce3ef;
+    --accent:#1f6feb; --accent2:#6b45ff; --mark:#ffe28a; --star:#f5a623;
+    --code-bg:#0f1524; --code-text:#cfe6ff;
+    --shadow:0 6px 18px rgba(20,40,80,.10);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic UI",Meiryo,sans-serif;
+    line-height:1.6; -webkit-text-size-adjust:100%;
+  }
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50; background:var(--bg2);
+    border-bottom:1px solid var(--line); box-shadow:var(--shadow);
+    padding:10px 12px calc(8px + env(safe-area-inset-bottom,0px));
+  }
+  .titlebar{display:flex; align-items:center; gap:8px; margin-bottom:8px}
+  .titlebar h1{font-size:16px; margin:0; letter-spacing:.02em; white-space:nowrap}
+  .titlebar .sub{color:var(--muted); font-size:11px; margin-left:2px}
+  .spacer{flex:1}
+  .iconbtn{
+    background:var(--card); color:var(--text); border:1px solid var(--line);
+    border-radius:10px; padding:7px 10px; font-size:13px; cursor:pointer; white-space:nowrap;
+  }
+  .iconbtn:active{transform:scale(.96)}
+  .iconbtn.on{border-color:var(--accent); color:var(--accent)}
+
+  .searchrow{display:flex; gap:8px; align-items:center}
+  .searchwrap{position:relative; flex:1}
+  #q{
+    width:100%; padding:11px 34px 11px 36px; border-radius:12px;
+    border:1px solid var(--line); background:var(--card); color:var(--text);
+    font-size:16px; outline:none;
+  }
+  #q:focus{border-color:var(--accent)}
+  .searchwrap .mag{position:absolute; left:11px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:15px}
+  .searchwrap .clr{position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--muted); font-size:18px; cursor:pointer; display:none}
+  select{
+    padding:10px 8px; border-radius:12px; border:1px solid var(--line);
+    background:var(--card); color:var(--text); font-size:14px; outline:none;
+  }
+
+  .chips{display:flex; gap:7px; overflow-x:auto; padding:9px 2px 2px; -webkit-overflow-scrolling:touch; scrollbar-width:thin}
+  .chips::-webkit-scrollbar{height:5px}
+  .chips::-webkit-scrollbar-thumb{background:var(--line); border-radius:3px}
+  .chip{
+    flex:0 0 auto; padding:6px 12px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--line); background:var(--card); color:var(--muted);
+    font-size:13px; white-space:nowrap;
+  }
+  .chip .n{opacity:.6; font-size:11px; margin-left:4px}
+  .chip.active{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; border-color:transparent}
+
+  /* Content */
+  main{padding:12px; max-width:1100px; margin:0 auto}
+  .count{color:var(--muted); font-size:12px; margin:2px 2px 10px}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; align-items:start}
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:13px 14px; box-shadow:var(--shadow); position:relative;
+    border-left:4px solid var(--catcolor,var(--accent));
+  }
+  .card h3{margin:0 40px 6px 0; font-size:15.5px; line-height:1.4}
+  .card .cat{
+    display:inline-block; font-size:10.5px; color:var(--muted);
+    background:var(--card2); border:1px solid var(--line);
+    border-radius:6px; padding:1px 7px; margin-bottom:8px;
+  }
+  .card .imp{color:var(--star); font-size:11px; letter-spacing:1px; margin-left:6px}
+  .card .body{font-size:13.5px; color:var(--text)}
+  .card .body strong{color:var(--accent); font-weight:700}
+  .star{
+    position:absolute; top:10px; right:10px; background:none; border:none;
+    font-size:20px; cursor:pointer; color:var(--line); line-height:1; padding:2px;
+  }
+  .star.on{color:var(--star)}
+  mark{background:var(--mark); color:#111; border-radius:3px; padding:0 2px}
+
+  .codewrap{position:relative; margin-top:9px}
+  pre{
+    margin:0; background:var(--code-bg); color:var(--code-text);
+    border-radius:10px; padding:11px 12px; overflow-x:auto;
+    font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    font-size:12.5px; line-height:1.55;
+  }
+  pre .cm{color:#6f86ad}       /* comment */
+  pre .kw{color:#ff9d5c; font-weight:600} /* keyword */
+  pre .st{color:#9ee493}       /* string */
+  .copy{
+    position:absolute; top:7px; right:7px; font-size:11px; padding:3px 8px;
+    background:rgba(255,255,255,.08); color:#cfe0ff; border:1px solid rgba(255,255,255,.15);
+    border-radius:7px; cursor:pointer;
+  }
+  .copy:active{transform:scale(.94)}
+
+  .empty{text-align:center; color:var(--muted); padding:60px 20px}
+  .empty .big{font-size:34px; margin-bottom:10px}
+  footer{color:var(--muted); font-size:11px; text-align:center; padding:24px 12px 40px}
+
+  @media (max-width:520px){
+    .titlebar h1{font-size:14px}
+    .grid{grid-template-columns:1fr}
+    .card h3{font-size:15px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="titlebar">
+    <h1>🎯 DB応用 最強カンペ</h1>
+    <span class="sub" id="dateSub"></span>
+    <span class="spacer"></span>
+    <button class="iconbtn" id="starFilterBtn" title="お気に入りのみ">★</button>
+    <button class="iconbtn" id="themeBtn" title="テーマ切替">🌙</button>
+  </div>
+  <div class="searchrow">
+    <div class="searchwrap">
+      <span class="mag">🔍</span>
+      <input id="q" type="search" placeholder="用語・SQL・キーワードで検索（ / で即入力）" autocomplete="off" enterkeyhint="search">
+      <button class="clr" id="clrBtn" aria-label="クリア">×</button>
+    </div>
+    <select id="sort" title="並び替え">
+      <option value="std">標準（章順）</option>
+      <option value="imp">重要度順 ★</option>
+      <option value="yomi">五十音順</option>
+      <option value="title">タイトル順</option>
+    </select>
+  </div>
+  <div class="chips" id="chips"></div>
+</header>
+
+<main>
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">
+    <div class="big">🔎</div>
+    <div>該当なし。検索語やジャンルを変えてみて。</div>
+  </div>
+</main>
+<footer>明日のテスト、落ち着いていこう。迷ったら「混同ペア」を見る。がんばれ！</footer>
+
+<script>
+/* ============ データ ============ */
+const CATS = [
+  {id:'kiso',   name:'基礎・全体像',        color:'#4f9cff'},
+  {id:'data',   name:'データと情報',        color:'#38bdf8'},
+  {id:'model',  name:'モデル・正規化',      color:'#a78bfa'},
+  {id:'design', name:'設計・ER図',          color:'#f472b6'},
+  {id:'ddl',    name:'DDL・制約',           color:'#fb923c'},
+  {id:'dml',    name:'DML・トランザクション',color:'#f87171'},
+  {id:'select', name:'SELECT・JOIN・集約',  color:'#34d399'},
+  {id:'sub',    name:'サブクエリ・ビュー',  color:'#22d3ee'},
+  {id:'confuse',name:'混同ペア',            color:'#facc15'},
+  {id:'code',   name:'頻出コード・演習',    color:'#94a3b8'},
+];
+
+// c:カテゴリ, t:タイトル, y:よみ, i:重要度(1-3), b:本文(**で強調), code:SQL
+const DATA = [
+  /* ===== 基礎・全体像 ===== */
+  {c:'kiso',t:'DB（データベース）',y:'でーたべーす',i:2,b:'データの倉庫。大量データを効率的に**保存・検索・更新・管理**する仕組み。単なる置き場ではない。'},
+  {c:'kiso',t:'DBMS',y:'でぃーびーえむえす',i:2,b:'倉庫を動かすソフト（MySQL等）。DBを管理するシステム本体。'},
+  {c:'kiso',t:'SQL',y:'えすきゅーえる',i:2,b:'倉庫（DB）への**命令言語**。DDL・DML・TCLに分かれる。'},
+  {c:'kiso',t:'DDL（構造＝器）',y:'でぃーでぃーえる',i:3,b:'テーブルなど**構造**を操作。**CREATE / ALTER / DROP / TRUNCATE**。'},
+  {c:'kiso',t:'DML（中身＝データ）',y:'でぃーえむえる',i:3,b:'**データ**を操作。**INSERT / UPDATE / DELETE / SELECT**。'},
+  {c:'kiso',t:'TCL',y:'てぃーしーえる',i:2,b:'トランザクション制御。**BEGIN / COMMIT / ROLLBACK**。'},
+  {c:'kiso',t:'CRUD対応',y:'くらっど',i:3,b:'**C**reate=INSERT ／ **R**ead=SELECT ／ **U**pdate=UPDATE ／ **D**elete=DELETE。'},
+
+  /* ===== データと情報 ===== */
+  {c:'data',t:'データ',y:'でーた',i:2,b:'事実・数値**そのもの**（例:37,36.5,38）。それ自体には意味がない。'},
+  {c:'data',t:'情報',y:'じょうほう',i:2,b:'データを加工・意味づけしたもの（例:平均37.2℃→発熱疑い）。**判断に使える**。'},
+  {c:'data',t:'データ加工プロセス',y:'でーたかこうぷろせす',i:1,b:'収集→整理→加工→可視化→共有→**意思決定**。'},
+  {c:'data',t:'DBの4つの役割',y:'でーたべーすのやくわり',i:2,b:'①蓄積と整理 ②検索と抽出 ③同時アクセス制御 ④整合性・安全性管理。'},
+  {c:'data',t:'ファイル管理 vs DB',y:'ふぁいるかんりたいでーたべーす',i:1,b:'散在→**一元管理** ／ 手作業検索→**SQLで高速** ／ 不整合→**自動で整合性** ／ 手動共有→**同時アクセス**。'},
+  {c:'data',t:'主なDBMS',y:'おもなでぃーびーえむえす',i:1,b:'**MySQL**(無料高速/Web) ／ **PostgreSQL**(拡張性/組織内) ／ **SQLite**(組込み/スマホ・IoT) ／ **MongoDB**(NoSQLドキュメント型/ビッグデータ)。'},
+
+  /* ===== データモデル・正規化 ===== */
+  {c:'model',t:'階層型モデル',y:'かいそうがたもでる',i:2,b:'構造=ツリー(親子)。関係は**1対多のみ**。IBM IMS。古い方式。'},
+  {c:'model',t:'ネットワーク型モデル',y:'ねっとわーくがたもでる',i:2,b:'構造=グラフ(網目)。**多対多OK**。標準は**CODASYL**。'},
+  {c:'model',t:'リレーショナル型モデル',y:'りれーしょなるがたもでる',i:3,b:'構造=表(行と列)。キーで柔軟につなぐ。提唱=**E.F.コッド / 1970年**。★現在の主流。'},
+  {c:'model',t:'正規化',y:'せいきか',i:3,b:'目的は**重複排除・更新不整合の防止・検索効率化**。1NF→2NF→3NFの順に整える。'},
+  {c:'model',t:'第1正規形(1NF)',y:'だいいちせいきけい',i:3,b:'1セルに値は**1つ**（単一値）。「数学,英語」→1行ずつ分割。'},
+  {c:'model',t:'第2正規形(2NF)',y:'だいにせいきけい',i:3,b:'複合主キーの**一部だけ**に依存する列（**部分関数従属**）を別表へ分ける。'},
+  {c:'model',t:'第3正規形(3NF)',y:'だいさんせいきけい',i:3,b:'非キー→非キーの依存（**推移的従属**）を排除。例:教師名→教師住所を別表へ。'},
+  {c:'model',t:'多対多の分解',y:'たたいたのぶんかい',i:2,b:'**多対多**は**中間テーブル**で「1対多＋1対多」に分解する。'},
+  {c:'model',t:'主キー(PK)',y:'しゅきー',i:3,b:'行を一意に識別。**重複×・NULL×・1表に1つ**だけ。'},
+  {c:'model',t:'外部キー(FK)',y:'がいぶきー',i:3,b:'他表の主キーを参照してつなぐ。→**参照整合性**を保つ。'},
+  {c:'model',t:'NoSQL 4種',y:'のーえすきゅーえる',i:2,b:'**ドキュメント型**(JSON/BSON・MongoDB) ／ **グラフ型**(ノードとエッジ・Neo4j) ／ **カラム型**(列ごと・Cassandra) ／ **キー・バリュー型**(キー→値・Redis)。'},
+
+  /* ===== 設計・ER図 ===== */
+  {c:'design',t:'設計の3段階',y:'せっけいのさんだんかい',i:3,b:'**概念設計**(ER図)→**論理設計**(テーブル定義・正規化)→**物理設計**(SQL/DBMS)。抽象→具体。'},
+  {c:'design',t:'概念設計の3要素',y:'がいねんせっけいのようそ',i:2,b:'**エンティティ**(対象/矩形)・**属性**(項目/楕円)・**リレーションシップ**(関係/ひし形)。'},
+  {c:'design',t:'ER図の記号',y:'いーあーるずのきごう',i:2,b:'**矩形=エンティティ** ／ **楕円=属性** ／ **ひし形=関係**。'},
+  {c:'design',t:'多重度',y:'たじゅうど',i:1,b:'1対1・1対多・多対多。鳥足記法で表す。'},
+  {c:'design',t:'データ型',y:'でーたがた',i:2,b:'INT / **CHAR(n)固定長** / **VARCHAR(n)可変長** / DATE / DATETIME / BOOLEAN / TEXT / BLOB。桁が固定ならCHARが効率的。'},
+  {c:'design',t:'インデックス',y:'いんでっくす',i:2,b:'本の索引＝**検索の高速化**。ただし**付けすぎると更新が遅く**なる。'},
+
+  /* ===== DDL・制約 ===== */
+  {c:'ddl',t:'CREATE TABLE（制約つき）',y:'くりえいとてーぶる',i:3,b:'テーブル作成の基本形。制約を列につける。',code:
+`CREATE TABLE Student (
+  student_id CHAR(4) PRIMARY KEY,          -- 主キー
+  name       VARCHAR(50) NOT NULL,         -- 空欄禁止
+  grade      INT CHECK (grade BETWEEN 1 AND 5),  -- 範囲チェック
+  email      VARCHAR(100) UNIQUE,          -- 重複禁止
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP  -- 初期値
+);`},
+  {c:'ddl',t:'外部キー付きの子テーブル',y:'がいぶきーつきのこてーぶる',i:3,b:'複合主キー＋FOREIGN KEYで親テーブルを参照。',code:
+`CREATE TABLE Enrollment (
+  student_id CHAR(4),
+  subject_id CHAR(4),
+  score INT DEFAULT 0,
+  PRIMARY KEY (student_id, subject_id),   -- 複合主キー
+  FOREIGN KEY (student_id) REFERENCES Student(student_id),
+  FOREIGN KEY (subject_id) REFERENCES Subject(subject_id)
+);`},
+  {c:'ddl',t:'ALTER（表の変更）',y:'おるたー',i:3,b:'列の追加・削除・型変更・表名変更。',code:
+`ALTER TABLE Student ADD COLUMN age INT;        -- 列追加
+ALTER TABLE Student DROP COLUMN age;           -- 列削除
+ALTER TABLE Student MODIFY COLUMN name VARCHAR(80);  -- 型変更
+ALTER TABLE Student RENAME TO Students;        -- 表名変更`},
+  {c:'ddl',t:'DROP / TRUNCATE',y:'どろっぷとらんけーと',i:2,b:'**DROP**=表ごと削除 ／ **TRUNCATE**=中身だけ高速全削除（構造は残る）。',code:
+`DROP TABLE IF EXISTS Student;   -- 表ごと削除(IF EXISTSで安全)
+TRUNCATE TABLE Enrollment;      -- 中身だけ高速全削除`},
+  {c:'ddl',t:'制約まとめ',y:'せいやくまとめ',i:3,b:'**NOT NULL**空禁止 / **UNIQUE**重複禁止 / **PRIMARY KEY**(重複×+NULL×+1つ) / **CHECK**条件 / **DEFAULT**初期値 / **FOREIGN KEY**参照。'},
+  {c:'ddl',t:'確認系コマンド',y:'かくにんけいこまんど',i:1,b:'構造や一覧の確認に使う。',code:
+`DESCRIBE Student;          -- 列の定義を表示
+SHOW CREATE TABLE Student; -- 作成文を表示
+SHOW TABLES;               -- 表の一覧`},
+
+  /* ===== DML・トランザクション ===== */
+  {c:'dml',t:'INSERT（追加）',y:'いんさーと',i:3,b:'1行でも複数行でも追加できる。',code:
+`INSERT INTO Student (student_id, name, grade) VALUES ('1001','山田太郎',3);
+INSERT INTO Student VALUES ('1002','佐藤花子',4),('1003','鈴木一郎',2);  -- 複数行`},
+  {c:'dml',t:'UPDATE（更新・WHERE必須）',y:'あっぷでーと',i:3,b:'**WHEREを忘れると全件更新の大事故**。計算式も書ける。',code:
+`UPDATE Student SET name='山田新太郎', grade=5 WHERE student_id='1002';
+UPDATE Student SET grade = grade + 1 WHERE grade < 5;  -- 計算も可`},
+  {c:'dml',t:'DELETE（削除・WHERE超必須）',y:'でりーと',i:3,b:'**WHEREを忘れると全件削除**。まずWHEREを書く癖を。',code:
+`DELETE FROM Enrollment WHERE student_id='1003';`},
+  {c:'dml',t:'トランザクション',y:'とらんざくしょん',i:3,b:'まとめて確定/取消。誤りなら**ROLLBACK**で巻き戻し、正しければ**COMMIT**。',code:
+`BEGIN;
+UPDATE Enrollment SET score = score + 10 WHERE subject_id='M01';
+SELECT * FROM Enrollment;   -- 確認
+COMMIT;      -- 確定（誤りなら ROLLBACK; で巻き戻し）`},
+  {c:'dml',t:'ACID',y:'えーしっど',i:3,b:'**A**tomicity原子性 / **C**onsistency一貫性 / **I**solation独立性 / **D**urability永続性。※「可用性・拡張性」はニセモノ。'},
+  {c:'dml',t:'DELETE / TRUNCATE / DROP 比較',y:'でりーととらんけーとどろっぷ',i:3,b:'**DELETE**=行(WHERE可)・構造残る・ROLLBACK可・DML ／ **TRUNCATE**=全行・構造残る・高速・ROLLBACK不可・DDL ／ **DROP**=表ごと・構造消える・ROLLBACK不可・DDL。'},
+
+  /* ===== SELECT・JOIN・集約 ===== */
+  {c:'select',t:'SELECTの処理順',y:'せれくとのしょりじゅん',i:3,b:'書く順と違う！ 実行は **FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY**。'},
+  {c:'select',t:'SELECT 基本パターン集',y:'せれくときほん',i:3,b:'絞り込み・範囲・複数値・部分一致・NULL判定・並べ替え・重複排除・件数制限・条件分岐。',code:
+`SELECT name, score FROM students WHERE grade = 2;          -- 絞り込み
+SELECT * FROM students WHERE score BETWEEN 60 AND 90;       -- 範囲
+SELECT * FROM students WHERE grade IN (1,3);                -- 複数値
+SELECT * FROM students WHERE name LIKE '%田%';              -- 部分一致(%=任意,_=1文字)
+SELECT * FROM students WHERE email IS NULL;                 -- NULL判定(=NULLは不可!)
+SELECT name, score FROM students ORDER BY score DESC;       -- 降順DESC/昇順ASC
+SELECT DISTINCT grade FROM students;                        -- 重複排除
+SELECT * FROM students ORDER BY score DESC LIMIT 3;         -- 上位3件
+SELECT name, CASE WHEN score>=60 THEN '合格' ELSE '不合格' END AS 結果 FROM students;`},
+  {c:'select',t:'演算子',y:'えんざんし',i:2,b:'比較=**= <> > < >= <=** ／ 論理=**AND OR NOT**（混在は括弧で明示）。'},
+  {c:'select',t:'JOIN（4種＋自己結合）',y:'じょいん',i:3,b:'**INNER**=共通のみ ／ **LEFT**=左全部＋右一致 ／ **RIGHT**=右全部 ／ **FULL OUTER**=両方全部 ／ **SELF**=自己結合。**ON忘れ=全組合せ(直積)**。',code:
+`-- 内部結合（両方に一致する行だけ）
+SELECT s.name, c.class_name FROM students s
+INNER JOIN classes c ON s.class_id = c.class_id;
+-- 左外部結合（左を全部残す。無ければNULL）
+SELECT s.name, c.class_name FROM students s
+LEFT JOIN classes c ON s.class_id = c.class_id;`},
+  {c:'select',t:'集約関数',y:'しゅうやくかんすう',i:3,b:'**COUNT / SUM / AVG / MIN / MAX**。GROUP BYで単位ごとに集計。',code:
+`SELECT COUNT(*), AVG(score) FROM Enrollment;            -- 件数・平均
+SELECT grade, AVG(score) FROM students GROUP BY grade;  -- 学年ごと`},
+  {c:'select',t:'GROUP BY と HAVING',y:'ぐるーぷばいはびんぐ',i:3,b:'**WHERE=集約前**の行条件 ／ **HAVING=集約後**のグループ条件。←超頻出の区別。',code:
+`SELECT subject_id, AVG(score) FROM Enrollment
+GROUP BY subject_id HAVING AVG(score) >= 80;  -- 集約後の絞り込み`},
+
+  /* ===== サブクエリ・ビュー ===== */
+  {c:'sub',t:'スカラサブクエリ',y:'すからさぶくえり',i:3,b:'結果が**1行1列(1値)**のサブクエリ。1値でないとエラー。**内側が先**に実行。',code:
+`-- 最大学年の学生
+SELECT name FROM Student WHERE grade = (SELECT MAX(grade) FROM Student);`},
+  {c:'sub',t:'IN サブクエリ',y:'いんさぶくえり',i:2,b:'集合（複数値）との照合。',code:
+`-- 履修者だけ
+SELECT name FROM Student
+WHERE student_id IN (SELECT student_id FROM Enrollment);`},
+  {c:'sub',t:'相関サブクエリ',y:'そうかんさぶくえり',i:3,b:'外側の各行を参照し**行ごとに再実行**される。',code:
+`-- 自分の平均が80超の学生
+SELECT s.name FROM Student s
+WHERE 80 < (SELECT AVG(e.score) FROM Enrollment e
+            WHERE e.student_id = s.student_id);`},
+  {c:'sub',t:'NOT EXISTS',y:'のっといぐじすつ',i:2,b:'存在しない行を探す。**NOT INのNULL問題**を避けられる。',code:
+`-- 一度も履修していない学生
+SELECT name FROM Student s
+WHERE NOT EXISTS (SELECT 1 FROM Enrollment e
+                  WHERE e.student_id = s.student_id);`},
+  {c:'sub',t:'派生表（FROM句サブクエリ）',y:'はせいひょう',i:2,b:'FROM句の中のサブクエリ。**AS別名が必須**。',code:
+`SELECT subject_id, avg_score FROM
+ (SELECT subject_id, AVG(score) AS avg_score
+  FROM Enrollment GROUP BY subject_id) AS T
+ORDER BY avg_score DESC;`},
+  {c:'sub',t:'ビュー',y:'びゅー',i:3,b:'SELECTに名前を付けた**仮想テーブル**。**単純ビュー**(1表・更新可が多い) / **複合ビュー**(JOIN・集約含む・**更新不可**)。見せる列だけにして**アクセス制御**にも使う。',code:
+`CREATE VIEW v_avg AS
+ SELECT s.name, AVG(e.score) AS avg FROM Student s
+ JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.name;
+SELECT * FROM v_avg WHERE avg > 80;`},
+
+  /* ===== 混同ペア ===== */
+  {c:'confuse',t:'主キー vs 外部キー',y:'しゅきーたいがいぶきー',i:3,b:'自分の表を識別=**主キー** ／ 他表を参照=**外部キー**。'},
+  {c:'confuse',t:'UNIQUE vs 主キー',y:'ゆにーくたいしゅきー',i:3,b:'主キー=**UNIQUE＋NULL禁止＋1つだけ**。UNIQUEはNULL可・複数可。'},
+  {c:'confuse',t:'1NF / 2NF / 3NF',y:'せいきけいのちがい',i:3,b:'1=**1セル1値** ／ 2=主キーの**一部依存(部分)** ／ 3=**非キー同士の依存(推移)**。'},
+  {c:'confuse',t:'WHERE vs HAVING',y:'うぇあたいはびんぐ',i:3,b:'**WHERE=集約前の行** ／ **HAVING=集約後のグループ**。'},
+  {c:'confuse',t:'INNER vs LEFT JOIN',y:'いんなーたいれふと',i:3,b:'**INNER=共通のみ** ／ **LEFT=左を全部残す**（右が無ければNULL）。'},
+  {c:'confuse',t:'= NULL vs IS NULL',y:'いこーるぬるたいいずぬる',i:3,b:'NULL判定は必ず**IS NULL**。**=NULLは常に不成立**になる。'},
+  {c:'confuse',t:'DELETE / TRUNCATE / DROP',y:'でりーととらんけーとどろっぷ',i:3,b:'行を選ぶ(DELETE) ／ 全行を高速(TRUNCATE) ／ 表ごと(DROP)。'},
+  {c:'confuse',t:'DDL vs DML',y:'でぃーでぃーえるたいでぃーえむえる',i:3,b:'構造=**DDL**(CREATE等) ／ 中身=**DML**(INSERT等・SELECT)。'},
+  {c:'confuse',t:'スカラ vs 相関サブクエリ',y:'すからたいそうかん',i:2,b:'**スカラ=1値** ／ **相関=外側を参照し行ごと再実行**。'},
+  {c:'confuse',t:'ASC vs DESC',y:'えーえすしーたいですく',i:2,b:'**ASC=昇順(既定)** ／ **DESC=降順(要明示)**。'},
+  {c:'confuse',t:'COMMIT vs ROLLBACK',y:'こみっとたいろーるばっく',i:2,b:'**COMMIT=確定** ／ **ROLLBACK=取り消し**。'},
+  {c:'confuse',t:'ACIDに含まれないもの',y:'えーしっどにふくまれない',i:3,b:'ACID=原子性/一貫性/独立性/永続性。**「拡張性」「可用性」は含まれない**（ひっかけ）。'},
+
+  /* ===== 頻出コード・演習 ===== */
+  {c:'code',t:'頻出5問パターン',y:'ひんしゅつごもん',i:3,b:'過去問形式の定番。手が勝手に動くまで。',code:
+`-- 3年生を取得
+SELECT * FROM Student WHERE grade = 3;
+-- 全員の学年+1
+UPDATE Student SET grade = grade + 1;
+-- 列追加
+ALTER TABLE Student ADD COLUMN email VARCHAR(100);
+-- 主キー指定
+student_id CHAR(4) PRIMARY KEY
+-- 平均80以上の科目（WHEREだと×）
+... GROUP BY subject_id HAVING AVG(score) >= 80;`},
+  {c:'code',t:'計算・順序のひっかけ',y:'けいさんじゅんじょ',i:2,b:'**平均**: score=85,70,60,95,80なら合計390÷5=**78**。 **削除順**: 外部キーがある時は**子(Enrollment)→親(Student)**の順。'},
+  {c:'code',t:'演習SELECT（5-1〜5-10）',y:'えんしゅうせれくと',i:2,b:'サンプルDB: Student / Subject / Enrollment。',code:
+`-- 5-1 1年生を抽出
+SELECT * FROM Student WHERE grade = 1;
+-- 5-2 80点以上の履修
+SELECT * FROM Enrollment WHERE score >= 80;
+-- 5-3 score降順
+SELECT * FROM Enrollment ORDER BY score DESC;
+-- 5-4 学籍番号1001の履修情報
+SELECT * FROM Enrollment WHERE student_id = 1001;
+-- 5-5 英語(E01)の履修情報
+SELECT * FROM Enrollment WHERE subject_id = 'E01';
+-- 5-6 得点60未満の学生IDと科目コード
+SELECT student_id, subject_id FROM Enrollment WHERE score < 60;
+-- 5-7 平均70以上の科目ごとの平均点
+SELECT subject_id, AVG(score) FROM Enrollment
+GROUP BY subject_id HAVING AVG(score) >= 70;
+-- 5-8 学年ごとの人数
+SELECT grade, COUNT(*) FROM Student GROUP BY grade;
+-- 5-9 氏名に「田」が含まれる学生
+SELECT * FROM Student WHERE name LIKE '%田%';
+-- 5-10 最高得点
+SELECT MAX(score) FROM Enrollment;`},
+  {c:'code',t:'演習JOIN（6-1〜6-4）',y:'えんしゅうじょいん',i:2,b:'複数表の結合。3表JOINとLEFT JOINが頻出。',code:
+`-- 6-1 学生名と得点
+SELECT s.name, e.score FROM Student s
+JOIN Enrollment e ON s.student_id = e.student_id;
+-- 6-2 3表JOINで学生名・科目名・得点
+SELECT s.name, sub.subject_name, e.score FROM Enrollment e
+JOIN Student s ON e.student_id = s.student_id
+JOIN Subject sub ON e.subject_id = sub.subject_id;
+-- 6-3 得点80以上の学生名と科目名
+SELECT s.name, sub.subject_name FROM Enrollment e
+JOIN Student s ON e.student_id = s.student_id
+JOIN Subject sub ON e.subject_id = sub.subject_id
+WHERE e.score >= 80;
+-- 6-4 全科目と履修状況をLEFT JOIN
+SELECT sub.subject_name, e.score FROM Subject sub
+LEFT JOIN Enrollment e ON sub.subject_id = e.subject_id;`},
+  {c:'code',t:'演習ビュー（7-1〜7-10）',y:'えんしゅうびゅー',i:2,b:'作成・表示・絞り込み・削除・一覧。',code:
+`-- 7-1 学生ごとの平均点ビュー
+CREATE VIEW ScoreSummary AS
+ SELECT s.name, AVG(e.score) AS avg_score FROM Student s
+ JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.name;
+-- 7-2 表示
+SELECT * FROM ScoreSummary;
+-- 7-3 平均70以上のみ
+SELECT * FROM ScoreSummary WHERE avg_score >= 70;
+-- 7-4 別名を付けて表示
+SELECT name AS 氏名, avg_score AS 平均点 FROM ScoreSummary;
+-- 7-6 削除
+DROP VIEW ScoreSummary;
+-- 7-7 科目別平均ビュー
+CREATE VIEW SubjectAvg AS
+ SELECT subject_id, AVG(score) AS avg_score FROM Enrollment GROUP BY subject_id;
+-- 7-10 ビュー一覧
+SHOW FULL TABLES WHERE Table_type = 'VIEW';`},
+  {c:'code',t:'演習サブクエリ（8-1〜8-6）',y:'えんしゅうさぶくえり',i:2,b:'全体平均比較・最高者・相関・科目平均など。',code:
+`-- 8-1 全体平均点より高い学生
+SELECT DISTINCT s.name FROM Student s
+JOIN Enrollment e ON s.student_id = e.student_id
+WHERE e.score > (SELECT AVG(score) FROM Enrollment);
+-- 8-2 最も平均点が高い学生
+SELECT name FROM
+ (SELECT s.name, AVG(e.score) AS a FROM Student s
+  JOIN Enrollment e ON s.student_id = e.student_id GROUP BY s.name) AS T
+ORDER BY a DESC LIMIT 1;
+-- 8-3 科目ごとの平均以上を取った学生（相関）
+SELECT s.name, e.subject_id, e.score FROM Student s
+JOIN Enrollment e ON s.student_id = e.student_id
+WHERE e.score >= (SELECT AVG(e2.score) FROM Enrollment e2
+                  WHERE e2.subject_id = e.subject_id);
+-- 8-5 全科目平均点より低い科目
+SELECT subject_id FROM Enrollment GROUP BY subject_id
+HAVING AVG(score) < (SELECT AVG(score) FROM Enrollment);
+-- 8-6 各学生の最高得点
+SELECT student_id, MAX(score) FROM Enrollment GROUP BY student_id;`},
+];
+
+/* ============ 状態 ============ */
+const catColor = Object.fromEntries(CATS.map(c=>[c.id,c.color]));
+const catName  = Object.fromEntries(CATS.map(c=>[c.id,c.name]));
+const catOrder = Object.fromEntries(CATS.map((c,i)=>[c.id,i]));
+DATA.forEach((d,i)=>d._i=i);
+
+let state = {
+  q:'',
+  cat:'all',
+  sort:'std',
+  starOnly:false,
+  stars: new Set(JSON.parse(localStorage.getItem('db_stars')||'[]')),
+};
+const idOf = d => d.c+'::'+d.t;
+
+/* ============ ユーティリティ ============ */
+function esc(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function bold(s){return s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');}
+function hi(html,q){
+  if(!q) return html;
+  const re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return html.replace(/(<[^>]+>)|([^<]+)/g,(m,tag,txt)=> tag?tag:txt.replace(re,'<mark>$1</mark>'));
+}
+function highlightSQL(code){
+  // コメント→キーワード→文字列 の順で色付け（エスケープ済み前提）
+  let out = esc(code);
+  out = out.replace(/(--[^\n]*)/g,'<span class="cm">$1</span>');
+  const kw=/\b(SELECT|FROM|WHERE|GROUP BY|ORDER BY|HAVING|JOIN|INNER JOIN|LEFT JOIN|RIGHT JOIN|FULL OUTER JOIN|ON|AS|AND|OR|NOT|IN|IS|NULL|LIKE|BETWEEN|DISTINCT|LIMIT|CASE|WHEN|THEN|ELSE|END|INSERT INTO|VALUES|UPDATE|SET|DELETE|CREATE TABLE|CREATE VIEW|DROP TABLE|DROP VIEW|ALTER TABLE|TRUNCATE TABLE|ADD COLUMN|DROP COLUMN|MODIFY COLUMN|RENAME TO|PRIMARY KEY|FOREIGN KEY|REFERENCES|NOT NULL|UNIQUE|CHECK|DEFAULT|BEGIN|COMMIT|ROLLBACK|COUNT|SUM|AVG|MIN|MAX|DESC|ASC|EXISTS|SHOW|DESCRIBE)\b/g;
+  out = out.replace(/(<span class="cm">[\s\S]*?<\/span>)|([\s\S]+?(?=<span class="cm">|$))/g,(m,cm,rest)=>{
+    if(cm) return cm;
+    let r = rest.replace(kw,'<span class="kw">$1</span>');
+    r = r.replace(/(&#39;[^&]*?&#39;)/g,'<span class="st">$1</span>');
+    return r;
+  });
+  return out;
+}
+
+/* ============ 描画 ============ */
+function renderChips(){
+  const el=document.getElementById('chips');
+  const counts={all:DATA.length};
+  DATA.forEach(d=>counts[d.c]=(counts[d.c]||0)+1);
+  const mk=(id,name)=>`<div class="chip ${state.cat===id?'active':''}" data-cat="${id}">${name}<span class="n">${counts[id]||0}</span></div>`;
+  el.innerHTML = mk('all','すべて') + CATS.map(c=>mk(c.id,c.name)).join('');
+  el.querySelectorAll('.chip').forEach(ch=>ch.onclick=()=>{state.cat=ch.dataset.cat; render();});
+}
+
+function match(d){
+  if(state.cat!=='all' && d.c!==state.cat) return false;
+  if(state.starOnly && !state.stars.has(idOf(d))) return false;
+  if(state.q){
+    const hay=(d.t+' '+d.y+' '+d.b+' '+(d.code||'')+' '+catName[d.c]).toLowerCase();
+    if(!hay.includes(state.q.toLowerCase())) return false;
+  }
+  return true;
+}
+
+function sortList(list){
+  const s=state.sort;
+  const by={
+    std:  (a,b)=> (catOrder[a.c]-catOrder[b.c]) || (a._i-b._i),
+    imp:  (a,b)=> (b.i-a.i) || (catOrder[a.c]-catOrder[b.c]) || (a._i-b._i),
+    yomi: (a,b)=> a.y.localeCompare(b.y,'ja'),
+    title:(a,b)=> a.t.localeCompare(b.t,'ja'),
+  }[s];
+  return list.slice().sort(by);
+}
+
+function render(){
+  renderChips();
+  document.getElementById('starFilterBtn').classList.toggle('on',state.starOnly);
+  const q=state.q;
+  let list = sortList(DATA.filter(match));
+
+  const grid=document.getElementById('grid');
+  const empty=document.getElementById('empty');
+  document.getElementById('count').textContent =
+    `${list.length} 件表示中${state.q?`（"${state.q}"で検索）`:''}${state.starOnly?' ・★のみ':''}`;
+
+  if(!list.length){ grid.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+
+  grid.innerHTML = list.map(d=>{
+    const on=state.stars.has(idOf(d));
+    const imp = d.i? `<span class="imp">${'★'.repeat(d.i)}</span>`:'';
+    const codeHtml = d.code ? `<div class="codewrap"><button class="copy">コピー</button><pre><code>${highlightSQL(d.code)}</code></pre></div>`:'';
+    return `<div class="card" style="--catcolor:${catColor[d.c]}">
+      <button class="star ${on?'on':''}" data-id="${esc(idOf(d))}">${on?'★':'☆'}</button>
+      <span class="cat">${esc(catName[d.c])}</span>
+      <h3>${hi(bold(esc(d.t)),q)}${imp}</h3>
+      <div class="body">${hi(bold(esc(d.b)),q)}</div>
+      ${codeHtml}
+    </div>`;
+  }).join('');
+
+  grid.querySelectorAll('.star').forEach(b=>b.onclick=()=>{
+    const id=b.dataset.id;
+    if(state.stars.has(id)) state.stars.delete(id); else state.stars.add(id);
+    localStorage.setItem('db_stars',JSON.stringify([...state.stars]));
+    render();
+  });
+  grid.querySelectorAll('.copy').forEach(b=>b.onclick=()=>{
+    const code=b.parentElement.querySelector('code').innerText;
+    navigator.clipboard?.writeText(code).then(()=>{b.textContent='コピー済';setTimeout(()=>b.textContent='コピー',1200);});
+  });
+}
+
+/* ============ イベント ============ */
+const qEl=document.getElementById('q'), clr=document.getElementById('clrBtn');
+qEl.addEventListener('input',()=>{state.q=qEl.value.trim(); clr.style.display=qEl.value?'block':'none'; render();});
+clr.onclick=()=>{qEl.value='';state.q='';clr.style.display='none';qEl.focus();render();};
+document.getElementById('sort').onchange=e=>{state.sort=e.target.value; render();};
+document.getElementById('starFilterBtn').onclick=()=>{state.starOnly=!state.starOnly; render();};
+
+// テーマ
+const themeBtn=document.getElementById('themeBtn');
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);themeBtn.textContent=t==='light'?'☀️':'🌙';localStorage.setItem('db_theme',t);}
+applyTheme(localStorage.getItem('db_theme')|| (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));
+themeBtn.onclick=()=>applyTheme(document.documentElement.getAttribute('data-theme')==='light'?'dark':'light');
+
+// "/"で検索フォーカス
+document.addEventListener('keydown',e=>{
+  if(e.key==='/' && document.activeElement!==qEl){e.preventDefault();qEl.focus();}
+  if(e.key==='Escape' && document.activeElement===qEl){clr.onclick();}
+});
+
+// 日付
+const d=new Date(); d.setDate(d.getDate()+0);
+document.getElementById('dateSub').textContent = `全${DATA.length}項目`;
+
+render();
+</script>
+</body>
+</html>
