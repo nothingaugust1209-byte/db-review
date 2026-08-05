@@ -88,6 +88,20 @@
   .fc-bar button:hover{border-color:var(--accent);}
   .mini{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:4px 11px;font-size:.75rem;cursor:pointer;transition:.12s;white-space:nowrap;}
   .mini:hover{border-color:var(--accent);color:var(--accent);}
+  /* コード見分け方 */
+  .cg h3{font-size:.98rem;margin:18px 0 8px;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:5px;}
+  .cg h3:first-of-type{margin-top:4px;}
+  .cgt{width:100%;border-collapse:collapse;font-size:.86rem;margin:4px 0 6px;}
+  .cgt td{border:1px solid var(--line);padding:7px 9px;vertical-align:top;}
+  .cgt td:first-child{color:var(--text);width:44%;}
+  .cgt td:last-child{color:#c7d2fe;font-family:"Consolas","Courier New",monospace;font-size:.82rem;}
+  .cgt tr:nth-child(even){background:rgba(255,255,255,.02);}
+  .rulebox{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:6px 0;font-size:.86rem;line-height:1.9;}
+  .rulebox .x{color:var(--ng);font-weight:700;}
+  .rulebox .o{color:var(--ok);font-weight:700;}
+  .rulebox code{color:#c7d2fe;font-family:"Consolas",monospace;font-size:.82rem;}
+  .judge{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.88rem;line-height:1.8;}
+  .judge b{color:var(--accent);}
   footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:28px;}
 </style>
 </head>
@@ -454,6 +468,7 @@ function home(){
       <p class="sec-lead">演習の前に、用語を「流れ」で理解して暗記しよう。<span class="count">全${GTERMS}語</span></p>
       <button class="btn primary" onclick="glossaryView(0)" style="background:linear-gradient(90deg,#818cf8,#38bdf8)">📗 単語解説集を読む<small>章ごとにストーリー仕立てで全用語を解説</small></button>
       <button class="btn" onclick="flashHome()" style="margin-top:10px">🃏 フラッシュカードで暗記<small>表:用語／裏:意味。タップでめくる</small></button>
+      <button class="btn" onclick="codeGuideView()" style="margin-top:10px;border-color:var(--accent2)">🧩 コード問題の見分け方<small>ここさえ見れば四択SQLを判断できる・点取り特化</small></button>
     </div>
     <div class="card">
       <h2>✏️ 演習で力だめし</h2>
@@ -491,6 +506,81 @@ function glossaryView(ci){
         ${ci<GLOSSARY.length-1?`<button onclick="glossaryView(${ci+1})">次の章 →</button>`:''}
       </div>
       <button class="btn" onclick="home()" style="margin-top:8px;text-align:center">← ホームに戻る</button>
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+/* ---- コード問題 見分け方 ---- */
+function codeGuideView(){
+  stopTimer(); examMode=false;
+  app.innerHTML = `
+    <div class="topbar"><button class="mini" onclick="home()">← ホームに戻る</button><span class="count">コード問題 対策</span></div>
+    <div class="card cg">
+      <h2>🧩 コード問題の見分け方</h2>
+      <p class="sec-lead">四択SQLは「①語順テンプレ→②即バツ消し→③キーワードで選ぶ」の順で判断すれば当たる。ここだけ見ればOK。</p>
+
+      <h3>① まず語順テンプレ（これに合わないものは怪しい）</h3>
+      <div class="rulebox">
+        <code>SELECT 列 → FROM 表 → WHERE 条件 → GROUP BY → HAVING → ORDER BY</code><br>
+        追加 <code>INSERT INTO 表(列) VALUES(値)</code>／更新 <code>UPDATE 表 SET 列=値 WHERE…</code><br>
+        削除 <code>DELETE FROM 表 WHERE…</code>／列追加 <code>ALTER TABLE 表 ADD COLUMN 列 型</code>
+      </div>
+
+      <h3>② 見た瞬間に消す「即バツ」集</h3>
+      <div class="rulebox">
+        <span class="x">✕</span> <code>IF / GET / SORT / MAKE</code> が出たら → SQLに無い。即バツ<br>
+        <span class="x">✕</span> <code>SET grade + 1</code>（=が無い）→ 正しくは <span class="o">SET grade = grade + 1</span><br>
+        <span class="x">✕</span> <code>WHERE</code> が <code>FROM</code> より前 → 語順違反でバツ<br>
+        <span class="x">✕</span> <code>WHERE AVG(score) >= 80</code>（集計を WHERE）→ 集計の条件は <span class="o">HAVING</span><br>
+        <span class="x">✕</span> <code>= NULL</code> → 必ず <span class="o">IS NULL</span><br>
+        <span class="x">✕</span> <code>= (SELECT …複数行…)</code> → 複数行との比較は <span class="o">IN (…)</span><br>
+        <span class="x">✕</span> <code>60 &lt;= score &lt;= 90</code> → <span class="o">BETWEEN 60 AND 90</span><br>
+        <span class="x">✕</span> <code>NEW COLUMN</code> / ADD COLUMN が無い列追加 → バツ<br>
+        <span class="x">✕</span> ビューを <code>CREATE TABLE</code> で作る → ビューは <span class="o">CREATE VIEW … AS SELECT</span>
+      </div>
+
+      <h3>③ 日本語 → 書くSQL（迷ったらこの表）</h3>
+      <table class="cgt"><tbody>
+        <tr><td>「〜だけ」「条件で絞る」</td><td>WHERE 条件</td></tr>
+        <tr><td>「高い順/低い順」「並べ替え」</td><td>ORDER BY 列 DESC / ASC</td></tr>
+        <tr><td>「上位N件」</td><td>ORDER BY 列 DESC LIMIT N</td></tr>
+        <tr><td>「重複なし」「何種類」</td><td>SELECT DISTINCT 列</td></tr>
+        <tr><td>「◯以上◯以下」「範囲」</td><td>WHERE 列 BETWEEN A AND B</td></tr>
+        <tr><td>「いずれか」「リストの中」</td><td>WHERE 列 IN (値, …)</td></tr>
+        <tr><td>「〜を含む/で始まる」</td><td>WHERE 列 LIKE '%x%' / 'x%'</td></tr>
+        <tr><td>「空」「未登録」</td><td>WHERE 列 IS NULL</td></tr>
+        <tr><td>「合計/平均/件数/最大/最小」</td><td>SUM / AVG / COUNT / MAX / MIN</td></tr>
+        <tr><td>「〜ごとに集計」</td><td>GROUP BY 列</td></tr>
+        <tr><td>「〜ごとで、集計が…以上」</td><td>GROUP BY 列 HAVING 集計 条件</td></tr>
+        <tr><td>「2つの表から」「名前と○○を一緒に」</td><td>JOIN 表 ON 条件</td></tr>
+        <tr><td>「別表にいる人だけ」</td><td>WHERE 列 IN (SELECT …)</td></tr>
+        <tr><td>「平均より高い等、計算結果と比較」</td><td>… > (SELECT AVG(…) …)</td></tr>
+        <tr><td>「列を追加」</td><td>ALTER TABLE 表 ADD COLUMN 列 型</td></tr>
+        <tr><td>「主キーにする」</td><td>列 型 PRIMARY KEY</td></tr>
+        <tr><td>「表ごと消す/中身だけ消す」</td><td>DROP TABLE / TRUNCATE TABLE</td></tr>
+      </tbody></table>
+
+      <h3>④ 迷う3ペアの一発判定</h3>
+      <div class="judge"><b>WHERE か HAVING か</b><br>
+        集計(AVG/COUNT/SUM…)を条件にしている？ → <b>Yes=HAVING</b>／No=WHERE。<br>
+        （GROUP BY とセットで出てきたらほぼ HAVING）</div>
+      <div class="judge"><b>INNER か LEFT JOIN か</b><br>
+        「一致するものだけ」→ <b>INNER</b>／「全部」「未◯◯も出す」「漏れなく」→ <b>LEFT</b>。</div>
+      <div class="judge"><b>= か IN か（サブクエリ）</b><br>
+        サブクエリが返すのが1個の値 → <b>=</b>／複数行の可能性 → <b>IN</b>。<br>
+        MAX/AVG など1個に決まる→=、Enrollmentのstudent_id等たくさん→IN。</div>
+
+      <h3>⑤ 計算・順序の注意</h3>
+      <div class="rulebox">
+        平均の計算問題 → <b>合計 ÷ 件数</b>。例:85,70,60,95,80 なら 390÷5=<span class="o">78</span>。<br>
+        <code>SUM</code>=合計(390)、<code>COUNT</code>=件数(5)、<code>AVG</code>=平均(78) を取り違えない。<br>
+        外部キーがある削除 → <span class="o">子(Enrollment)→親(Student)</span> の順。逆は参照エラー。
+      </div>
+
+      <div class="fc-bar" style="margin-top:14px">
+        <button onclick="start('code')">🧩 コード問題だけで練習</button>
+        <button onclick="home()">ホームに戻る</button>
+      </div>
     </div>`;
   window.scrollTo(0,0);
 }
